@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temario ICFES Completo</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0e10;
+    --surface: #16161a;
+    --surface2: #1e1e24;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(255,255,255,0.12);
+    --text: #f0eee8;
+    --muted: #888884;
+    --faint: #444440;
+
+    --mates:        #4f8ef7;  --mates-bg:      rgba(79,142,247,0.08);
+    --lectura:      #3ecf8e;  --lectura-bg:    rgba(62,207,142,0.08);
+    --naturales:    #f06292;  --naturales-bg:  rgba(240,98,146,0.08);
+    --ingles:       #a78bfa;  --ingles-bg:     rgba(167,139,250,0.08);
+    --sociales:     #fbbf24;  --sociales-bg:   rgba(251,191,36,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+
+  .wrap {
+    position: relative; z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  /* ── HEADER ── */
+  .header { margin-bottom: 2.5rem; }
+
+  .header-eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.75rem;
+  }
+
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -0.02em; color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .header h1 span {
+    background: linear-gradient(90deg, #4f8ef7, #a78bfa, #f06292);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-sub {
+    color: var(--muted); font-size: 14px;
+    font-weight: 300; max-width: 500px;
+  }
+
+  /* ── STATS ── */
+  .stats { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+
+  .stat-pill {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 99px; padding: 6px 14px;
+    font-size: 12px; color: var(--muted);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .stat-pill strong { color: var(--text); font-weight: 500; }
+
+  /* ── SEARCH ── */
+  .search-wrap { position: relative; margin-bottom: 1.75rem; }
+
+  .search-icon {
+    position: absolute; left: 14px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--faint); font-size: 16px; pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 14px 11px 42px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; color: var(--text); outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input::placeholder { color: var(--faint); }
+  .search-input:focus { border-color: var(--border-hover); }
+
+  /* ── COMPONENT CARD ── */
+  .comp-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+    animation: fadeUp 0.4s ease both;
+  }
+  .comp-card:hover { border-color: var(--border-hover); }
+  .comp-card.open  { border-color: var(--accent-color); }
+
+  .comp-card:nth-child(1){animation-delay:.05s}
+  .comp-card:nth-child(2){animation-delay:.10s}
+  .comp-card:nth-child(3){animation-delay:.15s}
+  .comp-card:nth-child(4){animation-delay:.20s}
+  .comp-card:nth-child(5){animation-delay:.25s}
+
+  .comp-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 1.1rem 1.25rem;
+    cursor: pointer; user-select: none; position: relative;
+  }
+
+  .comp-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+    background: var(--accent-bg); color: var(--accent-color);
+    transition: transform 0.2s;
+  }
+  .comp-header:hover .comp-icon { transform: scale(1.05); }
+
+  .comp-info { flex: 1; min-width: 0; }
+
+  .comp-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--text); letter-spacing: -0.01em;
+  }
+  .comp-desc { font-size: 12px; color: var(--muted); font-weight: 300; margin-top: 1px; }
+
+  .comp-meta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+  .comp-count {
+    font-size: 11px; color: var(--accent-color);
+    background: var(--accent-bg);
+    padding: 3px 10px; border-radius: 99px;
+    font-weight: 500; white-space: nowrap;
+  }
+
+  .comp-chevron {
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--faint);
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), color 0.2s;
+    flex-shrink: 0;
+  }
+  .comp-card.open .comp-chevron { transform: rotate(180deg); color: var(--accent-color); }
+
+  .comp-body { display: none; border-top: 0.5px solid var(--border); }
+  .comp-body.open { display: block; }
+
+  .progress-bar {
+    position: absolute; bottom: 0; left: 0;
+    height: 1px; background: var(--accent-color);
+    opacity: 0; transition: opacity 0.3s, width 0.4s; width: 0%;
+  }
+  .comp-card.open .progress-bar { opacity: 0.4; width: 100%; }
+
+  /* ── GENERAL THEME ── */
+  .gen-theme { border-bottom: 0.5px solid var(--border); }
+  .gen-theme:last-child { border-bottom: none; }
+
+  /* section label inside body */
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent-color); opacity: 0.7;
+    padding: 0.9rem 1.25rem 0.3rem 1.5rem;
+    display: block;
+  }
+
+  .gen-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0.7rem 1.25rem 0.7rem 1.5rem;
+    cursor: pointer; user-select: none;
+    transition: background 0.15s;
+  }
+  .gen-header:hover { background: rgba(255,255,255,0.025); }
+
+  .gen-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent-color); flex-shrink: 0;
+    opacity: 0.45; transition: opacity 0.2s;
+  }
+  .gen-header:hover .gen-dot,
+  .gen-theme.open .gen-dot { opacity: 1; }
+
+  .gen-name { font-size: 13.5px; font-weight: 500; color: var(--text); flex: 1; }
+
+  .gen-badge {
+    font-size: 11px; color: var(--muted);
+    background: var(--surface2);
+    padding: 2px 9px; border-radius: 99px; flex-shrink: 0;
+  }
+
+  .gen-arr {
+    font-size: 12px; color: var(--faint);
+    transition: transform 0.2s, color 0.2s; flex-shrink: 0;
+  }
+  .gen-theme.open .gen-arr { transform: rotate(90deg); color: var(--accent-color); }
+
+  /* ── SPECIFIC TOPICS ── */
+  .spec-list { display: none; padding: 0.4rem 1.25rem 0.9rem 2.75rem; }
+  .spec-list.open { display: block; }
+
+  .spec-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 5px 0; font-size: 13px;
+    color: rgba(240,238,232,0.62); font-weight: 300; line-height: 1.5;
+    border-bottom: 0.5px solid rgba(255,255,255,0.03);
+  }
+  .spec-item:last-child { border-bottom: none; }
+
+  .spec-dash {
+    color: var(--accent-color); flex-shrink: 0;
+    margin-top: 1px; opacity: 0.55; font-size: 11px;
+  }
+
+  /* source tag */
+  .src-tag {
+    font-size: 10px; padding: 1px 7px; border-radius: 99px;
+    flex-shrink: 0; margin-left: auto; font-weight: 500;
+    white-space: nowrap; align-self: center;
+  }
+  .src-pdf  { background: rgba(79,142,247,0.12); color: #4f8ef7; }
+  .src-img  { background: rgba(167,139,250,0.12); color: #a78bfa; }
+  .src-both { background: rgba(62,207,142,0.12);  color: #3ecf8e; }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-bottom: 1.5rem; align-items: center;
+  }
+  .legend-label {
+    font-size: 11px; color: var(--muted);
+    margin-right: 4px; font-weight: 300;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 11px; color: var(--muted);
+  }
+
+  /* no results */
+  .no-results {
+    text-align: center; color: var(--muted);
+    font-size: 14px; padding: 3rem 0; display: none;
+  }
+
+  .highlight {
+    background: rgba(251,191,36,0.25);
+    color: var(--text); border-radius: 2px; padding: 0 2px;
+  }
+
+  .footer {
+    text-align: center; color: var(--faint);
+    font-size: 12px; margin-top: 3rem; font-weight: 300;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 2rem 1rem 4rem; }
+    .comp-count { display: none; }
+    .src-tag { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="header">
+    <div class="header-eyebrow">Preparación · Saber 11 · Edición completa</div>
+    <h1>Temario <span>ICFES</span></h1>
+    <p class="header-sub">Bienvenido a tu espacio de preparación para el ICFES. Aquí encontrarás temarios organizados, material de práctica y todo lo que necesitas para llegar listo al examen.</p>
+  </div>
+
+  <div class="stats" id="statsRow">
+    <div class="stat-pill"><strong>5</strong> componentes</div>
+    <div class="stat-pill" id="statTemas"></div>
+    <div class="stat-pill" id="statSub"></div>
+  </div>
+
+  <div class="legend">
+    <span class="legend-label">Encontraras: </span>
+    <div class="legend-item"><span class="src-tag src-pdf">Temario General</span></div>
+    <div class="legend-item"><span class="src-tag src-img">Temas puntuales</span></div>
+    <div class="legend-item"><span class="src-tag src-both">Cuadernillos</span></div>
+  </div>
+
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input class="search-input" type="text" id="searchInput" placeholder="Buscar un tema específico...">
+  </div>
+
+<div id="accordion"></div>
+<div style="text-align: center; margin: 24px 0 8px;">
+
+  <a href="https://drive.google.com/drive/folders/1m8wX55W0zd-zkfeDEXrtN4P9uUOeKdnS?usp=drive_link"
+     target="_blank"
+     rel="noopener noreferrer"
+     style="
+        display: inline-block;
+        padding: 14px 26px;
+        border-radius: 18px;
+        background: linear-gradient(90deg, #3b82f6, #a855f7, #ec4899);
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 0 18px rgba(168, 85, 247, 0.35);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.08);
+     "
+
+     onmouseover="
+        this.style.transform='scale(1.05)';
+        this.style.boxShadow='0 0 28px rgba(168,85,247,0.55)';
+     "
+
+     onmouseout="
+        this.style.transform='scale(1)';
+        this.style.boxShadow='0 0 18px rgba(168,85,247,0.35)';
+     "
+  >
+     Acceder a los cuadernillos en Drive
+  </a>
+</div>
+
+  <div class="footer">Un verdadero perdedor es alguien que tiene tanto miedo de no ganar, que ni siquiera lo intenta. · ICFES 2025–2026</div>
+</div>
+
+<script>
+// src: "pdf" = solo de tus pruebas | "img" = solo temario imagen | "both" = en ambos
+const data = [
+  {
+    id: "mates",
+    title: "Matemáticas",
+    desc: "Componente cuantitativo",
+    icon: "∑",
+    color: "var(--mates)",
+    bg: "var(--mates-bg)",
+    themes: [
+      {
+        name: "Estadística y probabilidad",
+        topics: [
+          { t: "Lectura e interpretación de tablas, barras, circulares y líneas", src: "both" },
+          { t: "Media, mediana, moda y rango — qué pasa al eliminar o agregar un dato", src: "both" },
+          { t: "Comparar medidas de tendencia central entre dos conjuntos de datos", src: "pdf" },
+          { t: "Probabilidad simple: casos favorables sobre total de posibles", src: "both" },
+          { t: "Proporcionalidad directa e inversa — identificar cuál aplica y argumentarlo", src: "both" },
+        ]
+      },
+      {
+        name: "Geometría",
+        topics: [
+          { t: "Teorema de Pitágoras: calcular lado faltante, perímetros y cuerdas", src: "both" },
+          { t: "Áreas de figuras compuestas (rectángulos con zonas quitadas, triángulos internos)", src: "both" },
+          { t: "Ángulos internos de polígonos regulares e irregulares y sus sumas", src: "both" },
+          { t: "Relaciones entre rectas paralelas, perpendiculares y consecuencias lógicas", src: "both" },
+          { t: "Volumen de esferas, pirámides y cilindros — errores de procedimiento", src: "both" },
+          { t: "Clasificación y propiedades de figuras geométricas planas y sólidos", src: "img" },
+        ]
+      },
+      {
+        name: "Álgebra y funciones",
+        topics: [
+          { t: "Dominio de funciones con raíces cuadradas y fracciones con denominador variable", src: "both" },
+          { t: "Expresiones algebraicas: identificar qué procedimiento es correcto o incorrecto", src: "both" },
+          { t: "Variación lineal vs. no lineal: reconocer cuál crece de forma proporcional", src: "both" },
+          { t: "Notación científica: multiplicar y dividir potencias de 10", src: "both" },
+          { t: "Cuadrado de binomios y productos notables", src: "both" },
+          { t: "Sistemas de ecuaciones lineales e inecuaciones", src: "img" },
+          { t: "Funciones: identificar dominio, rango e imagen", src: "img" },
+        ]
+      },
+      {
+        name: "Combinatoria y conteo",
+        topics: [
+          { t: "Combinaciones vs. permutaciones: cuál aplica según el problema y por qué", src: "both" },
+          { t: "Contar posibilidades con restricciones (elementos fijos, sin repetición)", src: "both" },
+          { t: "Razonamiento sobre errores en conteos: opciones de más o de menos", src: "pdf" },
+          { t: "Principio multiplicativo del conteo", src: "img" },
+        ]
+      },
+      {
+        name: "Razonamiento lógico-matemático",
+        topics: [
+          { t: "Analizar procedimientos paso a paso e identificar en cuál está el error", src: "both" },
+          { t: "Deducir qué dato adicional falta para poder resolver un problema", src: "both" },
+          { t: "Interpretar afirmaciones sobre resultados y evaluar si son verdaderas o falsas", src: "both" },
+          { t: "Leer e interpretar gráficas estadísticas con contexto real", src: "both" },
+        ]
+      },
+      {
+        name: "Números y operaciones",
+        topics: [
+          { t: "Operaciones con números enteros, fraccionarios y decimales", src: "img" },
+          { t: "Porcentajes, razones y proporciones en contexto", src: "img" },
+          { t: "Conversiones de unidades (longitud, área, volumen, tiempo)", src: "img" },
+          { t: "Números racionales e irracionales: representación y operaciones", src: "img" },
+        ]
+      }
+    ]
+  },
+
+  {
+    id: "lectura",
+    title: "Lectura crítica",
+    desc: "Comprensión e interpretación textual",
+    icon: "L",
+    color: "var(--lectura)",
+    bg: "var(--lectura-bg)",
+    themes: [
+      {
+        name: "Textos continuos",
+        topics: [
+          { t: "Texto descriptivo, informativo, narrativo y expositivo — estructura y función", src: "img" },
+          { t: "Texto argumentativo: estructura, tesis, argumentos, premisas, conclusiones, falacias", src: "both" },
+          { t: "Tipos de narradores y figuras literarias", src: "img" },
+          { t: "Textos históricos y coloniales: crónicas y documentos de época", src: "pdf" },
+          { t: "La columna de opinión: juicio de valor, juicio de hecho, clases de argumentos", src: "img" },
+          { t: "La noticia, la crónica, el ensayo: características distintivas", src: "img" },
+        ]
+      },
+      {
+        name: "Textos discontinuos",
+        topics: [
+          { t: "El comic o historieta (incluyendo Historietmas de Quino)", src: "img" },
+          { t: "Humor gráfico: leer la intención detrás de la imagen", src: "img" },
+          { t: "La infografía: combinar texto e imagen para extraer información", src: "img" },
+          { t: "Avisos publicitarios: propósito e intención comunicativa", src: "img" },
+          { t: "El diagrama: lectura e interpretación de elementos visuales", src: "img" },
+        ]
+      },
+      {
+        name: "Vocabulario en contexto",
+        topics: [
+          { t: "Reemplazar una palabra subrayada sin alterar el sentido del texto", src: "both" },
+          { t: "Interpretar expresiones figuradas o arcaicas según el contexto inmediato", src: "both" },
+          { t: "Palabras clave del texto: identificarlas para orientar la comprensión", src: "img" },
+        ]
+      },
+      {
+        name: "Comprensión lectora",
+        topics: [
+          { t: "Lectura literal: identificar personajes y elementos explícitos del texto", src: "both" },
+          { t: "Lectura inferencial: análisis del texto, intencionalidad del autor, sentido global", src: "both" },
+          { t: "Lectura crítica: identificar tesis o idea principal y argumentos que la sostienen", src: "both" },
+          { t: "Inferir lo que el texto no dice explícitamente", src: "both" },
+          { t: "Determinar la función de un párrafo en relación con el texto completo", src: "both" },
+          { t: "Identificar el tema, la intencionalidad del autor y el aprendizaje para el lector", src: "img" },
+          { t: "Técnicas de comprensión lectora: subrayar, conectores, ideas claves", src: "pdf" },
+        ]
+      },
+      {
+        name: "Análisis crítico",
+        topics: [
+          { t: "Identificar prejuicios, sesgos o posiciones implícitas del autor", src: "both" },
+          { t: "Reconocer afirmaciones que apoyan o debilitan un argumento dado", src: "both" },
+          { t: "Detectar generalizaciones extremas ('siempre', 'nunca') — casi siempre incorrectas", src: "pdf" },
+          { t: "Distinguir hechos de opiniones dentro del texto", src: "both" },
+          { t: "Identificar falacias argumentativas", src: "img" },
+        ]
+      }
+    ]
+  },
+
+  {
+    id: "naturales",
+    title: "Ciencias naturales",
+    desc: "Biología, química y física",
+    icon: "⚛",
+    color: "var(--naturales)",
+    bg: "var(--naturales-bg)",
+    themes: [
+      {
+        name: "Biología — Biomoléculas y la célula",
+        topics: [
+          { t: "Lípidos, carbohidratos, proteínas y ácidos nucleicos: función y características", src: "img" },
+          { t: "Célula procariota vs. eucariota (animal y vegetal): diferencias clave", src: "img" },
+          { t: "Organelos celulares y sus funciones específicas", src: "img" },
+          { t: "Transporte celular: pasivo (difusión, ósmosis) y activo", src: "img" },
+          { t: "Reproducción celular: mitosis, meiosis y reproducción asexual", src: "img" },
+        ]
+      },
+      {
+        name: "Biología — Genética",
+        topics: [
+          { t: "ADN y ARN: estructura, función y diferencias", src: "img" },
+          { t: "Código genético: gen, genotipo, fenotipo", src: "img" },
+          { t: "Alelos y sus tipos; leyes de Mendel", src: "img" },
+          { t: "Cuadros de Punnett para predecir herencia", src: "img" },
+        ]
+      },
+      {
+        name: "Biología — Ecología",
+        topics: [
+          { t: "Metabolismo: anabolismo (fotosíntesis, síntesis de proteínas) y catabolismo (respiración celular)", src: "img" },
+          { t: "Relaciones interespecíficas: simbiosis (mutualismo, comensalismo, parasitismo), amensalismo, depredación", src: "both" },
+          { t: "Relaciones intraespecíficas: competencia, familiar, gregaria, social, colonial", src: "img" },
+          { t: "Cadena trófica: qué ocurre al eliminar un eslabón", src: "both" },
+          { t: "Niveles de organización de los seres vivos", src: "img" },
+          { t: "Especies invasoras y su impacto sobre los ecosistemas", src: "img" },
+          { t: "Ciclos biogeoquímicos: agua, carbono, fósforo, nitrógeno, azufre", src: "img" },
+          { t: "Adaptaciones de plantas y animales a entornos extremos (páramo, desierto, acuático)", src: "pdf" },
+          { t: "Diseño experimental: variable de control, variable medida, hipótesis posible de responder", src: "both" },
+          { t: "Explotación de recursos naturales y sus consecuencias ambientales", src: "img" },
+        ]
+      },
+      {
+        name: "Química — Átomo y materia",
+        topics: [
+          { t: "Estructura atómica: protones, electrones, neutrones; propiedades del átomo", src: "img" },
+          { t: "Formación de iones: catión y anión; isótopos", src: "img" },
+          { t: "Clasificación de la materia: mezclas homogéneas, heterogéneas, sustancias puras", src: "img" },
+          { t: "Propiedades físicas y químicas de la materia; estados de agregación", src: "img" },
+          { t: "Técnicas de separación de mezclas", src: "img" },
+        ]
+      },
+      {
+        name: "Química — Inorgánica y tabla periódica",
+        topics: [
+          { t: "Tipos de enlaces químicos; estructura de Lewis; geometría molecular", src: "img" },
+          { t: "Estados de oxidación y la tabla periódica: estructura y propiedades", src: "img" },
+          { t: "Configuración electrónica y nomenclatura inorgánica", src: "img" },
+        ]
+      },
+      {
+        name: "Química — Estequiometría y reacciones",
+        topics: [
+          { t: "Tipos de fórmulas y ecuaciones químicas; balanceo por tanteo y óxido-reducción", src: "img" },
+          { t: "Tipos de reacciones químicas y cinética química", src: "img" },
+          { t: "Leyes ponderales; reactivo límite y en exceso", src: "img" },
+          { t: "Ácidos y bases: escala de pH y pOH", src: "img" },
+          { t: "Solubilidad y sus curvas: cómo cambia con la temperatura", src: "both" },
+          { t: "Viscosidad y poder calorífico: comparar propiedades entre sustancias", src: "both" },
+        ]
+      },
+      {
+        name: "Química — Gases, soluciones y orgánica",
+        topics: [
+          { t: "Ley de gases ideales y ley de presiones parciales", src: "img" },
+          { t: "Concentración, solubilidad, soluto, solvente, solución saturada e insaturada", src: "img" },
+          { t: "Diagrama de fases", src: "img" },
+          { t: "Átomo de carbono, grupos funcionales, hidrocarburos, nomenclatura orgánica", src: "img" },
+        ]
+      },
+      {
+        name: "Física — Cinemática",
+        topics: [
+          { t: "Conversión de unidades (longitud, velocidad, tiempo)", src: "img" },
+          { t: "Movimiento rectilíneo uniforme (MRU) y uniformemente acelerado (MRUA)", src: "img" },
+          { t: "Movimiento parabólico, circular uniforme, caída libre y lanzamiento vertical", src: "img" },
+          { t: "Movimiento circular: distinguir dirección de velocidad vs. dirección de fuerza", src: "both" },
+        ]
+      },
+      {
+        name: "Física — Dinámica y energía",
+        topics: [
+          { t: "Leyes de Newton; fuerzas sobre un cuerpo: normal, peso, fricción, tensión, elástica, gravitatoria", src: "img" },
+          { t: "Diagrama de cuerpo libre; equilibrio de fuerzas", src: "img" },
+          { t: "Poleas y polipastos: predecir movimiento y equilibrio", src: "both" },
+          { t: "Trabajo, potencia, energía, impulso y cantidad de movimiento (momentum)", src: "both" },
+          { t: "Energía cinética y potencial: principio de conservación de la energía mecánica", src: "both" },
+          { t: "Transformaciones de la energía y leyes de la termodinámica", src: "img" },
+          { t: "Temperatura, calor, calor específico y capacidad calorífica", src: "img" },
+        ]
+      },
+      {
+        name: "Física — Ondas, óptica y electricidad",
+        topics: [
+          { t: "Movimiento armónico simple: péndulo simple y ley de Hooke", src: "img" },
+          { t: "Ondas: partes, tipos y ondas sonoras", src: "img" },
+          { t: "Reflexión y refracción de la luz; espectro electromagnético", src: "img" },
+          { t: "Interferencia y difracción de la luz", src: "img" },
+          { t: "Carga eléctrica, campo eléctrico, potencial eléctrico; ley de Coulomb", src: "img" },
+          { t: "Circuitos eléctricos: en serie y en paralelo", src: "img" },
+          { t: "Campos magnéticos: electroimanes, líneas de campo, atracción ferromagnética", src: "both" },
+        ]
+      },
+      {
+        name: "Física — Mecánica de fluidos",
+        topics: [
+          { t: "Densidad, presión, presión atmosférica y presión de los fluidos", src: "img" },
+          { t: "Principio de Arquímedes y principio de Pascal", src: "img" },
+        ]
+      }
+    ]
+  },
+
+  {
+    id: "ingles",
+    title: "Inglés",
+    desc: "Comprensión lectora y gramática",
+    icon: "E",
+    color: "var(--ingles)",
+    bg: "var(--ingles-bg)",
+    themes: [
+      {
+        name: "Estructura fija de la prueba",
+        topics: [
+          { t: "Parte 1 — Vocabulario: asociar descripción con la palabra correcta (matching)", src: "both" },
+          { t: "Parte 2 — Avisos y señales: identificar en qué lugar se vería cada letrero", src: "both" },
+          { t: "Parte 3 — Conversaciones cortas: elegir la respuesta apropiada al contexto", src: "both" },
+          { t: "Parte 4 — Fill in the blank: completar texto con la opción gramaticalmente correcta", src: "both" },
+          { t: "Parte 5 — Reading comprehension: textos medianos con 4–5 preguntas cada uno", src: "both" },
+        ]
+      },
+      {
+        name: "Léxico (vocabulario temático)",
+        topics: [
+          { t: "Common verbs — verbos comunes de uso frecuente", src: "img" },
+          { t: "Jobs & professions — trabajos y profesiones", src: "img" },
+          { t: "Fruits, vegetables, general meals — alimentos", src: "img" },
+          { t: "Clothing — ropa y calzado de hombre y mujer", src: "img" },
+          { t: "Animals — animales; means of transport — medios de transporte", src: "img" },
+          { t: "Sports — deportes; hobbies — pasatiempos", src: "img" },
+          { t: "Common objects and places (mall, bookstore, elevator, playground…)", src: "both" },
+        ]
+      },
+      {
+        name: "Pragmática",
+        topics: [
+          { t: "Objetos y lugares comunes: reconocer y usar su vocabulario en contexto", src: "img" },
+          { t: "Adjetivos: calificativos, indefinidos y demostrativos", src: "img" },
+          { t: "Verbos de acción; frases imperativas; instrucciones y direcciones", src: "img" },
+          { t: "Avisos, advertencias y señales: identificar su propósito", src: "both" },
+        ]
+      },
+      {
+        name: "Gramática en fill in the blank",
+        topics: [
+          { t: "Verbo To Be y tiempos verbales: regulares e irregulares", src: "both" },
+          { t: "Preposiciones de tiempo, lugar y movimiento (in, on, at, go away, provided with…)", src: "both" },
+          { t: "Comparativos y superlativos; cuantificadores", src: "img" },
+          { t: "Pronombres: reflexivos, posesivos, indefinidos", src: "img" },
+          { t: "Conectores: adición, adversativos, causales, comparativos, ejemplificación", src: "both" },
+          { t: "Verbos modales en contexto (might, would, could, shall)", src: "both" },
+          { t: "Tiempos verbales en narración: presente perfecto, pasado simple, futuro", src: "both" },
+        ]
+      },
+      {
+        name: "Comunicación",
+        topics: [
+          { t: "Expresiones comunes y coloquiales; exclamaciones", src: "img" },
+          { t: "Preguntas WH (what, where, when, who, why, how) y Yes/No questions", src: "img" },
+          { t: "Frases para opinar: mostrar acuerdo y desacuerdo", src: "img" },
+          { t: "Completar conversaciones cortas con la respuesta contextualmente apropiada", src: "both" },
+        ]
+      },
+      {
+        name: "Comprensión de lectura",
+        topics: [
+          { t: "Identificar qué está haciendo el autor en el texto (propósito comunicativo)", src: "both" },
+          { t: "Extraer información específica sobre un personaje, hecho o situación", src: "both" },
+          { t: "Interpretar el significado de una expresión o frase en contexto", src: "both" },
+          { t: "Inferir cuál sería la reacción o respuesta apropiada de un personaje", src: "both" },
+          { t: "Lectura literal e inferencial aplicada a textos en inglés", src: "img" },
+        ]
+      },
+      {
+        name: "Temas recurrentes en los textos",
+        topics: [
+          { t: "Historias personales y familiares (cartas, deseos de padres a hijos, campamentos)", src: "both" },
+          { t: "Museos, lugares históricos y personajes destacados", src: "both" },
+          { t: "Educación, experiencias de vida y desarrollo personal", src: "both" },
+          { t: "Instrucciones, recetas o guías prácticas", src: "both" },
+          { t: "Textos sobre ciencia, naturaleza o cultura general", src: "pdf" },
+        ]
+      }
+    ]
+  },
+
+  {
+    id: "sociales",
+    title: "Sociales y ciudadanas",
+    desc: "Historia, economía y ciudadanía",
+    icon: "◉",
+    color: "var(--sociales)",
+    bg: "var(--sociales-bg)",
+    themes: [
+      {
+        name: "Constitución Política de 1991",
+        topics: [
+          { t: "Estado social de derecho; derechos fundamentales", src: "img" },
+          { t: "Jurisdicción especial; ramas del poder público", src: "img" },
+          { t: "Organismos de control; función del congreso", src: "img" },
+          { t: "Funciones del presidente de la república", src: "img" },
+          { t: "Mecanismos de participación y de protección de derechos", src: "img" },
+        ]
+      },
+      {
+        name: "Historia de Colombia",
+        topics: [
+          { t: "Independencia de Colombia (1810); La Patria Boba (1811)", src: "img" },
+          { t: "Centralismo y federalismo (1812); Masacre de las bananeras (1928)", src: "img" },
+          { t: "Guerra de los Mil Días (1899)", src: "img" },
+          { t: "La Violencia bipartidista: El Bogotazo (1948), Dictadura Gustavo Rojas Pinilla (1953), Frente Nacional (1958)", src: "img" },
+          { t: "Conflicto armado: guerrilla, paramilitarismo, narcotráfico, acuerdos de paz", src: "img" },
+          { t: "Magnicidios en Colombia (Siglo XX); orden de sucesos históricos", src: "img" },
+          { t: "Impactos de actividades económicas históricas sobre comunidades y territorio", src: "pdf" },
+        ]
+      },
+      {
+        name: "Historia universal",
+        topics: [
+          { t: "Puntos cardinales de la historia mundial", src: "img" },
+          { t: "Primera y Segunda Guerra Mundial (1914, 1939); origen de la URSS (1922)", src: "img" },
+          { t: "Guerra Fría (1947–1991); Caída del Muro de Berlín (1989); Disolución URSS (1991)", src: "img" },
+          { t: "El apartheid (1948); lucha por los derechos civiles (1954)", src: "img" },
+          { t: "Revoluciones: industrial (1760), francesa (1789), mexicana (1910), rusa (1917), cubana (1953)", src: "img" },
+          { t: "Independencias hispanoamericanas: Simón Bolívar, Junín, Colombia y Perú", src: "both" },
+          { t: "Conquista y colonización: relaciones entre españoles e indígenas americanos", src: "both" },
+        ]
+      },
+      {
+        name: "Economía",
+        topics: [
+          { t: "Oferta, demanda y formación de precios", src: "both" },
+          { t: "Sectores económicos", src: "img" },
+          { t: "Ideologías políticas: izquierda, derecha, liberalismo, neoliberalismo, conservadurismo", src: "img" },
+          { t: "Sistemas económicos: capitalismo, comunismo, socialismo, feudalismo", src: "img" },
+          { t: "Sistemas de gobierno: democracia, monarquía, república, totalitarismo", src: "img" },
+          { t: "Medidas proteccionistas: aranceles, cuotas y sus efectos en industria e importaciones", src: "both" },
+          { t: "Política comercial: apertura económica y proteccionismo", src: "both" },
+          { t: "Impuestos, gasto público y redistribución", src: "both" },
+        ]
+      },
+      {
+        name: "Competencias ciudadanas",
+        topics: [
+          { t: "Objetividad y subjetividad en la evaluación de situaciones", src: "img" },
+          { t: "Actores y dimensiones de un conflicto", src: "img" },
+          { t: "Efecto deseado y no deseado de decisiones públicas", src: "img" },
+          { t: "Choque de derechos; prejuicio, estigma y discriminación", src: "img" },
+          { t: "Análisis crítico del discurso político y social", src: "img" },
+          { t: "Derechos laborales: igualdad salarial, condiciones de trabajo justas", src: "both" },
+          { t: "Dilemas éticos: cuándo una medida es justa o injusta y con qué argumentos", src: "both" },
+        ]
+      },
+      {
+        name: "Medio ambiente y territorio",
+        topics: [
+          { t: "Conflictos entre desarrollo económico y preservación ambiental", src: "both" },
+          { t: "Servicios ecosistémicos: qué son y cómo se afectan por actividades humanas", src: "both" },
+          { t: "Uso del suelo, recursos hídricos, bosques de niebla y páramos", src: "both" },
+          { t: "Minería, monocultivos y sus consecuencias sobre ecosistemas locales", src: "both" },
+        ]
+      },
+      {
+        name: "Patrón transversal de la prueba",
+        topics: [
+          { t: "Siempre presentan posiciones en conflicto (empresa vs. comunidad, economía vs. ambiente)", src: "pdf" },
+          { t: "Preguntan cuál es el aspecto más importante o qué evidencia lleva a la conclusión", src: "pdf" },
+          { t: "Opciones con 'siempre' o 'nunca' casi siempre incorrectas — eliminarlas primero", src: "pdf" },
+          { t: "Evaluar si una afirmación política o económica es verdadera con base en el texto dado", src: "pdf" },
+        ]
+      }
+    ]
+  }
+];
+
+const accordion = document.getElementById('accordion');
+const searchInput = document.getElementById('searchInput');
+const noResults   = document.getElementById('noResults');
+const noQuery     = document.getElementById('noQuery');
+const statTemas   = document.getElementById('statTemas');
+const statSub     = document.getElementById('statSub');
+
+function countAll() {
+  let temas = 0, sub = 0;
+  data.forEach(c => { temas += c.themes.length; c.themes.forEach(t => sub += t.topics.length); });
+  statTemas.innerHTML = `<strong>${temas}</strong> temas generales`;
+  statSub.innerHTML   = `<strong>${sub}</strong> temas específicos`;
+}
+
+function srcTag(src) {
+  const map = { pdf: ['src-pdf','PDF'], img: ['src-img','Temario'], both: ['src-both','Ambos'] };
+  const [cls, label] = map[src] || ['src-img','Temario'];
+  return `<span class="src-tag ${cls}">${label}</span>`;
+}
+
+function highlight(text, q) {
+  if (!q) return text;
+  const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+  return text.replace(re, '<mark class="highlight">$1</mark>');
+}
+
+function buildAccordion(filter = '') {
+  accordion.innerHTML = '';
+  let totalShown = 0;
+  const q = filter.toLowerCase().trim();
+
+  data.forEach(comp => {
+    const matchedThemes = comp.themes.map(theme => {
+      const topics = theme.topics.filter(t =>
+        !q ||
+        t.t.toLowerCase().includes(q) ||
+        theme.name.toLowerCase().includes(q) ||
+        comp.title.toLowerCase().includes(q)
+      );
+      return { ...theme, topics };
+    }).filter(t => t.topics.length > 0);
+
+    if (q && matchedThemes.length === 0) return;
+    totalShown++;
+
+    const card = document.createElement('div');
+    card.className = 'comp-card';
+    card.style.setProperty('--accent-color', comp.color);
+    card.style.setProperty('--accent-bg', comp.bg);
+
+    const totalTopics = matchedThemes.reduce((a, t) => a + t.topics.length, 0);
+
+    card.innerHTML = `
+      <div class="comp-header">
+        <div class="comp-icon">${comp.icon}</div>
+        <div class="comp-info">
+          <div class="comp-name">${comp.title}</div>
+          <div class="comp-desc">${comp.desc}</div>
+        </div>
+        <div class="comp-meta">
+          <span class="comp-count">${matchedThemes.length} temas · ${totalTopics} subtemas</span>
+          <div class="comp-chevron">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2.5 5L7 9.5L11.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="progress-bar"></div>
+      </div>
+      <div class="comp-body ${q ? 'open' : ''}">
+        ${matchedThemes.map(theme => `
+          <div class="gen-theme ${q ? 'open' : ''}">
+            <div class="gen-header">
+              <span class="gen-dot"></span>
+              <span class="gen-name">${highlight(theme.name, q)}</span>
+              <span class="gen-badge">${theme.topics.length}</span>
+              <span class="gen-arr">›</span>
+            </div>
+            <div class="spec-list ${q ? 'open' : ''}">
+              ${theme.topics.map(item => `
+                <div class="spec-item">
+                  <span class="spec-dash">—</span>
+                  <span style="flex:1">${highlight(item.t, q)}</span>
+                  ${srcTag(item.src)}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    card.querySelector('.comp-header').addEventListener('click', () => {
+      const body = card.querySelector('.comp-body');
+      const isOpen = card.classList.contains('open');
+      card.classList.toggle('open', !isOpen);
+      body.classList.toggle('open', !isOpen);
+    });
+
+    card.querySelectorAll('.gen-header').forEach(gh => {
+      gh.addEventListener('click', e => {
+        e.stopPropagation();
+        const gt = gh.parentElement;
+        const sl = gt.querySelector('.spec-list');
+        const isOpen = gt.classList.contains('open');
+        gt.classList.toggle('open', !isOpen);
+        sl.classList.toggle('open', !isOpen);
+      });
+    });
+
+    accordion.appendChild(card);
+  });
+
+  noResults.style.display = totalShown === 0 ? 'block' : 'none';
+  noQuery.textContent = filter;
+}
+
+searchInput.addEventListener('input', () => buildAccordion(searchInput.value));
+
+countAll();
+buildAccordion();
+</script>
+</body>
+</html>
