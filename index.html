@@ -256,6 +256,126 @@
   .src-img  { background: rgba(167,139,250,0.12); color: #a78bfa; }
   .src-both { background: rgba(62,207,142,0.12);  color: #3ecf8e; }
 
+  /* ── EXPANDABLE SUBTOPIC ── */
+  .spec-item { cursor: pointer; transition: color 0.15s; }
+  .spec-item:hover { color: var(--text); }
+
+  .spec-toggle {
+    margin-left: 8px; color: var(--faint);
+    font-size: 15px; line-height: 1; flex-shrink: 0;
+    align-self: center; font-weight: 300;
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), color 0.2s;
+  }
+  .spec-item.open .spec-toggle { transform: rotate(135deg); color: var(--accent-color); }
+
+  .spec-detail { display: none; padding: 0.2rem 0 0.9rem 22px; }
+  .spec-detail.open { display: block; animation: fadeUp 0.25s ease both; }
+
+  .spec-exp {
+    font-size: 12.5px; color: rgba(240,238,232,0.78);
+    font-weight: 300; line-height: 1.7;
+    border-left: 2px solid var(--accent-bg);
+    padding: 2px 0 2px 12px; margin-bottom: 10px;
+  }
+  .spec-exp strong { color: var(--text); font-weight: 600; }
+  .spec-exp .formula {
+    display: inline-block; font-family: 'Syne', monospace;
+    background: var(--surface2); color: var(--accent-color);
+    padding: 1px 8px; border-radius: 6px; font-size: 12px;
+    margin: 2px 0; letter-spacing: 0.02em;
+  }
+  .spec-exp .pending { color: var(--muted); font-style: italic; }
+  .spec-exp p { margin-bottom: 9px; }
+  .spec-exp p:last-child { margin-bottom: 0; }
+  .spec-exp ul, .spec-exp ol { margin: 6px 0 9px 18px; }
+  .spec-exp li { margin-bottom: 4px; }
+
+  .exp-h {
+    display: block; font-family: 'Syne', sans-serif;
+    font-size: 12px; font-weight: 700; color: var(--text);
+    margin: 14px 0 5px; letter-spacing: 0.01em;
+  }
+  .exp-h:first-child { margin-top: 0; }
+
+  .exp-formula {
+    display: block; background: var(--surface2);
+    border: 0.5px solid var(--border); border-radius: 8px;
+    padding: 8px 14px; margin: 10px 0;
+    text-align: center; overflow-x: auto; overflow-y: hidden;
+    color: var(--text);
+  }
+
+  .exp-ex {
+    background: rgba(62,207,142,0.06);
+    border-left: 2px solid #3ecf8e; border-radius: 6px;
+    padding: 9px 13px; margin: 10px 0; font-size: 12px;
+    line-height: 1.6;
+  }
+  .exp-ex b, .exp-ex strong { color: #3ecf8e; }
+
+  .exp-tip {
+    background: rgba(251,191,36,0.06);
+    border-left: 2px solid #fbbf24; border-radius: 6px;
+    padding: 9px 13px; margin: 10px 0; font-size: 12px;
+    line-height: 1.6;
+  }
+  .exp-tip b, .exp-tip strong { color: #fbbf24; }
+
+  /* MathJax sizing inside explanations */
+  .spec-exp mjx-container { font-size: 1.02em !important; }
+  .spec-exp mjx-container[display="true"] { margin: 0 !important; }
+
+  .res-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .res-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 500;
+    padding: 5px 12px; border-radius: 99px;
+    text-decoration: none;
+    border: 0.5px solid var(--border);
+    background: var(--surface2); color: var(--muted);
+    transition: border-color 0.18s, color 0.18s, transform 0.18s;
+  }
+  .res-btn:hover { transform: translateY(-1px); color: var(--accent-color); border-color: var(--accent-color); }
+  .res-btn.video:hover { color: #f06292; border-color: #f06292; }
+  .res-btn.wiki:hover  { color: #4f8ef7; border-color: #4f8ef7; }
+
+  .res-btn.study { cursor: pointer; font-family: inherit; }
+  .res-btn.study:hover { color: var(--lectura); border-color: var(--lectura); }
+  .res-btn.study.done {
+    color: var(--lectura); border-color: var(--lectura);
+    background: var(--lectura-bg);
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap { margin: 0 0 1.75rem; }
+  .progress-track {
+    height: 8px; background: var(--surface2);
+    border: 0.5px solid var(--border);
+    border-radius: 99px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: 0%; border-radius: 99px;
+    background: linear-gradient(90deg, #4f8ef7, #a78bfa, #3ecf8e);
+    transition: width 0.6s cubic-bezier(0.34,1.4,0.64,1);
+  }
+  .progress-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; margin-top: 8px; flex-wrap: wrap;
+  }
+  .progress-label { font-size: 12px; color: var(--muted); font-weight: 300; }
+  .progress-label strong { color: var(--text); font-weight: 600; }
+  .progress-reset {
+    font-family: 'DM Sans', sans-serif; font-size: 11px;
+    color: var(--faint); background: none; border: none;
+    cursor: pointer; padding: 2px 4px; transition: color 0.2s;
+    text-decoration: underline; text-underline-offset: 2px;
+  }
+  .progress-reset:hover { color: var(--naturales); }
+
+  /* completed subtopic marker */
+  .spec-item.done .spec-dash { color: var(--lectura); opacity: 1; font-weight: 700; }
+  .spec-item.done > span:nth-child(2) { color: rgba(240,238,232,0.85); }
+
   /* ── LEGEND ── */
   .legend {
     display: flex; gap: 1rem; flex-wrap: wrap;
@@ -297,6 +417,17 @@
     .src-tag { display: none; }
   }
 </style>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['\\[', '\\]']]
+    },
+    svg: { fontCache: 'global' },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
 
@@ -314,11 +445,12 @@
     <div class="stat-pill" id="statSub"></div>
   </div>
 
-  <div class="legend">
-    <span class="legend-label">Encontraras: </span>
-    <div class="legend-item"><span class="src-tag src-pdf">Temario General</span></div>
-    <div class="legend-item"><span class="src-tag src-img">Temas puntuales</span></div>
-    <div class="legend-item"><span class="src-tag src-both">Cuadernillos</span></div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-foot">
+      <span class="progress-label" id="progressLabel"></span>
+      <button class="progress-reset" type="button" onclick="resetProgress()">Reiniciar progreso</button>
+    </div>
   </div>
 
   <div class="search-wrap">
@@ -327,6 +459,7 @@
   </div>
 
 <div id="accordion"></div>
+<div class="no-results" id="noResults">No se encontraron subtemas para "<strong id="noQuery"></strong>".</div>
 <div style="text-align: center; margin: 24px 0 8px;">
 
   <a href="https://drive.google.com/drive/folders/1m8wX55W0zd-zkfeDEXrtN4P9uUOeKdnS?usp=drive_link"
@@ -795,12 +928,1418 @@ const data = [
   }
 ];
 
+// ── EXPLICACIONES POR SUBTEMA (clave = texto exacto del subtema) ──
+const EXP = {
+  // ───────────── MATEMÁTICAS ─────────────
+  "Lectura e interpretación de tablas, barras, circulares y líneas":
+    "<span class='exp-h'>¿Qué evalúan?</span><p>Tu capacidad de <strong>extraer información</strong> de un gráfico sin equivocarte. Cada representación tiene un propósito y leerla mal es el error #1 del ICFES.</p>" +
+    "<span class='exp-h'>Cada gráfico y para qué sirve</span><ul>" +
+    "<li><strong>Diagrama de barras:</strong> compara cantidades entre categorías (ventas por mes, votos por candidato). La altura = el valor.</li>" +
+    "<li><strong>Diagrama circular (torta):</strong> muestra partes de un todo. Todas las porciones suman el 100%. Sirve para proporciones, no para valores absolutos exactos.</li>" +
+    "<li><strong>Gráfico de líneas:</strong> muestra cómo cambia algo a lo largo del tiempo (tendencia: sube, baja, se mantiene).</li>" +
+    "<li><strong>Tabla:</strong> datos exactos en filas y columnas; útil para cruzar dos variables.</li></ul>" +
+    "<span class='exp-h'>Cómo leer sin caer en trampas</span><p>1) Lee el <strong>título</strong> (¿de qué trata?). 2) Mira los <strong>ejes y sus unidades</strong> (¿son miles, porcentajes, personas?). 3) Revisa la <strong>escala</strong>: a veces no empieza en cero y exagera diferencias.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Un circular muestra: Transporte 25%, Comida 40%, Arriendo 35%. Si el ingreso es $2.000.000, lo gastado en comida es \\(0{,}40 \\times 2.000.000 = \\$800.000\\). El circular da el %, tú lo conviertes a pesos.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> En el circular, la mayor porción no siempre es 'más de la mitad'. Solo supera el 50% si una sola tajada ocupa más de medio círculo.</div>",
+
+  "Media, mediana, moda y rango — qué pasa al eliminar o agregar un dato":
+    "<span class='exp-h'>Las cuatro medidas</span><ul>" +
+    "<li><strong>Media (promedio):</strong> \\(\\bar{x} = \\dfrac{\\text{suma de los datos}}{\\text{cantidad de datos}}\\)</li>" +
+    "<li><strong>Mediana:</strong> el valor del <strong>centro</strong> cuando ordenas los datos de menor a mayor. Si hay cantidad par, es el promedio de los dos centrales.</li>" +
+    "<li><strong>Moda:</strong> el dato que <strong>más se repite</strong> (puede haber varias o ninguna).</li>" +
+    "<li><strong>Rango:</strong> \\(\\text{dato mayor} - \\text{dato menor}\\). Mide qué tan dispersos están.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Datos: 2, 5, 5, 8, 10.<br>Media \\(= \\dfrac{2+5+5+8+10}{5} = \\dfrac{30}{5} = 6\\).<br>Mediana \\(= 5\\) (el del centro). Moda \\(= 5\\) (se repite). Rango \\(= 10 - 2 = 8\\).</div>" +
+    "<span class='exp-h'>Lo que MÁS preguntan: agregar o quitar un dato</span><p>La <strong>media es muy sensible</strong> a valores extremos; la <strong>mediana casi no se mueve</strong>. Si a los datos anteriores les agregas un 50:</p>" +
+    "<div class='exp-formula'>\\[ \\bar{x}_{nuevo} = \\frac{30 + 50}{6} = \\frac{80}{6} \\approx 13{,}3 \\]</div>" +
+    "<p>La media saltó de 6 a 13,3 por un solo dato, ¡pero la mediana apenas cambia! Por eso, cuando hay un valor atípico, la mediana describe mejor al grupo.</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Si te preguntan qué medida 'representa mejor' un sueldo típico cuando hay un jefe que gana muchísimo, la respuesta suele ser la <b>mediana</b>, no la media.</div>",
+
+  "Comparar medidas de tendencia central entre dos conjuntos de datos":
+    "<span class='exp-h'>La idea clave</span><p>Dos grupos pueden tener la <strong>misma media</strong> y ser totalmente distintos. Comparar no es solo calcular: es <strong>argumentar</strong> qué grupo es más parejo, cuál tiene valores extremos y qué medida los describe mejor.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Notas de dos cursos.<br>Curso A: 3, 3, 3, 3, 3 → media \\(=3\\), todos iguales (nada disperso).<br>Curso B: 1, 1, 3, 5, 5 → media \\(=3\\) también, pero muy disperso.<br><b>Misma media, realidades opuestas.</b> El rango lo revela: A tiene rango 0, B tiene rango 4.</div>" +
+    "<span class='exp-h'>Cómo comparar bien</span><ul>" +
+    "<li>Si las medias son iguales → mira la <strong>dispersión</strong> (rango): menor rango = grupo más homogéneo.</li>" +
+    "<li>Si hay valores atípicos → compara con <strong>mediana</strong>, no con media.</li>" +
+    "<li>Si preguntan 'cuál mejoró más' → compara el cambio de la media o mediana entre antes y después.</li></ul>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Desconfía de conclusiones tipo 'el curso A es mejor' basadas solo en la media. Casi siempre la respuesta correcta menciona la dispersión.</div>",
+
+  "Probabilidad simple: casos favorables sobre total de posibles":
+    "<span class='exp-h'>La fórmula base</span>" +
+    "<div class='exp-formula'>\\[ P(A) = \\frac{\\text{casos favorables}}{\\text{casos posibles}} \\]</div>" +
+    "<p>El resultado siempre está entre <strong>0</strong> (imposible) y <strong>1</strong> (seguro). Puedes expresarlo como fracción, decimal o porcentaje: \\(\\tfrac{1}{2} = 0{,}5 = 50\\%\\).</p>" +
+    "<div class='exp-ex'><b>Ejemplo 1 (dado):</b> Probabilidad de sacar par. Favorables = {2,4,6} = 3. Posibles = 6.<br>\\(P = \\dfrac{3}{6} = \\dfrac{1}{2}\\).</div>" +
+    "<div class='exp-ex'><b>Ejemplo 2 (bolsa):</b> 4 bolas rojas y 6 azules (10 en total). \\(P(\\text{roja}) = \\dfrac{4}{10} = \\dfrac{2}{5} = 40\\%\\).</div>" +
+    "<span class='exp-h'>Reglas útiles</span><ul>" +
+    "<li><strong>Complemento:</strong> \\(P(\\text{no A}) = 1 - P(A)\\). (Si llover tiene \\(P=0{,}3\\), no llover tiene \\(0{,}7\\).)</li>" +
+    "<li><strong>Eventos independientes</strong> (uno no afecta al otro): \\(P(A \\text{ y } B) = P(A)\\times P(B)\\).</li></ul>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Cuenta bien el TOTAL de casos posibles. El error más común es equivocarse en el denominador, no en el numerador.</div>",
+
+  "Proporcionalidad directa e inversa — identificar cuál aplica y argumentarlo":
+    "<span class='exp-h'>Dos tipos, no los confundas</span><ul>" +
+    "<li><strong>Directa:</strong> si una cantidad sube, la otra sube en la misma proporción. Su cociente es constante: \\(\\dfrac{y}{x} = k\\). Ej: más kilos de fruta → más precio.</li>" +
+    "<li><strong>Inversa:</strong> si una sube, la otra baja. Su producto es constante: \\(x \\cdot y = k\\). Ej: más obreros → menos días para terminar.</li></ul>" +
+    "<span class='exp-h'>Regla de tres</span><p><b>Directa</b> (se multiplican en cruz):</p>" +
+    "<div class='exp-formula'>\\[ \\frac{a}{b} = \\frac{c}{x} \\;\\Rightarrow\\; x = \\frac{b \\cdot c}{a} \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo directo:</b> 3 kg de manzana cuestan $9.000. ¿5 kg?<br>\\(x = \\dfrac{9000 \\times 5}{3} = \\$15.000\\).</div>" +
+    "<div class='exp-ex'><b>Ejemplo inverso:</b> 4 obreros tardan 12 días. ¿6 obreros? Como es inversa, se multiplica: \\(4 \\times 12 = 6 \\times x\\), entonces \\(x = \\dfrac{48}{6} = 8\\) días.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Antes de plantear, pregúntate: '¿al aumentar lo uno, lo otro aumenta o disminuye?'. Si disminuye, es INVERSA (multiplicas, no cruzas).</div>",
+
+  "Teorema de Pitágoras: calcular lado faltante, perímetros y cuerdas":
+    "<span class='exp-h'>La fórmula</span><p>Solo funciona en <strong>triángulos rectángulos</strong> (uno tiene un ángulo de 90°). La <strong>hipotenusa</strong> \\(c\\) es el lado más largo, opuesto al ángulo recto; \\(a\\) y \\(b\\) son los catetos.</p>" +
+    "<div class='exp-formula'>\\[ c^2 = a^2 + b^2 \\]</div>" +
+    "<p>Despejando un cateto: \\(a = \\sqrt{c^2 - b^2}\\).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Catetos 3 y 4. \\(c = \\sqrt{3^2 + 4^2} = \\sqrt{9+16} = \\sqrt{25} = 5\\).</div>" +
+    "<div class='exp-ex'><b>Hallar cateto:</b> Hipotenusa 13, un cateto 5. El otro: \\(\\sqrt{13^2 - 5^2} = \\sqrt{169-25} = \\sqrt{144} = 12\\).</div>" +
+    "<span class='exp-h'>Ternas que conviene memorizar</span><p>\\(3\\text{-}4\\text{-}5\\), \\(6\\text{-}8\\text{-}10\\), \\(5\\text{-}12\\text{-}13\\), \\(8\\text{-}15\\text{-}17\\). Si reconoces una, te ahorras la raíz.</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Lo usan también para diagonales de rectángulos, alturas de escaleras apoyadas en muros y distancias en el plano. Si ves un ángulo recto, piensa en Pitágoras.</div>",
+
+  "Áreas de figuras compuestas (rectángulos con zonas quitadas, triángulos internos)":
+    "<span class='exp-h'>Estrategia: descomponer</span><p>Una figura 'rara' se resuelve <strong>partiéndola</strong> en figuras simples que sí sabes calcular, y luego <strong>sumando o restando</strong> áreas.</p>" +
+    "<span class='exp-h'>Áreas básicas</span><ul>" +
+    "<li>Rectángulo: \\(A = b \\cdot h\\)</li>" +
+    "<li>Triángulo: \\(A = \\dfrac{b \\cdot h}{2}\\)</li>" +
+    "<li>Círculo: \\(A = \\pi r^2\\)</li>" +
+    "<li>Trapecio: \\(A = \\dfrac{(B + b)\\,h}{2}\\)</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo (figura con hueco):</b> Un cuadrado de lado 10 con un círculo de radio 3 recortado en el centro.<br>Área = \\(10^2 - \\pi(3)^2 = 100 - 9\\pi \\approx 100 - 28{,}3 = 71{,}7\\).</div>" +
+    "<div class='exp-ex'><b>Ejemplo (suma):</b> Una 'L' = rectángulo grande \\(6\\times4=24\\) más rectángulo pequeño \\(2\\times3=6\\) → \\(24+6=30\\).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Si hay zona sombreada, casi siempre es 'área total − área blanca'. Identifica qué se suma y qué se resta antes de calcular.</div>",
+
+  "Ángulos internos de polígonos regulares e irregulares y sus sumas":
+    "<span class='exp-h'>Suma de ángulos internos</span><p>Para cualquier polígono de \\(n\\) lados:</p>" +
+    "<div class='exp-formula'>\\[ S = (n - 2)\\times 180^\\circ \\]</div>" +
+    "<p>Triángulo \\((n=3)\\): \\(180^\\circ\\). Cuadrilátero: \\(360^\\circ\\). Pentágono: \\(540^\\circ\\). Hexágono: \\(720^\\circ\\).</p>" +
+    "<span class='exp-h'>Polígono regular (todos los ángulos iguales)</span>" +
+    "<div class='exp-formula'>\\[ \\text{cada ángulo} = \\frac{(n-2)\\times 180^\\circ}{n} \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Hexágono regular: \\(\\dfrac{(6-2)\\times180}{6} = \\dfrac{720}{6} = 120^\\circ\\) cada ángulo.</div>" +
+    "<div class='exp-ex'><b>Irregular:</b> En un cuadrilátero conoces 3 ángulos: 90°, 100°, 80°. El cuarto es \\(360 - (90+100+80) = 90^\\circ\\).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Los ángulos <b>exteriores</b> de cualquier polígono siempre suman \\(360^\\circ\\). Útil cuando preguntan por el ángulo exterior de un regular: \\(360^\\circ / n\\).</div>",
+
+  "Relaciones entre rectas paralelas, perpendiculares y consecuencias lógicas":
+    "<span class='exp-h'>Definiciones</span><ul>" +
+    "<li><strong>Paralelas:</strong> nunca se cruzan, mantienen la misma distancia y la <strong>misma pendiente</strong>.</li>" +
+    "<li><strong>Perpendiculares:</strong> se cortan formando \\(90^\\circ\\). Sus pendientes cumplen \\(m_1 \\cdot m_2 = -1\\).</li></ul>" +
+    "<span class='exp-h'>Ángulos entre paralelas cortadas por una transversal</span><p>Cuando una recta cruza a dos paralelas se forman parejas de ángulos <strong>iguales</strong>:</p><ul>" +
+    "<li><strong>Correspondientes</strong> (misma posición): iguales.</li>" +
+    "<li><strong>Alternos internos</strong> (entre las paralelas, lados opuestos): iguales.</li>" +
+    "<li><strong>Conjugados/colaterales:</strong> suman \\(180^\\circ\\).</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Dos paralelas cortadas por una transversal. Si un ángulo mide \\(70^\\circ\\), su alterno interno también mide \\(70^\\circ\\), y el conjugado mide \\(180 - 70 = 110^\\circ\\).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Marca en el dibujo todos los ángulos iguales que vayas deduciendo. La respuesta suele salir 'en cadena' usando que opuestos por el vértice son iguales.</div>",
+
+  "Volumen de esferas, pirámides y cilindros — errores de procedimiento":
+    "<span class='exp-h'>Fórmulas de volumen</span><ul>" +
+    "<li>Prisma / cilindro: \\(V = A_{base}\\times h\\). Cilindro: \\(V = \\pi r^2 h\\).</li>" +
+    "<li>Pirámide / cono: \\(V = \\dfrac{A_{base}\\times h}{3}\\). Cono: \\(V = \\dfrac{\\pi r^2 h}{3}\\).</li>" +
+    "<li>Esfera: \\(V = \\dfrac{4}{3}\\pi r^3\\).</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Cilindro con \\(r=2\\), \\(h=5\\): \\(V = \\pi (2)^2(5) = 20\\pi \\approx 62{,}8\\).</div>" +
+    "<span class='exp-h'>Los errores que te ponen como 'trampa'</span><ul>" +
+    "<li>Olvidar el \\(\\div 3\\) en cono y pirámide.</li>" +
+    "<li>Usar el <strong>diámetro</strong> en vez del radio: recuerda \\(r = d/2\\).</li>" +
+    "<li>No elevar el radio al cuadrado (o al cubo en la esfera).</li></ul>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Muchas preguntas muestran un desarrollo y piden 'en qué paso está el error'. Revisa primero el \\(\\div 3\\) y el radio vs. diámetro.</div>",
+
+  "Clasificación y propiedades de figuras geométricas planas y sólidos":
+    "<span class='exp-h'>Figuras planas</span><p>Se clasifican por número de lados y por sus propiedades:</p><ul>" +
+    "<li><strong>Triángulos:</strong> por lados (equilátero, isósceles, escaleno) y por ángulos (rectángulo, acutángulo, obtusángulo).</li>" +
+    "<li><strong>Cuadriláteros:</strong> cuadrado (4 lados y 4 ángulos iguales), rectángulo (ángulos iguales, lados 2 a 2), rombo (4 lados iguales), paralelogramo, trapecio.</li></ul>" +
+    "<span class='exp-h'>Sólidos</span><p>Se describen por <strong>caras, aristas y vértices</strong>. Distingue prismas (dos bases iguales) de pirámides (una base y un vértice superior), y cuerpos redondos (esfera, cilindro, cono).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Un cubo tiene 6 caras, 12 aristas y 8 vértices. Un cuadrado es un caso especial de rectángulo (y de rombo) porque cumple ambas condiciones.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Saber clasificar te dice qué fórmula aplicar. Si dudas entre rombo y cuadrado: el cuadrado además tiene ángulos rectos.</div>",
+
+  "Dominio de funciones con raíces cuadradas y fracciones con denominador variable":
+    "<span class='exp-h'>¿Qué es el dominio?</span><p>Es el conjunto de <strong>valores de \\(x\\) permitidos</strong>. Hay dos prohibiciones que casi siempre aparecen:</p><ul>" +
+    "<li><strong>Fracción:</strong> el denominador <strong>no puede ser 0</strong>.</li>" +
+    "<li><strong>Raíz cuadrada:</strong> lo de adentro debe ser \\(\\geq 0\\) (no hay raíz real de negativos).</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo 1:</b> \\(f(x) = \\dfrac{1}{x-3}\\). El denominador se anula si \\(x=3\\), así que el dominio es 'todos los reales menos 3'.</div>" +
+    "<div class='exp-ex'><b>Ejemplo 2:</b> \\(g(x) = \\sqrt{x-2}\\). Necesitamos \\(x - 2 \\geq 0\\), o sea \\(x \\geq 2\\). Dominio: \\([2, \\infty)\\).</div>" +
+    "<div class='exp-ex'><b>Ejemplo 3 (mezcla):</b> \\(h(x) = \\dfrac{\\sqrt{x}}{x-1}\\): se necesita \\(x\\geq 0\\) <em>y</em> \\(x\\neq 1\\).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Si hay raíz EN el denominador, el interior debe ser estrictamente mayor que 0 (no puede ser 0 porque dividiría por cero).</div>",
+
+  "Expresiones algebraicas: identificar qué procedimiento es correcto o incorrecto":
+    "<span class='exp-h'>Qué evalúan</span><p>Detectar <strong>errores</strong> al transformar expresiones. La regla de oro: cada paso debe mantener la igualdad.</p>" +
+    "<span class='exp-h'>Errores más frecuentes</span><ul>" +
+    "<li><strong>Signo mal distribuido:</strong> \\(-(a-b) = -a+b\\), NO \\(-a-b\\).</li>" +
+    "<li><strong>Distributiva incompleta:</strong> \\(2(x+3) = 2x+6\\), no \\(2x+3\\).</li>" +
+    "<li><strong>Cancelar mal:</strong> en \\(\\dfrac{x+2}{2}\\) NO se puede 'tachar' el 2; solo se cancela lo que multiplica a todo.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> ¿Es correcto \\(3(x-2)+4 = 3x-2+4\\)? <b>No.</b> Lo correcto es \\(3x-6+4 = 3x-2\\). El error fue no multiplicar el \\(-2\\) por 3.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Para verificar, reemplaza un número (por ejemplo \\(x=1\\)) en la expresión original y en la transformada: si dan distinto, hubo error.</div>",
+
+  "Variación lineal vs. no lineal: reconocer cuál crece de forma proporcional":
+    "<span class='exp-h'>La diferencia</span><ul>" +
+    "<li><strong>Lineal:</strong> crece a <strong>ritmo constante</strong>. Forma \\(y = mx + b\\); su gráfica es una <strong>recta</strong>.</li>" +
+    "<li><strong>No lineal:</strong> el ritmo cambia. Ej. cuadrática \\(y=x^2\\) (parábola) o exponencial \\(y=2^x\\) (se dispara).</li></ul>" +
+    "<span class='exp-h'>Cómo reconocerla en una tabla</span><p>Mira las diferencias entre valores consecutivos de \\(y\\): si son <strong>constantes</strong>, es lineal.</p>" +
+    "<div class='exp-ex'><b>Lineal:</b> \\(x:1,2,3,4\\) → \\(y:5,8,11,14\\). Diferencias: \\(+3,+3,+3\\). Constante → lineal, con pendiente \\(m=3\\).</div>" +
+    "<div class='exp-ex'><b>No lineal:</b> \\(x:1,2,3,4\\) → \\(y:1,4,9,16\\). Diferencias: \\(+3,+5,+7\\). Cambian → no lineal (es \\(y=x^2\\)).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> 'Proporcional' (directa) es un caso especial de lineal donde además \\(b=0\\): pasa por el origen \\((0,0)\\).</div>",
+
+  "Notación científica: multiplicar y dividir potencias de 10":
+    "<span class='exp-h'>Qué es</span><p>Una forma corta de escribir números muy grandes o muy pequeños: \\(a \\times 10^n\\), con \\(1 \\leq a < 10\\).</p>" +
+    "<div class='exp-ex'><b>Ejemplos:</b> \\(45.000 = 4{,}5\\times 10^4\\). \\(0{,}0007 = 7\\times 10^{-4}\\) (exponente negativo = número pequeño).</div>" +
+    "<span class='exp-h'>Operar con potencias de 10</span><ul>" +
+    "<li>Multiplicar: se <strong>suman</strong> exponentes. \\(10^3 \\times 10^4 = 10^{7}\\).</li>" +
+    "<li>Dividir: se <strong>restan</strong>. \\(\\dfrac{10^6}{10^2} = 10^{4}\\).</li></ul>" +
+    "<div class='exp-formula'>\\[ (2\\times10^3)(3\\times10^4) = (2\\cdot3)\\times10^{3+4} = 6\\times10^{7} \\]</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Si al multiplicar el coeficiente queda \\(\\geq 10\\) (ej. \\(40\\times10^3\\)), ajusta: \\(4\\times10^{4}\\) para dejarlo en forma correcta.</div>",
+
+  "Cuadrado de binomios y productos notables":
+    "<span class='exp-h'>Los tres esenciales</span>" +
+    "<div class='exp-formula'>\\[ (a+b)^2 = a^2 + 2ab + b^2 \\]</div>" +
+    "<div class='exp-formula'>\\[ (a-b)^2 = a^2 - 2ab + b^2 \\]</div>" +
+    "<div class='exp-formula'>\\[ (a+b)(a-b) = a^2 - b^2 \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo 1:</b> \\((x+5)^2 = x^2 + 2(x)(5) + 25 = x^2 + 10x + 25\\).</div>" +
+    "<div class='exp-ex'><b>Ejemplo 2 (diferencia de cuadrados):</b> \\((x+7)(x-7) = x^2 - 49\\).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> El error #1 es olvidar el término del medio \\(2ab\\): \\((x+5)^2\\) NO es \\(x^2+25\\). Reconocer una diferencia de cuadrados también ayuda a factorizar rápido.</div>",
+
+  "Sistemas de ecuaciones lineales e inecuaciones":
+    "<span class='exp-h'>Sistemas (2 ecuaciones, 2 incógnitas)</span><p>La solución es el punto \\((x,y)\\) que cumple ambas a la vez (donde las rectas se cruzan). Tres métodos: sustitución, igualación y eliminación.</p>" +
+    "<div class='exp-ex'><b>Ejemplo (eliminación):</b><br>\\(x + y = 10\\)<br>\\(x - y = 4\\)<br>Sumando: \\(2x = 14 \\Rightarrow x = 7\\). Luego \\(y = 10 - 7 = 3\\). Solución: \\((7,3)\\).</div>" +
+    "<span class='exp-h'>Inecuaciones</span><p>Se resuelven casi igual que una ecuación, con UNA regla especial:</p>" +
+    "<div class='exp-formula'>\\[ \\text{al } \\times \\text{ o } \\div \\text{ por un negativo, se invierte el signo} \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> \\(-2x > 6\\). Divido por \\(-2\\) e invierto: \\(x < -3\\).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> La solución de una inecuación es un <b>intervalo</b> (muchos valores), no un solo número. Verifica con un valor de prueba.</div>",
+
+  "Funciones: identificar dominio, rango e imagen":
+    "<span class='exp-h'>Conceptos</span><ul>" +
+    "<li><strong>Dominio:</strong> todos los valores de entrada \\(x\\) válidos (se leen en el eje horizontal).</li>" +
+    "<li><strong>Rango (o recorrido):</strong> todos los valores de salida \\(y\\) que produce (eje vertical).</li>" +
+    "<li><strong>Imagen de un valor:</strong> el \\(y\\) que corresponde a un \\(x\\) concreto, \\(f(x)\\).</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> \\(f(x) = x^2\\). Dominio: todos los reales. Rango: \\(y \\geq 0\\) (un cuadrado nunca es negativo). Imagen de \\(3\\): \\(f(3) = 9\\).</div>" +
+    "<span class='exp-h'>Regla de la función</span><p>A cada \\(x\\) le corresponde <strong>un único</strong> \\(y\\). En una gráfica, si una recta vertical corta la curva en dos puntos, NO es función.</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Para hallar la imagen, simplemente reemplaza el valor en la fórmula. Para el rango, piensa en los valores 'que alcanza' la gráfica de abajo hacia arriba.</div>",
+
+  "Combinaciones vs. permutaciones: cuál aplica según el problema y por qué":
+    "<span class='exp-h'>La pregunta clave: ¿importa el orden?</span><ul>" +
+    "<li><strong>Permutación</strong> (el orden SÍ importa): podios, contraseñas, ordenar en fila. \\(P(n,r) = \\dfrac{n!}{(n-r)!}\\).</li>" +
+    "<li><strong>Combinación</strong> (el orden NO importa): elegir un comité, escoger frutas. \\(C(n,r) = \\dfrac{n!}{r!(n-r)!}\\).</li></ul>" +
+    "<div class='exp-ex'><b>Permutación:</b> ¿De cuántas formas quedan 1°, 2° y 3° entre 5 corredores? \\(P(5,3) = \\dfrac{5!}{2!} = 60\\). (Oro-Plata-Bronce es distinto de Plata-Oro-Bronce.)</div>" +
+    "<div class='exp-ex'><b>Combinación:</b> ¿De cuántas formas eliges 3 personas de 5 para un comité? \\(C(5,3) = \\dfrac{5!}{3!\\,2!} = 10\\). (Aquí el orden da igual.)</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> 'Ordenar, rankear, ubicar' → permutación. 'Elegir, escoger un grupo' → combinación. Recuerda \\(n! = n\\cdot(n-1)\\cdots 1\\) y \\(0!=1\\).</div>",
+
+  "Contar posibilidades con restricciones (elementos fijos, sin repetición)":
+    "<span class='exp-h'>Estrategia</span><p>Primero coloca lo <strong>obligatorio</strong> (lo que está fijo), y luego cuenta las opciones que quedan para el resto.</p>" +
+    "<div class='exp-ex'><b>Ejemplo (posición fija):</b> Formar números de 3 cifras con 1,2,3,4,5 sin repetir, que empiecen en 5. La primera cifra ya es 5 (1 forma); quedan 4 opciones para la segunda y 3 para la tercera: \\(1\\times4\\times3 = 12\\).</div>" +
+    "<div class='exp-ex'><b>Ejemplo (sin repetición):</b> Con 4 letras distintas, palabras de 4 letras: \\(4\\times3\\times2\\times1 = 24\\). Cada letra usada reduce las disponibles.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> 'Sin repetición' = cada elección descuenta una opción del total. Si pueden repetirse, en cambio, el número de opciones se mantiene en cada paso.</div>",
+
+  "Razonamiento sobre errores en conteos: opciones de más o de menos":
+    "<span class='exp-h'>Qué evalúan</span><p>No solo contar, sino <strong>detectar el descuido</strong>: alguien contó casos repetidos (de más) u olvidó casos (de menos).</p>" +
+    "<div class='exp-ex'><b>Conteo de más:</b> Al contar 'parejas' de un grupo, contar A-B y B-A como distintas cuando es la misma pareja. Eso duplica el resultado.</div>" +
+    "<div class='exp-ex'><b>Conteo de menos:</b> Al contar números pares de 1 a 10 olvidar el 10, o no considerar el caso 0.</div>" +
+    "<span class='exp-h'>Cómo razonar</span><p>Reconstruye el conteo con un ejemplo pequeño que puedas listar a mano y compáralo con el resultado propuesto.</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Cuando el orden no importa pero alguien lo contó como si importara, sobró: hay que dividir entre las repeticiones.</div>",
+
+  "Principio multiplicativo del conteo":
+    "<span class='exp-h'>La regla</span><p>Si una elección se hace en <strong>etapas</strong>, el total de posibilidades es el <strong>producto</strong> de las opciones de cada etapa.</p>" +
+    "<div class='exp-formula'>\\[ \\text{Total} = n_1 \\times n_2 \\times \\cdots \\times n_k \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo 1:</b> 3 camisas y 2 pantalones → \\(3\\times2 = 6\\) combinaciones de ropa.</div>" +
+    "<div class='exp-ex'><b>Ejemplo 2:</b> Un menú con 2 entradas, 3 platos y 2 postres: \\(2\\times3\\times2 = 12\\) menús distintos.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Si las decisiones son 'esto Y esto Y esto', se multiplica. Si es 'esto O esto' (casos separados), se suma.</div>",
+
+  "Analizar procedimientos paso a paso e identificar en cuál está el error":
+    "<span class='exp-h'>El formato</span><p>Te muestran una solución desarrollada (paso 1, 2, 3…) y debes hallar el <strong>primer</strong> paso equivocado. Importante: una vez hay un error, los pasos siguientes 'arrastran' ese error.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b><br>Paso 1: \\(2(x-3) = 8\\)<br>Paso 2: \\(2x - 3 = 8\\)  ← <b>aquí el error</b> (faltó multiplicar el \\(-3\\) por 2)<br>Paso 3: \\(2x = 11\\)<br>Lo correcto en el paso 2 era \\(2x - 6 = 8\\).</div>" +
+    "<span class='exp-h'>Dónde mirar primero</span><ul><li>Signos al distribuir.</li><li>Despejes (lo que suma pasa restando, etc.).</li><li>Fórmulas mal aplicadas.</li></ul>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Verifica cada paso de forma independiente, sin asumir que el anterior estaba bien. El error pedido es el PRIMERO, no cualquiera.</div>",
+
+  "Deducir qué dato adicional falta para poder resolver un problema":
+    "<span class='exp-h'>Qué se pide</span><p>No resolver, sino identificar <strong>qué información hace falta</strong> (o si un dato dado es suficiente). Es razonamiento sobre la suficiencia de datos.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'Un rectángulo tiene perímetro 20. ¿Cuál es su área?' No se puede: con solo el perímetro hay infinitos rectángulos (4×6, 2×8…). Falta un dato, por ejemplo un lado o que sea cuadrado.</div>" +
+    "<span class='exp-h'>Cómo razonar</span><p>Pregúntate: '¿con lo que tengo, llego a un único resultado?' Si hay más de una respuesta posible, falta información.</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Evalúa cada dato propuesto por separado: '¿con ESTE dato ya alcanza?'. A veces un solo dato basta; a veces se necesitan dos.</div>",
+
+  "Interpretar afirmaciones sobre resultados y evaluar si son verdaderas o falsas":
+    "<span class='exp-h'>Qué evalúan</span><p>Tras leer datos o una gráfica, te dan afirmaciones y debes decidir cuáles se sostienen con la <strong>evidencia</strong>, no con suposiciones.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una gráfica muestra ventas: Ene 100, Feb 120, Mar 90.<br>'Las ventas crecieron todo el trimestre' → <b>FALSA</b> (en marzo bajaron).<br>'Febrero fue el mejor mes' → <b>VERDADERA</b>.</div>" +
+    "<span class='exp-h'>Señales de afirmación falsa</span><ul><li>Generaliza más de lo que muestran los datos.</li><li>Usa 'siempre', 'todos', 'nunca'.</li><li>Confunde correlación con causa.</li></ul>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Contrasta cada afirmación SOLO con lo que dicen los datos. Si requiere información que no está, no puedes darla por verdadera.</div>",
+
+  "Leer e interpretar gráficas estadísticas con contexto real":
+    "<span class='exp-h'>El enfoque</span><p>Combinas <strong>lectura de gráfica + contexto</strong> del enunciado. Casi nunca necesitas cálculos complejos: necesitas leer bien.</p>" +
+    "<span class='exp-h'>Pasos</span><ol>" +
+    "<li>Lee el título y los ejes con sus unidades.</li>" +
+    "<li>Identifica máximos, mínimos y tendencias (sube/baja).</li>" +
+    "<li>Relaciona con lo que pregunta el enunciado.</li></ol>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una gráfica de líneas de temperatura por hora. '¿En qué intervalo subió más rápido?' → busca el tramo con mayor inclinación (pendiente), no el valor más alto.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Cuidado con escalas que no empiezan en cero: hacen que diferencias pequeñas parezcan enormes. Mira siempre los números, no solo la forma.</div>",
+
+  "Operaciones con números enteros, fraccionarios y decimales":
+    "<span class='exp-h'>Jerarquía de operaciones</span><p>Orden: <strong>paréntesis → potencias/raíces → multiplicación y división → suma y resta</strong> (de izquierda a derecha).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> \\(2 + 3\\times 4^2 = 2 + 3\\times 16 = 2 + 48 = 50\\). (Primero la potencia, luego la multiplicación.)</div>" +
+    "<span class='exp-h'>Ley de signos</span><p>\\((+)(+)=+\\), \\((-)(-)=+\\), \\((+)(-)=-\\). Para sumar/restar enteros, cuida el signo del mayor.</p>" +
+    "<span class='exp-h'>Fracciones</span><ul>" +
+    "<li>Sumar/restar: común denominador. \\(\\dfrac{2}{3}+\\dfrac{1}{4} = \\dfrac{8}{12}+\\dfrac{3}{12} = \\dfrac{11}{12}\\).</li>" +
+    "<li>Multiplicar: directo. \\(\\dfrac{2}{3}\\times\\dfrac{4}{5} = \\dfrac{8}{15}\\).</li>" +
+    "<li>Dividir: multiplica por el inverso. \\(\\dfrac{2}{3}\\div\\dfrac{4}{5} = \\dfrac{2}{3}\\times\\dfrac{5}{4} = \\dfrac{10}{12} = \\dfrac{5}{6}\\).</li></ul>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Convierte decimales a fracción (o al revés) según convenga. \\(0{,}5 = \\tfrac{1}{2}\\), \\(0{,}25 = \\tfrac{1}{4}\\).</div>",
+
+  "Porcentajes, razones y proporciones en contexto":
+    "<span class='exp-h'>Porcentaje</span>" +
+    "<div class='exp-formula'>\\[ \\% = \\frac{\\text{parte}}{\\text{total}}\\times 100 \\qquad X\\%\\text{ de }N = \\frac{X}{100}\\times N \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El 15% de 200 es \\(\\dfrac{15}{100}\\times200 = 30\\).</div>" +
+    "<span class='exp-h'>Aumentos y descuentos</span><p>Subir 20%: multiplica por \\(1{,}20\\). Bajar 20%: multiplica por \\(0{,}80\\).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una camisa de $50.000 con 30% de descuento: \\(50000\\times0{,}70 = \\$35.000\\).</div>" +
+    "<span class='exp-h'>Razones y proporciones</span><p>Una <strong>razón</strong> compara: \\(a:b\\). Una <strong>proporción</strong> iguala dos razones \\(\\tfrac{a}{b}=\\tfrac{c}{d}\\) y se resuelve cruzando.</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Un descuento del 50% seguido de otro 50% NO es gratis: \\(100\\times0{,}5\\times0{,}5 = 25\\) (quedó en 25%, descuento total del 75%).</div>",
+
+  "Conversiones de unidades (longitud, área, volumen, tiempo)":
+    "<span class='exp-h'>Longitud (sistema métrico)</span><p>Cada escalón es \\(\\times 10\\): \\(1\\,m = 100\\,cm = 1000\\,mm\\); \\(1\\,km = 1000\\,m\\).</p>" +
+    "<span class='exp-h'>¡Cuidado con área y volumen!</span><p>El factor se eleva al cuadrado (área) o al cubo (volumen):</p>" +
+    "<div class='exp-formula'>\\[ 1\\,m^2 = 100^2\\,cm^2 = 10\\,000\\,cm^2 \\]</div>" +
+    "<div class='exp-formula'>\\[ 1\\,m^3 = 100^3\\,cm^3 = 1\\,000\\,000\\,cm^3 \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Convertir \\(2{,}5\\,m\\) a cm: \\(2{,}5\\times100 = 250\\,cm\\).</div>" +
+    "<span class='exp-h'>Tiempo</span><p>\\(1\\,h = 60\\,min = 3600\\,s\\). No es decimal: \\(1{,}5\\,h = 90\\,min\\), no '1 h con 5 min'.</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> El error clásico es convertir áreas como si fueran longitudes (usar 100 en vez de 10 000). Pregúntate si la unidad lleva exponente.</div>",
+
+  "Números racionales e irracionales: representación y operaciones":
+    "<span class='exp-h'>Clasificación</span><ul>" +
+    "<li><strong>Racionales \\((\\mathbb{Q})\\):</strong> se pueden escribir como fracción \\(\\tfrac{a}{b}\\). Incluyen enteros, decimales finitos (\\(0{,}75\\)) y periódicos (\\(0{,}333\\ldots\\)).</li>" +
+    "<li><strong>Irracionales:</strong> decimales infinitos NO periódicos. Ej: \\(\\pi \\approx 3{,}14159\\ldots\\), \\(\\sqrt{2}\\approx 1{,}414\\ldots\\), \\(e\\).</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> \\(\\sqrt{9} = 3\\) es racional (raíz exacta), pero \\(\\sqrt{2}\\) es irracional (no da exacto nunca).</div>" +
+    "<span class='exp-h'>Operar con raíces</span><p>\\(\\sqrt{a}\\cdot\\sqrt{b} = \\sqrt{ab}\\). Se pueden simplificar: \\(\\sqrt{12} = \\sqrt{4\\cdot3} = 2\\sqrt{3}\\).</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Juntos, racionales e irracionales forman los <b>reales</b>. Para ubicar \\(\\sqrt{2}\\) en la recta, está entre 1 y 2 (cerca de 1,4).</div>",
+
+  // ───────────── LECTURA CRÍTICA ─────────────
+  "Texto descriptivo, informativo, narrativo y expositivo — estructura y función":
+    "Cada tipo de texto tiene un propósito: <strong>descriptivo</strong> (cómo es algo), <strong>narrativo</strong> (cuenta hechos en el tiempo), <strong>informativo</strong> (da datos objetivos) y <strong>expositivo</strong> (explica un tema). Identificar el tipo te dice qué buscar y cuál es la intención del autor.",
+  "Texto argumentativo: estructura, tesis, argumentos, premisas, conclusiones, falacias":
+    "Busca primero la <strong>tesis</strong> (la posición que defiende el autor). Los <strong>argumentos/premisas</strong> la sostienen y la <strong>conclusión</strong> la refuerza. Atención a las <strong>falacias</strong> (errores de razonamiento como atacar a la persona o generalizar). Si hallas la tesis, todo lo demás se ordena.",
+  "Tipos de narradores y figuras literarias":
+    "<strong>Narrador:</strong> 1ª persona (protagonista/testigo, dice 'yo') u omnisciente (lo sabe todo, 3ª persona). <strong>Figuras:</strong> metáfora (comparación implícita), símil (con 'como'), hipérbole (exageración), personificación (cualidades humanas a objetos), ironía. Muy preguntadas en fragmentos literarios.",
+  "Textos históricos y coloniales: crónicas y documentos de época":
+    "Textos con lenguaje antiguo o arcaico. La clave es interpretar el <strong>contexto histórico</strong> y descifrar palabras por el contexto, no por su forma actual. Pregúntate quién escribe, desde qué época y con qué intención.",
+  "La columna de opinión: juicio de valor, juicio de hecho, clases de argumentos":
+    "<strong>Juicio de hecho:</strong> verificable, objetivo ('Colombia tiene costa en dos océanos'). <strong>Juicio de valor:</strong> opinión, subjetivo ('es el mejor país'). En una columna, distingue cuándo el autor informa y cuándo opina, y con qué tipo de argumentos respalda su postura.",
+  "La noticia, la crónica, el ensayo: características distintivas":
+    "<strong>Noticia:</strong> hechos recientes, objetiva, responde qué/quién/cuándo/dónde. <strong>Crónica:</strong> narra un hecho con estilo personal y orden temporal. <strong>Ensayo:</strong> reflexión subjetiva del autor sobre un tema. Reconocer el género orienta cómo leer.",
+  "El comic o historieta (incluyendo Historietmas de Quino)":
+    "Combina imagen y texto: hay que leer el <strong>diálogo, la secuencia de viñetas y el lenguaje visual</strong> (gestos, símbolos). El humor o la crítica suele estar en la última viñeta o en lo que NO se dice. Quino (Mafalda) usa la ironía para criticar la sociedad.",
+  "Humor gráfico: leer la intención detrás de la imagen":
+    "El chiste gráfico casi siempre esconde una <strong>crítica social o política</strong>. Pregúntate: ¿de qué se burla? ¿qué idea quiere transmitir el autor? La respuesta rara vez es literal: busca el doble sentido y la ironía.",
+  "La infografía: combinar texto e imagen para extraer información":
+    "Lee títulos, datos, íconos y flechas como un conjunto. La información está repartida entre lo visual y lo escrito. Identifica el dato principal y cómo se relacionan las partes; no te quedes solo con el texto ni solo con la imagen.",
+  "Avisos publicitarios: propósito e intención comunicativa":
+    "Toda publicidad busca <strong>persuadir</strong> (vender, convencer, concienciar). Analiza a quién se dirige, qué emoción provoca y qué recursos usa (eslóganes, imágenes, colores). La pregunta típica es por la intención o el público objetivo.",
+  "El diagrama: lectura e interpretación de elementos visuales":
+    "Los diagramas representan procesos o relaciones con cajas, flechas y niveles. Sigue el sentido de las flechas para entender la secuencia o jerarquía. Identifica el inicio, el flujo y el resultado.",
+  "Reemplazar una palabra subrayada sin alterar el sentido del texto":
+    "Busca un <strong>sinónimo que encaje en el contexto</strong>, no solo en el diccionario. Lee la oración completa reemplazando mentalmente cada opción y comprueba que el sentido global se mantenga idéntico.",
+  "Interpretar expresiones figuradas o arcaicas según el contexto inmediato":
+    "Cuando aparece una frase rara o antigua, las palabras de alrededor son tu pista. No traduzcas literal: deduce el significado por cómo se usa en esa oración y párrafo.",
+  "Palabras clave del texto: identificarlas para orientar la comprensión":
+    "Las palabras clave son los términos que se repiten o cargan el significado central. Detectarlas te da rápidamente el tema y de qué trata cada párrafo, y ayuda a ubicar respuestas.",
+  "Lectura literal: identificar personajes y elementos explícitos del texto":
+    "Nivel básico: encontrar lo que el texto dice <strong>tal cual</strong>, sin interpretar. Datos, nombres, lugares, fechas. La respuesta está escrita literalmente; es cuestión de localizarla.",
+  "Lectura inferencial: análisis del texto, intencionalidad del autor, sentido global":
+    "Nivel medio: <strong>deducir lo que el texto sugiere</strong> pero no dice directamente. Implica leer entre líneas para captar intenciones, causas o el sentido completo a partir de las pistas.",
+  "Lectura crítica: identificar tesis o idea principal y argumentos que la sostienen":
+    "Nivel avanzado: <strong>evaluar</strong> el texto. Identifica la idea central, juzga la validez de los argumentos, detecta sesgos y valora la postura del autor. Es el nivel que da nombre a toda la prueba.",
+  "Inferir lo que el texto no dice explícitamente":
+    "Conecta las pistas del texto con tu razonamiento para concluir algo que no está escrito. Si el texto dice 'tomó el paraguas al ver el cielo gris', infieres que va a llover. Apóyate siempre en evidencia del propio texto.",
+  "Determinar la función de un párrafo en relación con el texto completo":
+    "Cada párrafo cumple un rol: introduce, ejemplifica, contrasta, refuerza o concluye. Pregúntate qué aporta ESE párrafo al conjunto y cómo se conecta con el anterior y el siguiente.",
+  "Identificar el tema, la intencionalidad del autor y el aprendizaje para el lector":
+    "<strong>Tema:</strong> de qué trata. <strong>Intención:</strong> para qué lo escribió (informar, criticar, persuadir, emocionar). <strong>Enseñanza:</strong> qué deja al lector. Tres preguntas que resumen la comprensión global.",
+  "Técnicas de comprensión lectora: subrayar, conectores, ideas claves":
+    "Estrategias prácticas: lee primero las preguntas, subraya ideas clave, presta atención a los <strong>conectores</strong> (sin embargo, por lo tanto, no obstante) que marcan la relación entre ideas, y resume cada párrafo en una frase.",
+  "Identificar prejuicios, sesgos o posiciones implícitas del autor":
+    "Todo autor tiene un punto de vista. Detecta palabras cargadas, qué información resalta u omite, y a quién favorece. El sesgo se nota en el tono y en lo que se da por sentado.",
+  "Reconocer afirmaciones que apoyan o debilitan un argumento dado":
+    "Una afirmación <strong>fortalece</strong> si aporta evidencia a favor y <strong>debilita</strong> si la contradice o muestra una excepción. Pregúntate si cada opción suma o resta fuerza a la tesis planteada.",
+  "Detectar generalizaciones extremas ('siempre', 'nunca') — casi siempre incorrectas":
+    "Las palabras absolutas (siempre, nunca, todos, ninguno) suelen marcar opciones falsas porque la realidad rara vez es tan rotunda. Es una excelente estrategia de eliminación en el examen.",
+  "Distinguir hechos de opiniones dentro del texto":
+    "<strong>Hecho:</strong> comprobable y objetivo. <strong>Opinión:</strong> juicio personal, subjetivo. Identificar cuál es cuál evita confundir lo que el autor demuestra con lo que solo cree.",
+  "Identificar falacias argumentativas":
+    "Errores de razonamiento que parecen válidos: <strong>ad hominem</strong> (atacar a la persona), <strong>generalización apresurada</strong> (concluir con pocos casos), <strong>falsa causa</strong> (creer que A causó B solo porque ocurrió antes). Saber nombrarlas te ayuda a desmontar argumentos.",
+
+  // ───────────── CIENCIAS NATURALES · BIOLOGÍA ─────────────
+  "Lípidos, carbohidratos, proteínas y ácidos nucleicos: función y características":
+    "<span class='exp-h'>Las 4 biomoléculas de la vida</span><ul>" +
+    "<li><strong>Carbohidratos:</strong> energía rápida. Formados por C, H, O. Ej: glucosa, almidón, celulosa.</li>" +
+    "<li><strong>Lípidos (grasas):</strong> reserva de energía a largo plazo, forman las membranas celulares y aíslan. Ej: aceites, fosfolípidos, colesterol.</li>" +
+    "<li><strong>Proteínas:</strong> las 'obreras'. Construyen tejidos, transportan (hemoglobina) y aceleran reacciones (enzimas). Hechas de <strong>aminoácidos</strong>.</li>" +
+    "<li><strong>Ácidos nucleicos:</strong> ADN y ARN. Guardan y transmiten la información genética. Hechos de <strong>nucleótidos</strong>.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Cuando comes pan (carbohidrato) obtienes energía rápida; el aguacate (lípido) da energía de reserva; la carne (proteína) aporta material para construir músculo.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Relaciona cada biomolécula con su 'unidad': proteínas→aminoácidos, ácidos nucleicos→nucleótidos, carbohidratos→monosacáridos (glucosa).</div>",
+
+  "Célula procariota vs. eucariota (animal y vegetal): diferencias clave":
+    "<span class='exp-h'>Dos grandes tipos de célula</span><ul>" +
+    "<li><strong>Procariota:</strong> SIN núcleo definido (el ADN está suelto). Pequeña y simple. Ej: <strong>bacterias</strong>.</li>" +
+    "<li><strong>Eucariota:</strong> CON núcleo definido y organelos. Ej: células de animales, plantas, hongos.</li></ul>" +
+    "<span class='exp-h'>Animal vs. vegetal (ambas eucariotas)</span><p>La célula vegetal tiene 3 cosas que la animal NO: <strong>pared celular</strong> (rigidez), <strong>cloroplastos</strong> (fotosíntesis) y una <strong>vacuola central</strong> grande.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si en una imagen ves pared celular y cloroplastos → es vegetal. Si no los tiene pero sí núcleo → animal. Si ni siquiera tiene núcleo → procariota (bacteria).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> 'Pro' = antes (antes del núcleo) → procariota = sin núcleo. 'Eu' = verdadero → eucariota = núcleo verdadero.</div>",
+
+  "Organelos celulares y sus funciones específicas":
+    "<span class='exp-h'>Quién hace qué (la célula como fábrica)</span><ul>" +
+    "<li><strong>Núcleo:</strong> centro de control, guarda el ADN.</li>" +
+    "<li><strong>Mitocondria:</strong> 'central energética', produce ATP en la respiración celular.</li>" +
+    "<li><strong>Ribosomas:</strong> fabrican proteínas.</li>" +
+    "<li><strong>Retículo endoplasmático:</strong> rugoso (con ribosomas, sintetiza proteínas) y liso (lípidos).</li>" +
+    "<li><strong>Aparato de Golgi:</strong> empaca y distribuye sustancias.</li>" +
+    "<li><strong>Lisosomas:</strong> digestión celular.</li>" +
+    "<li><strong>Cloroplastos:</strong> (vegetal) fotosíntesis. <strong>Pared celular:</strong> (vegetal) rigidez.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una célula muscular (mucho gasto de energía) tiene MUCHAS mitocondrias. Una célula que secreta hormonas tiene mucho Golgi y retículo.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Las preguntas suelen pedir relacionar función con organelo. Si dice 'produce energía' → mitocondria; 'fabrica proteínas' → ribosoma.</div>",
+
+  "Transporte celular: pasivo (difusión, ósmosis) y activo":
+    "<span class='exp-h'>Cómo entran y salen sustancias de la célula</span><ul>" +
+    "<li><strong>Transporte pasivo:</strong> SIN gasto de energía. La sustancia va de donde hay MÁS a donde hay MENOS (a favor del gradiente).<ul>" +
+    "<li><em>Difusión:</em> paso de solutos de mayor a menor concentración.</li>" +
+    "<li><em>Ósmosis:</em> paso del AGUA a través de la membrana hacia donde hay más soluto.</li></ul></li>" +
+    "<li><strong>Transporte activo:</strong> CON gasto de energía (ATP). Mueve sustancias EN CONTRA del gradiente (de menos a más). Ej: bomba sodio-potasio.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo (ósmosis):</b> Si pones una célula en agua muy salada, el agua SALE de la célula (hacia donde hay más sal) y la célula se arruga. En agua pura, el agua entra y la célula se hincha.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> ¿A favor del gradiente y sin energía? Pasivo. ¿En contra y gastando ATP? Activo. La ósmosis SIEMPRE se refiere al agua.</div>",
+
+  "Reproducción celular: mitosis, meiosis y reproducción asexual":
+    "<span class='exp-h'>Dos divisiones distintas</span><ul>" +
+    "<li><strong>Mitosis:</strong> una célula produce <strong>2 células idénticas</strong> a la original (mismo número de cromosomas). Sirve para crecer y reparar tejidos.</li>" +
+    "<li><strong>Meiosis:</strong> produce <strong>4 células con la mitad</strong> de los cromosomas (gametos: óvulos y espermatozoides). Genera variabilidad genética.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Cuando una herida en la piel cicatriza, es mitosis (copias idénticas). Cuando el cuerpo forma espermatozoides u óvulos, es meiosis (mitad de cromosomas para que al unirse vuelvan al número normal).</div>" +
+    "<span class='exp-h'>Reproducción asexual</span><p>Un solo progenitor genera descendencia idéntica (clones), sin gametos. Ej: bipartición en bacterias, gemación, esquejes de plantas.</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Mit<b>o</b>sis = idénticas (crecimiento). Mei<b>o</b>sis = mitad (gametos, reproducción sexual). El truco: meiosis 'reduce' a la mitad.</div>",
+
+  "ADN y ARN: estructura, función y diferencias":
+    "<span class='exp-h'>Las moléculas de la herencia</span><p>Ambos son ácidos nucleicos hechos de <strong>nucleótidos</strong> (base nitrogenada + azúcar + fosfato).</p><ul>" +
+    "<li><strong>ADN:</strong> doble hélice, guarda la información genética. Bases: A, T, C, G. Azúcar: desoxirribosa.</li>" +
+    "<li><strong>ARN:</strong> una sola cadena, copia y lleva la información para fabricar proteínas. Bases: A, <strong>U</strong> (uracilo en vez de timina), C, G. Azúcar: ribosa.</li></ul>" +
+    "<span class='exp-h'>Apareamiento de bases (ADN)</span><p>A se une con T, y C con G (complementarias). En ARN, A se une con U.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si una cadena de ADN es A-T-G-C, la cadena complementaria es T-A-C-G. Al pasar a ARN, la T se reemplaza por U.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Diferencia clave: ADN tiene Timina y doble cadena; ARN tiene Uracilo y una sola cadena.</div>",
+
+  "Código genético: gen, genotipo, fenotipo":
+    "<span class='exp-h'>Conceptos que se confunden</span><ul>" +
+    "<li><strong>Gen:</strong> fragmento de ADN con la información para un rasgo (ej: el gen del color de ojos).</li>" +
+    "<li><strong>Genotipo:</strong> la combinación de genes (lo que llevas en el ADN). Ej: <em>Aa</em>.</li>" +
+    "<li><strong>Fenotipo:</strong> la característica que se VE o expresa. Ej: ojos cafés.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Dos personas con genotipo distinto (<em>AA</em> y <em>Aa</em>) pueden tener el mismo fenotipo (ojos cafés) si A (café) domina sobre a (claro).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Genotipo = lo que está escrito en los genes (no se ve). Fenotipo = lo que se manifiesta (sí se ve). El fenotipo depende del genotipo + el ambiente.</div>",
+
+  "Alelos y sus tipos; leyes de Mendel":
+    "<span class='exp-h'>Alelos</span><p>Son las versiones de un gen. Recibes uno de cada padre. Pueden ser <strong>dominantes</strong> (se expresan siempre, letra mayúscula A) o <strong>recesivos</strong> (solo se expresan si están en pareja, minúscula a).</p><ul>" +
+    "<li><strong>Homocigoto:</strong> dos alelos iguales (AA o aa).</li>" +
+    "<li><strong>Heterocigoto:</strong> dos alelos distintos (Aa) → se expresa el dominante.</li></ul>" +
+    "<span class='exp-h'>Leyes de Mendel</span><ol>" +
+    "<li><strong>Uniformidad:</strong> al cruzar dos homocigotos puros (AA × aa), toda la 1ª generación es igual (Aa).</li>" +
+    "<li><strong>Segregación:</strong> los alelos se separan al formar gametos; al cruzar Aa × Aa aparece la proporción <strong>3:1</strong>.</li></ol>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Aa × Aa da genotipos 1 AA : 2 Aa : 1 aa. En fenotipo: 3 dominantes : 1 recesivo (\\(3{:}1\\)).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> El rasgo recesivo solo aparece con <b>aa</b>. Si un hijo muestra el rasgo recesivo, ambos padres llevan al menos un alelo a.</div>",
+
+  "Cuadros de Punnett para predecir herencia":
+    "<span class='exp-h'>Para qué sirve</span><p>Es una tabla que predice las <strong>probabilidades</strong> de los genotipos/fenotipos de los hijos al cruzar dos padres.</p>" +
+    "<span class='exp-h'>Cómo se arma</span><p>Pones los alelos de un padre arriba (columnas) y los del otro al lado (filas), y combinas en cada casilla.</p>" +
+    "<div class='exp-ex'><b>Ejemplo (Aa × Aa):</b><br>Casillas resultantes: AA, Aa, Aa, aa.<br>Genotipos: \\(\\tfrac{1}{4}\\) AA, \\(\\tfrac{1}{2}\\) Aa, \\(\\tfrac{1}{4}\\) aa.<br>Fenotipos: \\(\\tfrac{3}{4}\\) (75%) dominante y \\(\\tfrac{1}{4}\\) (25%) recesivo.</div>" +
+    "<div class='exp-ex'><b>Cruce de prueba (Aa × aa):</b> da 50% Aa y 50% aa → mitad dominante, mitad recesivo.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Las respuestas suelen pedir una probabilidad o proporción. Cuenta las casillas favorables sobre el total (4 casillas).</div>",
+
+  "Metabolismo: anabolismo (fotosíntesis, síntesis de proteínas) y catabolismo (respiración celular)":
+    "<span class='exp-h'>Dos caras del metabolismo</span><ul>" +
+    "<li><strong>Anabolismo:</strong> CONSTRUIR moléculas grandes, GASTA energía. Ej: fotosíntesis (arma glucosa) y síntesis de proteínas.</li>" +
+    "<li><strong>Catabolismo:</strong> ROMPER moléculas para LIBERAR energía. Ej: respiración celular (descompone glucosa para hacer ATP).</li></ul>" +
+    "<span class='exp-h'>Fotosíntesis vs. respiración</span>" +
+    "<div class='exp-formula'>\\[ \\text{Fotosíntesis: } 6\\,CO_2 + 6\\,H_2O + \\text{luz} \\rightarrow C_6H_{12}O_6 + 6\\,O_2 \\]</div>" +
+    "<div class='exp-formula'>\\[ \\text{Respiración: } C_6H_{12}O_6 + 6\\,O_2 \\rightarrow 6\\,CO_2 + 6\\,H_2O + \\text{ATP} \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Son procesos opuestos: la planta usa fotosíntesis para fabricar glucosa (de día, con luz) y respiración para obtener energía de ella (todo el tiempo).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Anabolismo = 'A' de Armar (gasta energía). Catabolismo = Cortar (libera energía). La fotosíntesis ocurre en cloroplastos; la respiración en mitocondrias.</div>",
+
+  "Relaciones interespecíficas: simbiosis (mutualismo, comensalismo, parasitismo), amensalismo, depredación":
+    "<span class='exp-h'>Relaciones entre especies DISTINTAS</span><ul>" +
+    "<li><strong>Mutualismo (+/+):</strong> ambos se benefician. Ej: abeja y flor.</li>" +
+    "<li><strong>Comensalismo (+/0):</strong> uno gana, al otro le da igual. Ej: rémora pegada al tiburón.</li>" +
+    "<li><strong>Parasitismo (+/−):</strong> uno gana, el otro pierde. Ej: pulga y perro.</li>" +
+    "<li><strong>Depredación (+/−):</strong> uno se come al otro. Ej: león y cebra.</li>" +
+    "<li><strong>Amensalismo (−/0):</strong> uno se perjudica, al otro le da igual. Ej: un hongo que libera antibiótico y mata bacterias cercanas.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El pez payaso y la anémona = mutualismo (el pez se protege, la anémona se limpia). El muérdago sobre un árbol = parasitismo.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Usa el código de signos (+ gana, − pierde, 0 indiferente) para clasificar rápido. Mutualismo (+/+) y parasitismo (+/−) son los más preguntados.</div>",
+
+  "Relaciones intraespecíficas: competencia, familiar, gregaria, social, colonial":
+    "<span class='exp-h'>Relaciones dentro de la MISMA especie</span><ul>" +
+    "<li><strong>Competencia:</strong> individuos compiten por alimento, pareja o territorio.</li>" +
+    "<li><strong>Familiar:</strong> basada en el parentesco para reproducción y cuidado de crías (manada de leones).</li>" +
+    "<li><strong>Gregaria:</strong> agrupación temporal sin parentesco (cardumen de peces, bandada de aves).</li>" +
+    "<li><strong>Social:</strong> grupo organizado con división de tareas (hormigas, abejas).</li>" +
+    "<li><strong>Colonial:</strong> individuos físicamente unidos que funcionan como uno (corales).</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Un hormiguero es una relación social (reina, obreras, soldados, cada una con su rol). Un cardumen es gregario (se juntan para protegerse, sin roles).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> 'Intra' = dentro de la misma especie; 'inter' = entre especies distintas. La social tiene división de trabajo; la gregaria no.</div>",
+
+  "Cadena trófica: qué ocurre al eliminar un eslabón":
+    "<span class='exp-h'>Quién se come a quién</span><p>La cadena muestra el flujo de energía: <strong>productores → consumidores → descomponedores</strong>.</p><ul>" +
+    "<li><strong>Productores:</strong> plantas (hacen su alimento).</li>" +
+    "<li><strong>Consumidores primarios:</strong> herbívoros.</li>" +
+    "<li><strong>Consumidores secundarios/terciarios:</strong> carnívoros.</li>" +
+    "<li><strong>Descomponedores:</strong> hongos y bacterias que reciclan la materia muerta.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo (efecto dominó):</b> Pasto → conejo → zorro. Si desaparecen los zorros, los conejos se multiplican y se acaban el pasto. Si desaparece el pasto, mueren los conejos y luego los zorros.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Al quitar un eslabón, piensa en cadena: lo que ESTÁ DEBAJO (su presa) aumenta y lo que está ARRIBA (su depredador) disminuye.</div>",
+
+  "Niveles de organización de los seres vivos":
+    "<span class='exp-h'>De lo más pequeño a lo más grande</span>" +
+    "<div class='exp-formula'>\\[ \\text{célula} \\to \\text{tejido} \\to \\text{órgano} \\to \\text{sistema} \\to \\text{organismo} \\]</div>" +
+    "<p>Y a nivel ecológico continúa:</p>" +
+    "<div class='exp-formula'>\\[ \\text{población} \\to \\text{comunidad} \\to \\text{ecosistema} \\to \\text{bioma} \\to \\text{biosfera} \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una neurona (célula) → tejido nervioso → cerebro (órgano) → sistema nervioso → un ser humano. Muchos humanos = población; varias poblaciones juntas = comunidad.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Recuerda el orden. <b>Población</b> = misma especie; <b>comunidad</b> = varias especies; <b>ecosistema</b> = comunidad + ambiente físico.</div>",
+
+  "Especies invasoras y su impacto sobre los ecosistemas":
+    "<span class='exp-h'>Qué son</span><p>Especies que llegan a un lugar donde no son nativas y, al no tener depredadores naturales, se reproducen sin control y desplazan a las especies locales.</p>" +
+    "<span class='exp-h'>Impactos</span><ul>" +
+    "<li>Compiten por alimento y espacio con las nativas (y suelen ganar).</li>" +
+    "<li>Reducen la biodiversidad; pueden llevar especies a la extinción.</li>" +
+    "<li>Alteran las cadenas tróficas y el equilibrio del ecosistema.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo (Colombia):</b> El hipopótamo introducido en el río Magdalena no tiene depredadores y se reproduce rápido, afectando los ecosistemas acuáticos y a las especies nativas.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> La clave es la AUSENCIA de controles naturales (depredadores, competidores) en el nuevo hábitat, lo que les permite crecer descontroladamente.</div>",
+
+  "Ciclos biogeoquímicos: agua, carbono, fósforo, nitrógeno, azufre":
+    "<span class='exp-h'>Reciclaje de la naturaleza</span><p>Los elementos circulan entre los seres vivos y el ambiente, una y otra vez.</p><ul>" +
+    "<li><strong>Agua:</strong> evaporación → condensación → precipitación → escorrentía.</li>" +
+    "<li><strong>Carbono:</strong> entra por fotosíntesis (plantas toman CO₂) y vuelve por respiración y combustión.</li>" +
+    "<li><strong>Nitrógeno:</strong> bacterias 'fijan' el N₂ del aire para que las plantas lo usen (fijación → nitrificación → desnitrificación).</li>" +
+    "<li><strong>Fósforo:</strong> no pasa por el aire; va de las rocas al suelo, a los seres vivos y de vuelta (sin fase gaseosa).</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Un átomo de carbono puede estar en el CO₂ del aire, ser captado por una planta (fotosíntesis), pasar a un animal que la come y volver al aire cuando el animal respira.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> El ciclo del fósforo es el 'raro': NO tiene fase gaseosa (no pasa por la atmósfera). La quema de combustibles fósiles altera el ciclo del carbono.</div>",
+
+  "Adaptaciones de plantas y animales a entornos extremos (páramo, desierto, acuático)":
+    "<span class='exp-h'>Adaptación = ventaja para sobrevivir</span><p>Características que ayudan a un ser vivo a sobrevivir y reproducirse en su ambiente.</p><ul>" +
+    "<li><strong>Desierto:</strong> cactus con espinas (menos pérdida de agua) y tallos que almacenan agua; animales nocturnos para evitar el calor.</li>" +
+    "<li><strong>Páramo:</strong> frailejones con hojas peludas que retienen calor y captan agua de la niebla.</li>" +
+    "<li><strong>Acuático:</strong> peces con branquias y forma hidrodinámica; plantas flotantes.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El frailejón del páramo colombiano tiene hojas cubiertas de vellosidades que lo protegen del frío extremo y le ayudan a 'cosechar' agua de la neblina.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Relaciona la adaptación con el PROBLEMA del ambiente: en el desierto el problema es el agua → adaptaciones para no perderla.</div>",
+
+  "Diseño experimental: variable de control, variable medida, hipótesis posible de responder":
+    "<span class='exp-h'>Las variables</span><ul>" +
+    "<li><strong>Variable independiente:</strong> la que el investigador CAMBIA a propósito (la causa).</li>" +
+    "<li><strong>Variable dependiente (medida):</strong> la que se MIDE para ver el efecto.</li>" +
+    "<li><strong>Variables de control:</strong> las que se mantienen IGUALES para que no interfieran.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> '¿Influye la cantidad de luz en el crecimiento de una planta?' Independiente = horas de luz (la cambias). Dependiente = altura de la planta (la mides). Control = misma agua, mismo suelo, misma especie.</div>" +
+    "<span class='exp-h'>Hipótesis comprobable</span><p>Debe poder confirmarse o refutarse con un experimento. 'Las plantas con más luz crecen más' es comprobable; 'las plantas son bonitas' no.</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Un buen experimento cambia UNA sola variable a la vez. Si cambias varias, no sabrás cuál causó el efecto.</div>",
+
+  "Explotación de recursos naturales y sus consecuencias ambientales":
+    "<span class='exp-h'>Actividades y sus impactos</span><ul>" +
+    "<li><strong>Minería:</strong> contamina aguas (mercurio, cianuro), destruye suelos y hábitats.</li>" +
+    "<li><strong>Deforestación:</strong> pérdida de biodiversidad, erosión, más CO₂ (menos árboles que lo capturen).</li>" +
+    "<li><strong>Monocultivos:</strong> agotan el suelo y reducen la diversidad.</li>" +
+    "<li><strong>Quema de combustibles fósiles:</strong> aumenta el CO₂ → efecto invernadero y cambio climático.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> La minería ilegal de oro en ríos de Colombia libera mercurio que contamina el agua, envenena peces y llega a las personas que los consumen.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Estas preguntas suelen enfrentar 'desarrollo económico vs. ambiente'. La mejor respuesta suele buscar la <b>sostenibilidad</b> (usar el recurso sin agotarlo).</div>",
+
+  // ───────────── CIENCIAS NATURALES · QUÍMICA ─────────────
+  "Estructura atómica: protones, electrones, neutrones; propiedades del átomo":
+    "<span class='exp-h'>Partes del átomo</span><ul>" +
+    "<li><strong>Protones (p⁺):</strong> carga positiva, en el núcleo. Definen QUÉ elemento es.</li>" +
+    "<li><strong>Neutrones (n⁰):</strong> sin carga, en el núcleo. Aportan masa.</li>" +
+    "<li><strong>Electrones (e⁻):</strong> carga negativa, giran alrededor del núcleo.</li></ul>" +
+    "<span class='exp-h'>Números clave</span>" +
+    "<div class='exp-formula'>\\[ Z = \\text{número atómico} = \\text{n.º de protones} \\]</div>" +
+    "<div class='exp-formula'>\\[ A = \\text{número de masa} = \\text{protones} + \\text{neutrones} \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El carbono tiene \\(Z=6\\) (6 protones) y \\(A=12\\), así que tiene \\(12-6=6\\) neutrones. En un átomo neutro, hay tantos electrones como protones (6).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> El número de protones NUNCA cambia para un elemento. Para hallar neutrones: \\(A - Z\\). Electrones = protones (si el átomo es neutro).</div>",
+
+  "Formación de iones: catión y anión; isótopos":
+    "<span class='exp-h'>Iones (átomos con carga)</span><p>Un átomo neutro gana o pierde electrones y queda cargado:</p><ul>" +
+    "<li><strong>Catión (+):</strong> PIERDE electrones → queda positivo. Ej: Na⁺.</li>" +
+    "<li><strong>Anión (−):</strong> GANA electrones → queda negativo. Ej: Cl⁻.</li></ul>" +
+    "<span class='exp-h'>Isótopos</span><p>Átomos del MISMO elemento (mismos protones) pero con DISTINTO número de neutrones (distinta masa).</p>" +
+    "<div class='exp-ex'><b>Ejemplo (iones):</b> El sodio pierde 1 electrón → Na⁺ (catión). El cloro gana 1 → Cl⁻ (anión). Por eso se atraen y forman NaCl (sal).</div>" +
+    "<div class='exp-ex'><b>Ejemplo (isótopos):</b> Carbono-12 y Carbono-14: ambos tienen 6 protones, pero 6 y 8 neutrones respectivamente.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Catión = positivo (perdió e⁻). Truco: 'catión' suena a 'gato' que sube (+). Isótopos = misma identidad, distinta masa.</div>",
+
+  "Clasificación de la materia: mezclas homogéneas, heterogéneas, sustancias puras":
+    "<span class='exp-h'>Cómo se clasifica la materia</span><ul>" +
+    "<li><strong>Sustancias puras:</strong> un solo tipo de componente. Elementos (O₂, Fe) o compuestos (H₂O, NaCl).</li>" +
+    "<li><strong>Mezclas homogéneas:</strong> los componentes NO se distinguen a simple vista (se ven uniformes). También llamadas <em>soluciones</em>. Ej: agua con sal, aire.</li>" +
+    "<li><strong>Mezclas heterogéneas:</strong> SÍ se distinguen los componentes. Ej: agua con aceite, ensalada, granito.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El agua salada es homogénea (no ves la sal). El agua con arena es heterogénea (ves la arena). El oro puro es una sustancia pura (elemento).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> ¿Se distinguen las partes a simple vista? Sí → heterogénea. No → homogénea. Las mezclas SE PUEDEN separar por métodos físicos; los compuestos NO.</div>",
+
+  "Propiedades físicas y químicas de la materia; estados de agregación":
+    "<span class='exp-h'>Dos tipos de propiedades</span><ul>" +
+    "<li><strong>Físicas:</strong> se observan sin cambiar la sustancia. Color, densidad, punto de fusión, masa.</li>" +
+    "<li><strong>Químicas:</strong> describen cómo reacciona y se transforma. Inflamabilidad, oxidación, reactividad.</li></ul>" +
+    "<span class='exp-h'>Estados de agregación</span><p><strong>Sólido</strong> (forma y volumen fijos), <strong>líquido</strong> (volumen fijo, forma del recipiente), <strong>gaseoso</strong> (ni forma ni volumen fijos). Cambios: fusión, evaporación, condensación, solidificación, sublimación.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'El hierro es gris' = propiedad física. 'El hierro se oxida' = propiedad química (cambia a otra sustancia). Derretir hielo = cambio físico; quemar papel = cambio químico.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> En un cambio FÍSICO la sustancia sigue siendo la misma (hielo→agua). En un cambio QUÍMICO se forma una sustancia nueva (madera→ceniza).</div>",
+
+  "Técnicas de separación de mezclas":
+    "<span class='exp-h'>Cada técnica según la mezcla</span><ul>" +
+    "<li><strong>Filtración:</strong> separa un sólido insoluble de un líquido (agua y arena).</li>" +
+    "<li><strong>Decantación:</strong> separa líquidos que no se mezclan o un sólido que se asienta (agua y aceite).</li>" +
+    "<li><strong>Destilación:</strong> separa líquidos con distinto punto de ebullición (agua y alcohol).</li>" +
+    "<li><strong>Evaporación:</strong> separa un sólido disuelto evaporando el líquido (sal del agua de mar).</li>" +
+    "<li><strong>Tamizado:</strong> separa sólidos de distinto tamaño. <strong>Imantación:</strong> separa materiales magnéticos.</li>" +
+    "<li><strong>Cromatografía:</strong> separa componentes por cómo se desplazan (tintas).</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Para obtener sal del agua de mar usas evaporación; para separar limaduras de hierro de la arena, un imán (imantación).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Elige la técnica según la propiedad que DIFERENCIA a los componentes: tamaño (tamizado), magnetismo (imán), punto de ebullición (destilación).</div>",
+
+  "Tipos de enlaces químicos; estructura de Lewis; geometría molecular":
+    "<span class='exp-h'>Tipos de enlace</span><ul>" +
+    "<li><strong>Iónico:</strong> un metal CEDE electrones a un no metal (transferencia). Ej: NaCl.</li>" +
+    "<li><strong>Covalente:</strong> dos no metales COMPARTEN electrones. Ej: H₂O, O₂.</li>" +
+    "<li><strong>Metálico:</strong> entre metales, electrones en una 'nube' compartida.</li></ul>" +
+    "<span class='exp-h'>Estructura de Lewis y regla del octeto</span><p>Los átomos tienden a completar <strong>8 electrones</strong> en su última capa (octeto). Lewis dibuja los electrones de valencia como puntos.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> En el agua (H₂O), el oxígeno comparte un par de electrones con cada hidrógeno (enlace covalente). Geometría: angular (forma de 'V'), por eso el agua es polar.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Metal + no metal → iónico. No metal + no metal → covalente. La diferencia de electronegatividad alta = iónico; baja = covalente.</div>",
+
+  "Estados de oxidación y la tabla periódica: estructura y propiedades":
+    "<span class='exp-h'>La tabla periódica</span><ul>" +
+    "<li><strong>Períodos:</strong> filas (7). <strong>Grupos:</strong> columnas (18).</li>" +
+    "<li><strong>Metales</strong> (izquierda), <strong>no metales</strong> (derecha), <strong>gases nobles</strong> (grupo 18, muy estables).</li></ul>" +
+    "<span class='exp-h'>Tendencias periódicas</span><p>De izquierda a derecha aumenta la electronegatividad; de arriba a abajo aumenta el tamaño atómico.</p>" +
+    "<span class='exp-h'>Estados de oxidación</span><p>Indican cuántos electrones gana o pierde un átomo al enlazarse. Ej: el grupo 1 (Na, K) suele ser +1; el grupo 17 (Cl, F) suele ser −1.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> En NaCl, el Na actúa con +1 y el Cl con −1. La suma de estados de oxidación en un compuesto neutro debe dar 0.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Los gases nobles casi no reaccionan porque ya tienen su octeto completo. Los grupos 1 y 17 son los más reactivos.</div>",
+
+  "Configuración electrónica y nomenclatura inorgánica":
+    "<span class='exp-h'>Configuración electrónica</span><p>Describe cómo se distribuyen los electrones en niveles y subniveles (s, p, d, f). Se llenan de menor a mayor energía.</p>" +
+    "<div class='exp-formula'>\\[ 1s^2\\,2s^2\\,2p^6\\,3s^2\\,3p^6\\ldots \\]</div>" +
+    "<p>Los <strong>electrones de valencia</strong> (los de la última capa) determinan cómo se enlaza el átomo.</p>" +
+    "<span class='exp-h'>Nomenclatura inorgánica (nombrar compuestos)</span><ul>" +
+    "<li><strong>Óxidos:</strong> metal/no metal + oxígeno (óxido de hierro).</li>" +
+    "<li><strong>Hidróxidos (bases):</strong> metal + OH (hidróxido de sodio, NaOH).</li>" +
+    "<li><strong>Ácidos:</strong> liberan H⁺ (ácido clorhídrico, HCl).</li>" +
+    "<li><strong>Sales:</strong> resultan de ácido + base.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El oxígeno (\\(Z=8\\)) tiene configuración \\(1s^2\\,2s^2\\,2p^4\\): 6 electrones de valencia, por eso necesita 2 más para el octeto.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> La suma de los superíndices = número total de electrones = número atómico (en átomo neutro).</div>",
+
+  "Tipos de fórmulas y ecuaciones químicas; balanceo por tanteo y óxido-reducción":
+    "<span class='exp-h'>Ecuación química</span><p>Representa una reacción: <strong>reactivos → productos</strong>. Por la <strong>ley de conservación de la masa</strong>, debe haber los mismos átomos de cada elemento a ambos lados.</p>" +
+    "<span class='exp-h'>Balanceo por tanteo</span><p>Se ajustan los <strong>coeficientes</strong> (números delante) hasta igualar los átomos. NO se cambian los subíndices.</p>" +
+    "<div class='exp-formula'>\\[ 2\\,H_2 + O_2 \\rightarrow 2\\,H_2O \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> En \\(2H_2 + O_2 \\rightarrow 2H_2O\\): a la izquierda hay 4 H y 2 O; a la derecha 4 H y 2 O. ¡Balanceada!</div>" +
+    "<span class='exp-h'>Óxido-reducción (redox)</span><p>Hay transferencia de electrones: uno se <strong>oxida</strong> (pierde e⁻) y otro se <strong>reduce</strong> (gana e⁻).</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Para balancear, empieza por los elementos que aparecen una sola vez en cada lado y deja el oxígeno e hidrógeno para el final. Recuerda: 'redox' → Reducción gana, Oxidación pierde (RIG-OIL).</div>",
+
+  "Tipos de reacciones químicas y cinética química":
+    "<span class='exp-h'>Tipos de reacciones</span><ul>" +
+    "<li><strong>Síntesis:</strong> \\(A + B \\rightarrow AB\\) (se combinan).</li>" +
+    "<li><strong>Descomposición:</strong> \\(AB \\rightarrow A + B\\) (se separa).</li>" +
+    "<li><strong>Sustitución simple:</strong> \\(A + BC \\rightarrow AC + B\\).</li>" +
+    "<li><strong>Doble sustitución:</strong> \\(AB + CD \\rightarrow AD + CB\\).</li>" +
+    "<li><strong>Combustión:</strong> con O₂, libera energía (CO₂ + H₂O).</li></ul>" +
+    "<span class='exp-h'>Cinética (velocidad de reacción)</span><p>Aumenta con: mayor <strong>temperatura</strong>, mayor <strong>concentración</strong>, mayor <strong>superficie de contacto</strong> y con <strong>catalizadores</strong>.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una pastilla efervescente se disuelve más rápido en agua caliente (más temperatura) y si está triturada (más superficie de contacto).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Un catalizador acelera la reacción pero NO se consume. Identifica el tipo de reacción contando cuántas sustancias entran y salen.</div>",
+
+  "Leyes ponderales; reactivo límite y en exceso":
+    "<span class='exp-h'>Leyes ponderales</span><ul>" +
+    "<li><strong>Conservación de la masa (Lavoisier):</strong> la masa de los reactivos = masa de los productos.</li>" +
+    "<li><strong>Proporciones definidas (Proust):</strong> un compuesto siempre tiene los mismos elementos en la misma proporción.</li></ul>" +
+    "<span class='exp-h'>Reactivo límite y en exceso</span><p>El <strong>reactivo límite</strong> es el que se agota primero y DETERMINA cuánto producto se forma. El <strong>en exceso</strong> es el que sobra.</p>" +
+    "<div class='exp-ex'><b>Ejemplo (analogía):</b> Para armar un sándwich necesitas 2 panes y 1 jamón. Si tienes 10 panes y 3 jamones, el jamón es el límite (haces solo 3 sándwiches) y el pan sobra (queda en exceso).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> El reactivo límite NO es el que tienes en menor cantidad necesariamente, sino el que se acaba primero SEGÚN la proporción de la reacción.</div>",
+
+  "Ácidos y bases: escala de pH y pOH":
+    "<span class='exp-h'>La escala de pH</span><p>Mide qué tan ácida o básica es una solución, de <strong>0 a 14</strong>:</p><ul>" +
+    "<li><strong>pH &lt; 7:</strong> ácido (limón, vinagre).</li>" +
+    "<li><strong>pH = 7:</strong> neutro (agua pura).</li>" +
+    "<li><strong>pH &gt; 7:</strong> básico/alcalino (jabón, bicarbonato).</li></ul>" +
+    "<div class='exp-formula'>\\[ pH = -\\log[H^+] \\qquad pH + pOH = 14 \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si una solución tiene \\([H^+] = 10^{-3}\\), su \\(pH = 3\\) (ácida). Su \\(pOH = 14 - 3 = 11\\).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> La escala es logarítmica: un pH de 4 es DIEZ veces más ácido que uno de 5, y cien veces más que uno de 6. Más H⁺ = más ácido = menor pH.</div>",
+
+  "Solubilidad y sus curvas: cómo cambia con la temperatura":
+    "<span class='exp-h'>Solubilidad</span><p>Es la cantidad máxima de soluto que se disuelve en un solvente a cierta temperatura. Las <strong>curvas de solubilidad</strong> grafican esa cantidad vs. la temperatura.</p>" +
+    "<span class='exp-h'>Efecto de la temperatura</span><ul>" +
+    "<li>En la mayoría de <strong>sólidos</strong>: a más temperatura, MÁS se disuelve (la curva sube).</li>" +
+    "<li>En los <strong>gases</strong>: al revés, a más temperatura MENOS se disuelve (por eso una gaseosa caliente pierde gas).</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo (leer la curva):</b> Si a 20 °C se disuelven 30 g de una sal en 100 g de agua y a 60 °C se disuelven 60 g, calentar permite disolver el doble. Un punto SOBRE la curva = saturada; debajo = insaturada.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> En estas preguntas, ubica el punto en la gráfica y lee la temperatura o la cantidad. Por encima de la curva, el exceso de soluto se precipita (no se disuelve).</div>",
+
+  "Viscosidad y poder calorífico: comparar propiedades entre sustancias":
+    "<span class='exp-h'>Viscosidad</span><p>Resistencia de un líquido a fluir. Más viscoso = fluye más lento.</p>" +
+    "<span class='exp-h'>Poder calorífico</span><p>Energía que libera un combustible al quemarse. Mayor poder calorífico = más energía por unidad de masa.</p>" +
+    "<div class='exp-ex'><b>Ejemplo (viscosidad):</b> La miel es más viscosa que el agua (fluye lento). Al calentar un líquido, su viscosidad baja (la miel caliente fluye mejor).</div>" +
+    "<div class='exp-ex'><b>Ejemplo (poder calorífico):</b> Si comparas combustibles en una tabla, el de mayor poder calorífico produce más energía con la misma cantidad: es más 'eficiente'.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Estas preguntas suelen darte una tabla para COMPARAR sustancias. Lee bien las unidades y ordena de mayor a menor según lo que pidan.</div>",
+
+  "Ley de gases ideales y ley de presiones parciales":
+    "<span class='exp-h'>Ley de los gases ideales</span>" +
+    "<div class='exp-formula'>\\[ PV = nRT \\]</div>" +
+    "<p>\\(P\\) = presión, \\(V\\) = volumen, \\(n\\) = moles, \\(R\\) = constante, \\(T\\) = temperatura (en Kelvin). Relaciona todas las variables de un gas.</p>" +
+    "<span class='exp-h'>Relaciones clave</span><ul>" +
+    "<li>A temperatura constante: si \\(V\\) baja, \\(P\\) sube (Boyle, \\(P_1V_1=P_2V_2\\)).</li>" +
+    "<li>A presión constante: si \\(T\\) sube, \\(V\\) sube (Charles).</li></ul>" +
+    "<span class='exp-h'>Presiones parciales (Dalton)</span><p>En una mezcla de gases, la presión total es la suma de las presiones de cada gas: \\(P_{total} = P_1 + P_2 + \\ldots\\)</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si comprimes un gas a la mitad de su volumen (a T constante), su presión se duplica.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> La temperatura SIEMPRE va en Kelvin (\\(K = °C + 273\\)). P y V son inversamente proporcionales; V y T, directamente.</div>",
+
+  "Concentración, solubilidad, soluto, solvente, solución saturada e insaturada":
+    "<span class='exp-h'>Componentes de una solución</span><ul>" +
+    "<li><strong>Soluto:</strong> lo que se disuelve (está en menor cantidad). Ej: la sal.</li>" +
+    "<li><strong>Solvente:</strong> lo que disuelve (mayor cantidad). Ej: el agua.</li></ul>" +
+    "<span class='exp-h'>Tipos según cuánto soluto</span><ul>" +
+    "<li><strong>Insaturada:</strong> admite más soluto.</li>" +
+    "<li><strong>Saturada:</strong> tiene el máximo disuelto; ya no admite más.</li>" +
+    "<li><strong>Sobresaturada:</strong> tiene más de lo normal (inestable).</li></ul>" +
+    "<span class='exp-h'>Concentración</span><p>Mide cuánto soluto hay. Ej: porcentaje en masa, molaridad \\((M = \\tfrac{\\text{moles de soluto}}{\\text{litros de solución}})\\).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si sigues echando azúcar al café y ya no se disuelve (se acumula en el fondo), la solución está saturada.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Más concentrado = más soluto en el mismo solvente. Diluir = agregar solvente para bajar la concentración.</div>",
+
+  "Diagrama de fases":
+    "<span class='exp-h'>Qué muestra</span><p>Es una gráfica de <strong>presión vs. temperatura</strong> que indica en qué estado (sólido, líquido o gas) está una sustancia según esas condiciones.</p>" +
+    "<span class='exp-h'>Puntos importantes</span><ul>" +
+    "<li><strong>Punto triple:</strong> los 3 estados coexisten.</li>" +
+    "<li><strong>Las líneas:</strong> separan los estados; sobre ellas ocurren los cambios de fase (fusión, ebullición, sublimación).</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> En el diagrama del agua, a presión normal (1 atm) y 0 °C ocurre la fusión, y a 100 °C la ebullición. Si cambias la presión, esas temperaturas cambian (por eso el agua hierve antes en la montaña).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Ubica el punto (P, T) en el diagrama y mira en qué región cae para saber el estado. Cruzar una línea = cambio de fase.</div>",
+
+  "Átomo de carbono, grupos funcionales, hidrocarburos, nomenclatura orgánica":
+    "<span class='exp-h'>El carbono, base de la vida</span><p>El carbono forma 4 enlaces, lo que le permite armar cadenas largas y estructuras complejas (química orgánica).</p>" +
+    "<span class='exp-h'>Hidrocarburos (solo C e H)</span><ul>" +
+    "<li><strong>Alcanos:</strong> enlaces simples (metano CH₄, etano).</li>" +
+    "<li><strong>Alquenos:</strong> un doble enlace.</li>" +
+    "<li><strong>Alquinos:</strong> un triple enlace.</li></ul>" +
+    "<span class='exp-h'>Grupos funcionales</span><p>Átomos que dan propiedades especiales: <strong>-OH</strong> (alcohol), <strong>-COOH</strong> (ácido), <strong>-CHO</strong> (aldehído), <strong>-NH₂</strong> (amina).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El etanol (alcohol de las bebidas) es CH₃-CH₂-<b>OH</b>: tiene el grupo -OH que lo hace alcohol. El nombre indica el n.º de carbonos (met=1, et=2, prop=3, but=4).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Identifica el grupo funcional para clasificar la molécula. Los prefijos met-, et-, prop-, but- te dicen cuántos carbonos tiene la cadena.</div>",
+
+  // ───────────── CIENCIAS NATURALES · FÍSICA ─────────────
+  "Conversión de unidades (longitud, velocidad, tiempo)":
+    "<span class='exp-h'>Por qué importa</span><p>En física, si las unidades no concuerdan, el resultado está mal. Casi todo se trabaja en el <strong>Sistema Internacional</strong>: metros (m), segundos (s), kilogramos (kg).</p>" +
+    "<span class='exp-h'>La conversión estrella: km/h ↔ m/s</span>" +
+    "<div class='exp-formula'>\\[ \\text{de km/h a m/s: } \\div 3{,}6 \\qquad \\text{de m/s a km/h: } \\times 3{,}6 \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> \\(72\\ \\text{km/h} = \\dfrac{72}{3{,}6} = 20\\ \\text{m/s}\\). Al revés: \\(10\\ \\text{m/s} = 10 \\times 3{,}6 = 36\\ \\text{km/h}\\).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Antes de aplicar cualquier fórmula, pasa TODO a m, s y kg. El error #1 en física es mezclar km/h con m/s.</div>",
+
+  "Movimiento rectilíneo uniforme (MRU) y uniformemente acelerado (MRUA)":
+    "<span class='exp-h'>MRU — velocidad constante</span><p>Sin aceleración, la velocidad no cambia.</p>" +
+    "<div class='exp-formula'>\\[ d = v \\cdot t \\]</div>" +
+    "<span class='exp-h'>MRUA — aceleración constante</span><p>La velocidad cambia de forma uniforme (por ejemplo, al frenar o acelerar).</p>" +
+    "<div class='exp-formula'>\\[ v_f = v_0 + a\\,t \\qquad d = v_0\\,t + \\tfrac{1}{2}a\\,t^2 \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo (MRU):</b> Un auto a 20 m/s durante 5 s recorre \\(d = 20 \\times 5 = 100\\) m.</div>" +
+    "<div class='exp-ex'><b>Ejemplo (MRUA):</b> Parte del reposo (\\(v_0=0\\)) y acelera \\(2\\ \\text{m/s}^2\\) por 4 s: \\(v_f = 0 + 2(4) = 8\\) m/s; \\(d = 0 + \\tfrac{1}{2}(2)(4^2) = 16\\) m.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> ¿Velocidad constante? MRU. ¿Hay aceleración o frenado? MRUA. En una gráfica v-t, una recta horizontal es MRU; una recta inclinada es MRUA.</div>",
+
+  "Movimiento parabólico, circular uniforme, caída libre y lanzamiento vertical":
+    "<span class='exp-h'>Caída libre y lanzamiento vertical</span><p>Solo actúa la gravedad \\(g \\approx 9{,}8\\ \\text{m/s}^2\\). En caída, el objeto acelera hacia abajo; lanzado hacia arriba, frena, se detiene un instante y baja.</p>" +
+    "<div class='exp-formula'>\\[ v_f = v_0 - g\\,t \\qquad h = v_0\\,t - \\tfrac{1}{2}g\\,t^2 \\]</div>" +
+    "<span class='exp-h'>Movimiento parabólico</span><p>Combina MRU horizontal (velocidad constante) + caída libre vertical. La trayectoria es una parábola.</p>" +
+    "<span class='exp-h'>Circular uniforme</span><p>Rapidez constante pero dirección que cambia, así que SÍ hay aceleración (centrípeta, hacia el centro).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una pelota lanzada horizontalmente desde una mesa cae describiendo una parábola: avanza a velocidad constante mientras cae acelerando por la gravedad.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> En el punto más alto de un lanzamiento vertical, la velocidad es CERO pero la aceleración sigue siendo \\(g\\) (la gravedad nunca se apaga).</div>",
+
+  "Movimiento circular: distinguir dirección de velocidad vs. dirección de fuerza":
+    "<span class='exp-h'>El concepto clave</span><p>En un movimiento circular, la <strong>velocidad</strong> apunta siempre en la dirección <strong>tangente</strong> al círculo (hacia donde 'saldría' el objeto). La <strong>fuerza centrípeta</strong> apunta hacia el <strong>centro</strong>, y es la que lo mantiene girando.</p>" +
+    "<div class='exp-formula'>\\[ F_c = \\frac{m\\,v^2}{r} \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si haces girar una piedra atada a una cuerda y la sueltas, sale DISPARADA en línea recta (tangente), no hacia afuera en curva. La tensión de la cuerda era la fuerza centrípeta que apuntaba al centro.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Pregunta clásica: '¿hacia dónde sale el objeto si se rompe la cuerda?'. Respuesta: tangente al círculo (recto), NO radialmente hacia afuera.</div>",
+
+  "Leyes de Newton; fuerzas sobre un cuerpo: normal, peso, fricción, tensión, elástica, gravitatoria":
+    "<span class='exp-h'>Las tres leyes</span><ol>" +
+    "<li><strong>Inercia:</strong> un cuerpo sigue en reposo o en movimiento constante si NO hay fuerza neta.</li>" +
+    "<li><strong>Fundamental:</strong> \\(F = m\\,a\\) (la fuerza neta produce aceleración).</li>" +
+    "<li><strong>Acción-reacción:</strong> toda fuerza tiene otra igual y opuesta.</li></ol>" +
+    "<span class='exp-h'>Fuerzas comunes</span><ul>" +
+    "<li><strong>Peso:</strong> \\(P = m\\,g\\), hacia abajo.</li>" +
+    "<li><strong>Normal:</strong> la superficie empuja perpendicularmente.</li>" +
+    "<li><strong>Fricción:</strong> se opone al movimiento.</li>" +
+    "<li><strong>Tensión:</strong> en cuerdas. <strong>Elástica:</strong> en resortes.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Empujas una caja de 2 kg con fuerza neta de 10 N: \\(a = \\dfrac{F}{m} = \\dfrac{10}{2} = 5\\ \\text{m/s}^2\\).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Acción-reacción actúan sobre cuerpos DISTINTOS (por eso no se cancelan). El peso depende de \\(g\\); la masa NO cambia aunque cambie el planeta.</div>",
+
+  "Diagrama de cuerpo libre; equilibrio de fuerzas":
+    "<span class='exp-h'>Diagrama de cuerpo libre (DCL)</span><p>Es un dibujo donde representas TODAS las fuerzas que actúan sobre un objeto, como flechas. Es el primer paso para resolver casi cualquier problema de dinámica.</p>" +
+    "<span class='exp-h'>Equilibrio</span><p>Un cuerpo está en equilibrio si la fuerza neta es cero (no acelera). Entonces las fuerzas se cancelan:</p>" +
+    "<div class='exp-formula'>\\[ \\sum F = 0 \\;\\Rightarrow\\; F_{arriba} = F_{abajo},\\quad F_{izq} = F_{der} \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Un libro quieto sobre una mesa: la Normal (hacia arriba) iguala al Peso (hacia abajo). Como se cancelan, el libro no se mueve (equilibrio).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> 'En reposo' o 'velocidad constante' significan equilibrio → la suma de fuerzas es cero. Dibuja siempre el DCL antes de calcular.</div>",
+
+  "Poleas y polipastos: predecir movimiento y equilibrio":
+    "<span class='exp-h'>Para qué sirven</span><p>Las poleas cambian la dirección de la fuerza y, combinadas (polipasto), permiten levantar pesos con MENOS fuerza, a cambio de jalar más cuerda.</p>" +
+    "<span class='exp-h'>Cómo predecir</span><ul>" +
+    "<li><strong>Polea fija:</strong> no reduce la fuerza, solo cambia su dirección (jalas hacia abajo para subir algo).</li>" +
+    "<li><strong>Polea móvil / polipasto:</strong> divide la fuerza necesaria entre el número de cuerdas que sostienen la carga.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Para levantar 100 N con un polipasto de 2 cuerdas que sostienen la carga, necesitas solo \\(\\dfrac{100}{2} = 50\\) N (pero jalas el doble de cuerda).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Más poleas móviles = menos fuerza, pero más distancia de cuerda. La energía se conserva: lo que ahorras en fuerza lo 'pagas' en distancia.</div>",
+
+  "Trabajo, potencia, energía, impulso y cantidad de movimiento (momentum)":
+    "<span class='exp-h'>Definiciones y fórmulas</span><ul>" +
+    "<li><strong>Trabajo:</strong> \\(W = F \\cdot d\\) (fuerza por distancia). Se mide en julios (J).</li>" +
+    "<li><strong>Potencia:</strong> \\(P = \\dfrac{W}{t}\\) (trabajo por tiempo). En vatios (W).</li>" +
+    "<li><strong>Cantidad de movimiento:</strong> \\(p = m \\cdot v\\).</li>" +
+    "<li><strong>Impulso:</strong> \\(J = F \\cdot t\\) = cambio en la cantidad de movimiento.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Empujas una caja con 20 N a lo largo de 3 m: \\(W = 20 \\times 3 = 60\\) J. Si tardas 2 s, la potencia es \\(P = \\dfrac{60}{2} = 30\\) W.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Si la fuerza es perpendicular al movimiento, NO hace trabajo (\\(W=0\\)). La cantidad de movimiento se CONSERVA en los choques.</div>",
+
+  "Energía cinética y potencial: principio de conservación de la energía mecánica":
+    "<span class='exp-h'>Dos energías mecánicas</span><ul>" +
+    "<li><strong>Cinética:</strong> energía del movimiento. \\(E_c = \\tfrac{1}{2}m\\,v^2\\).</li>" +
+    "<li><strong>Potencial gravitatoria:</strong> energía por la altura. \\(E_p = m\\,g\\,h\\).</li></ul>" +
+    "<span class='exp-h'>Conservación de la energía</span><p>Sin fricción, la energía mecánica total se mantiene: la potencial se convierte en cinética y viceversa.</p>" +
+    "<div class='exp-formula'>\\[ E_c + E_p = \\text{constante} \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una montaña rusa: arriba tiene mucha \\(E_p\\) y poca \\(E_c\\) (va lento). Al bajar, la \\(E_p\\) se transforma en \\(E_c\\) (va rapidísimo). La suma es la misma.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> En el punto más alto, máxima \\(E_p\\) y mínima \\(E_c\\). En el más bajo, al revés. Si hay fricción, parte se pierde como calor.</div>",
+
+  "Transformaciones de la energía y leyes de la termodinámica":
+    "<span class='exp-h'>La energía se transforma</span><p>La energía no se crea ni se destruye, solo cambia de forma: eléctrica → luz, química → movimiento, etc.</p>" +
+    "<span class='exp-h'>Leyes de la termodinámica</span><ol>" +
+    "<li><strong>1ª ley:</strong> conservación de la energía (la energía total se mantiene).</li>" +
+    "<li><strong>2ª ley:</strong> la energía tiende a dispersarse; aumenta el desorden (entropía). El calor fluye de lo caliente a lo frío, nunca al revés por sí solo.</li></ol>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Un bombillo transforma energía eléctrica en luz (útil) y calor (que se 'desperdicia'). Un carro: energía química de la gasolina → movimiento + calor.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Ninguna máquina es 100% eficiente: siempre se pierde algo de energía como calor (2ª ley). El calor SIEMPRE pasa de caliente a frío.</div>",
+
+  "Temperatura, calor, calor específico y capacidad calorífica":
+    "<span class='exp-h'>Temperatura vs. calor (no son lo mismo)</span><ul>" +
+    "<li><strong>Temperatura:</strong> mide qué tan caliente está algo (agitación de sus partículas).</li>" +
+    "<li><strong>Calor:</strong> energía que se TRANSFIERE de un cuerpo caliente a uno frío.</li></ul>" +
+    "<span class='exp-h'>Calor específico</span><p>Cantidad de calor para subir 1 °C a 1 g de una sustancia. Fórmula del calor:</p>" +
+    "<div class='exp-formula'>\\[ Q = m \\cdot c \\cdot \\Delta T \\]</div>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El agua tiene calor específico alto: cuesta mucho calentarla y mucho enfriarla (por eso el mar regula el clima). El metal, bajo: se calienta rápido.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> \\(\\Delta T = T_{final} - T_{inicial}\\). Mayor calor específico = más energía para cambiar su temperatura. El calor fluye de mayor a menor temperatura.</div>",
+
+  "Movimiento armónico simple: péndulo simple y ley de Hooke":
+    "<span class='exp-h'>Movimiento armónico simple (MAS)</span><p>Movimiento de vaivén que se repite alrededor de un punto de equilibrio (oscilación). Ejemplos: un péndulo, un resorte.</p>" +
+    "<span class='exp-h'>Ley de Hooke (resortes)</span><p>La fuerza de un resorte es proporcional a cuánto se estira o comprime:</p>" +
+    "<div class='exp-formula'>\\[ F = k \\cdot x \\]</div>" +
+    "<p>\\(k\\) = constante del resorte, \\(x\\) = deformación.</p>" +
+    "<span class='exp-h'>Péndulo</span><p>Su período (tiempo de una oscilación) depende de la longitud, NO de la masa colgada.</p>" +
+    "<div class='exp-ex'><b>Ejemplo (Hooke):</b> Un resorte con \\(k = 100\\ \\text{N/m}\\) estirado \\(0{,}2\\) m ejerce \\(F = 100 \\times 0{,}2 = 20\\) N.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> En Hooke, más estiramiento = más fuerza (proporcional). El período del péndulo depende de su LARGO y de la gravedad, no del peso.</div>",
+
+  "Ondas: partes, tipos y ondas sonoras":
+    "<span class='exp-h'>Partes de una onda</span><ul>" +
+    "<li><strong>Cresta y valle:</strong> punto más alto y más bajo.</li>" +
+    "<li><strong>Amplitud:</strong> altura desde el centro (relacionada con la energía/volumen).</li>" +
+    "<li><strong>Longitud de onda (λ):</strong> distancia entre dos crestas.</li>" +
+    "<li><strong>Frecuencia (f):</strong> oscilaciones por segundo (Hz).</li></ul>" +
+    "<div class='exp-formula'>\\[ v = \\lambda \\cdot f \\]</div>" +
+    "<span class='exp-h'>Tipos</span><p><strong>Transversales</strong> (la luz; vibran perpendicular) y <strong>longitudinales</strong> (el sonido; vibran en la misma dirección). El sonido NECESITA un medio (no viaja en el vacío).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Más frecuencia en el sonido = tono más agudo. Más amplitud = más volumen. En el vacío del espacio no hay sonido porque no hay aire que lo transmita.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Frecuencia y longitud de onda son inversas: a más frecuencia, menor longitud de onda (la velocidad es la misma en un medio dado).</div>",
+
+  "Reflexión y refracción de la luz; espectro electromagnético":
+    "<span class='exp-h'>Dos fenómenos de la luz</span><ul>" +
+    "<li><strong>Reflexión:</strong> la luz REBOTA en una superficie. El ángulo de entrada = ángulo de salida (espejos).</li>" +
+    "<li><strong>Refracción:</strong> la luz se DESVÍA al cambiar de medio (del aire al agua), porque cambia su velocidad.</li></ul>" +
+    "<span class='exp-h'>Espectro electromagnético</span><p>Todas las ondas EM ordenadas por frecuencia: ondas de radio, microondas, infrarrojo, <strong>luz visible</strong>, ultravioleta, rayos X, gamma.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Un lápiz dentro de un vaso con agua se ve 'quebrado': es refracción (la luz se desvía al pasar del agua al aire). Verte en un espejo es reflexión.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> La luz visible es solo una pequeña parte del espectro. A mayor frecuencia (UV, rayos X, gamma), más energía y más peligrosa la radiación.</div>",
+
+  "Interferencia y difracción de la luz":
+    "<span class='exp-h'>Interferencia</span><p>Cuando dos ondas se superponen:</p><ul>" +
+    "<li><strong>Constructiva:</strong> se suman (cresta + cresta) → más intensa.</li>" +
+    "<li><strong>Destructiva:</strong> se anulan (cresta + valle) → se cancelan.</li></ul>" +
+    "<span class='exp-h'>Difracción</span><p>Las ondas se 'doblan' al pasar por una rendija o bordear un obstáculo. Es más notoria cuando la abertura es del tamaño de la longitud de onda.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Los colores que ves en un CD o en una burbuja de jabón son interferencia de la luz. El sonido que 'dobla' una esquina y lo escuchas sin ver la fuente es difracción.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> La interferencia y la difracción son pruebas de que la luz se comporta como ONDA. Constructiva = se refuerzan; destructiva = se apagan.</div>",
+
+  "Carga eléctrica, campo eléctrico, potencial eléctrico; ley de Coulomb":
+    "<span class='exp-h'>Carga eléctrica</span><p>Hay cargas positivas y negativas. <strong>Iguales se repelen, opuestas se atraen.</strong></p>" +
+    "<span class='exp-h'>Ley de Coulomb</span><p>La fuerza entre dos cargas depende de su valor y de la distancia:</p>" +
+    "<div class='exp-formula'>\\[ F = k\\,\\frac{q_1 \\, q_2}{r^2} \\]</div>" +
+    "<p>Si duplicas la distancia, la fuerza se reduce a la CUARTA parte (por el \\(r^2\\)).</p>" +
+    "<span class='exp-h'>Campo y potencial</span><p>El <strong>campo eléctrico</strong> es la zona de influencia de una carga; el <strong>potencial</strong> (voltaje) es la energía por unidad de carga.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Dos cargas separadas \\(r\\) se atraen con fuerza \\(F\\). Si las alejas al doble (\\(2r\\)), la fuerza baja a \\(F/4\\).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> La fuerza es inversamente proporcional al CUADRADO de la distancia: alejar poco reduce mucho la fuerza. Cargas iguales se repelen.</div>",
+
+  "Circuitos eléctricos: en serie y en paralelo":
+    "<span class='exp-h'>Ley de Ohm</span>" +
+    "<div class='exp-formula'>\\[ V = I \\cdot R \\]</div>" +
+    "<p>Voltaje = corriente × resistencia.</p>" +
+    "<span class='exp-h'>Serie vs. paralelo</span><ul>" +
+    "<li><strong>Serie:</strong> un solo camino. La corriente es la misma; si se daña un elemento, se apaga todo. Resistencias se suman.</li>" +
+    "<li><strong>Paralelo:</strong> varios caminos. Si uno falla, los demás siguen; el voltaje es el mismo en cada rama.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Las luces navideñas en serie: si una se funde, se apagan todas. Los enchufes de tu casa están en paralelo: puedes apagar una lámpara sin afectar las demás.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Serie = un solo camino (se suman resistencias). Paralelo = varios caminos (la resistencia total baja). Usa \\(V = IR\\) para despejar lo que falte.</div>",
+
+  "Campos magnéticos: electroimanes, líneas de campo, atracción ferromagnética":
+    "<span class='exp-h'>Imanes y campos</span><p>Todo imán tiene dos polos (norte y sur). <strong>Polos iguales se repelen, opuestos se atraen.</strong> Las líneas de campo salen del norte y entran al sur.</p>" +
+    "<span class='exp-h'>Electromagnetismo</span><p>Una corriente eléctrica genera un campo magnético. Un <strong>electroimán</strong> es una bobina con corriente: se puede encender y apagar.</p>" +
+    "<span class='exp-h'>Materiales ferromagnéticos</span><p>Hierro, níquel y cobalto son atraídos por imanes y pueden imantarse.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Las grúas de los depósitos de chatarra usan electroimanes: encienden la corriente para atraer el metal y la apagan para soltarlo.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Electricidad y magnetismo están unidos: corriente eléctrica → campo magnético. Más vueltas de bobina o más corriente = electroimán más fuerte.</div>",
+
+  "Densidad, presión, presión atmosférica y presión de los fluidos":
+    "<span class='exp-h'>Densidad</span>" +
+    "<div class='exp-formula'>\\[ \\rho = \\frac{m}{V} \\]</div>" +
+    "<p>Masa por unidad de volumen. Si la densidad de un objeto es menor que la del agua, FLOTA.</p>" +
+    "<span class='exp-h'>Presión</span>" +
+    "<div class='exp-formula'>\\[ P = \\frac{F}{A} \\]</div>" +
+    "<p>Fuerza repartida en un área. A menor área, mayor presión (por eso un cuchillo afilado corta mejor).</p>" +
+    "<span class='exp-h'>Presión en fluidos</span><p>Aumenta con la profundidad: a más hondo, más presión. La presión atmosférica es el 'peso' del aire sobre nosotros.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Un mismo peso sobre tacones (área pequeña) ejerce mucha más presión que sobre zapatos planos (área grande). Por eso los tacones se hunden en la arena.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Misma fuerza + menor área = mayor presión. En el fondo del mar la presión es enorme por la columna de agua encima.</div>",
+
+  "Principio de Arquímedes y principio de Pascal":
+    "<span class='exp-h'>Principio de Arquímedes (flotación)</span><p>Todo cuerpo sumergido recibe un <strong>empuje hacia arriba</strong> igual al peso del fluido que desaloja.</p><ul>" +
+    "<li>Si el empuje &gt; peso → flota.</li>" +
+    "<li>Si el empuje &lt; peso → se hunde.</li></ul>" +
+    "<span class='exp-h'>Principio de Pascal</span><p>La presión aplicada a un fluido se transmite por igual en todas las direcciones. Es la base de los sistemas hidráulicos.</p>" +
+    "<div class='exp-ex'><b>Ejemplo (Arquímedes):</b> Un barco de acero flota porque su forma desaloja MUCHA agua, generando un empuje que supera su peso. (Pascal): el gato hidráulico levanta un carro aplicando poca fuerza en un pistón pequeño.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Un objeto flota si su densidad es menor que la del líquido. Pascal explica por qué con un pistón pequeño puedes mover uno grande (frenos, gatos hidráulicos).</div>",
+
+  // ───────────── INGLÉS ─────────────
+  "Parte 1 — Vocabulario: asociar descripción con la palabra correcta (matching)":
+    "<span class='exp-h'>Qué pide</span><p>Te dan una descripción o definición y debes elegir la palabra que le corresponde. Evalúa vocabulario básico.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'A place where you borrow books' → <b>library</b> (biblioteca), no 'bookstore' (que es para comprar).</div>" +
+    "<span class='exp-h'>Estrategia</span><ul><li>Lee TODA la descripción, no solo una palabra.</li><li>Descarta opciones que se parecen pero no encajan.</li><li>Ojo con los 'falsos amigos' (library ≠ librería).</li></ul>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Construye tu vocabulario por categorías (lugares, trabajos, comida). El matching premia reconocer palabras, no traducir perfecto.</div>",
+
+  "Parte 2 — Avisos y señales: identificar en qué lugar se vería cada letrero":
+    "<span class='exp-h'>Qué pide</span><p>Lees un letrero corto y decides DÓNDE estaría o QUÉ significa. Evalúa comprensión de mensajes breves del mundo real.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'No parking' → se ve en la calle (prohibido estacionar). 'Sale 50% off' → en una tienda. 'Keep off the grass' → en un parque (no pisar el césped).</div>" +
+    "<span class='exp-h'>Vocabulario frecuente de señales</span><p>warning (advertencia), exit (salida), push/pull (empuje/jale), out of order (fuera de servicio), do not disturb (no molestar).</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Piensa en el LUGAR lógico del mensaje. Verbos imperativos (keep, do not, please) suelen ser instrucciones o prohibiciones.</div>",
+
+  "Parte 3 — Conversaciones cortas: elegir la respuesta apropiada al contexto":
+    "<span class='exp-h'>Qué pide</span><p>Lees el inicio de un diálogo y eliges la respuesta que mejor continúa la conversación de forma natural.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> '— How are you? — _____' → 'I'm fine, thanks' (no 'I'm 15 years old', que respondería a 'How old are you?').</div>" +
+    "<span class='exp-h'>Estrategia</span><p>Fíjate en la PREGUNTA o frase inicial: ¿es un saludo, una invitación, una disculpa? La respuesta debe encajar con ese tipo de intercambio.</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Relaciona pregunta-respuesta: 'Would you like…?' → 'Yes, please / No, thanks'. 'Thank you' → 'You're welcome'. 'I'm sorry' → 'That's okay'.</div>",
+
+  "Parte 4 — Fill in the blank: completar texto con la opción gramaticalmente correcta":
+    "<span class='exp-h'>Qué pide</span><p>Un texto con espacios en blanco; eliges la palabra que es gramaticalmente correcta (verbo, preposición, conector, etc.).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'She _____ to school every day.' → <b>goes</b> (presente simple, 3ª persona). No 'go', 'going' ni 'gone'.</div>" +
+    "<span class='exp-h'>Qué revisar</span><ul><li>El tiempo verbal (busca pistas: yesterday, now, every day).</li><li>La concordancia (he/she lleva -s).</li><li>Preposiciones y conectores según el sentido.</li></ul>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Lee la oración COMPLETA antes y después del espacio. Las pistas de tiempo (time markers) te dicen qué forma verbal va.</div>",
+
+  "Parte 5 — Reading comprehension: textos medianos con 4–5 preguntas cada uno":
+    "<span class='exp-h'>Qué pide</span><p>La sección más densa: lees un texto y respondes varias preguntas (idea principal, detalles, inferencias, vocabulario).</p>" +
+    "<span class='exp-h'>Estrategia clave</span><ol><li>Lee primero las PREGUNTAS, luego el texto, sabiendo qué buscar.</li><li>Subraya nombres, fechas y palabras clave.</li><li>No te bloquees con palabras desconocidas: usa el contexto.</li></ol>" +
+    "<div class='exp-ex'><b>Ejemplo de preguntas:</b> 'What is the text mainly about?' (idea principal), 'According to the text…' (detalle), 'The word X means…' (vocabulario por contexto).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> La idea principal suele estar en la primera o última oración de cada párrafo. Para detalles, regresa al texto y localiza la palabra clave de la pregunta.</div>",
+
+  "Common verbs — verbos comunes de uso frecuente":
+    "<span class='exp-h'>Verbos que SIEMPRE aparecen</span><p>be (ser/estar), have (tener), do (hacer), go (ir), get (obtener), make (hacer/fabricar), take (tomar), want (querer), need (necesitar), like (gustar).</p>" +
+    "<div class='exp-ex'><b>Ejemplo (make vs. do):</b> 'make a cake' (hacer/crear algo), 'do homework' (realizar una tarea). 'have breakfast' (desayunar), 'take a shower' (ducharse).</div>" +
+    "<span class='exp-h'>Verbos irregulares clave</span><p>go→went, have→had, do→did, get→got, make→made, take→took, see→saw, eat→ate.</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Aprende los verbos irregulares en sus 3 formas (go-went-gone). Son los más usados y los que más caen en el fill in the blank.</div>",
+
+  "Jobs & professions — trabajos y profesiones":
+    "<span class='exp-h'>Vocabulario de profesiones</span><p>teacher (profesor), doctor, nurse (enfermero/a), engineer (ingeniero), lawyer (abogado), chef/cook (cocinero), firefighter (bombero), police officer, farmer (granjero), waiter (mesero).</p>" +
+    "<div class='exp-ex'><b>Ejemplo (asociar trabajo y lugar/acción):</b> 'A person who takes care of sick people' → nurse/doctor. 'works in a kitchen' → chef. 'puts out fires' → firefighter.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Suelen describir lo que hace la persona o dónde trabaja. Asocia: hospital→doctor/nurse, school→teacher, restaurant→chef/waiter.</div>",
+
+  "Fruits, vegetables, general meals — alimentos":
+    "<span class='exp-h'>Comida básica</span><p><b>Fruits:</b> apple (manzana), banana, orange, grape (uva), strawberry (fresa). <b>Vegetables:</b> carrot (zanahoria), potato (papa), onion (cebolla), tomato, lettuce (lechuga).</p>" +
+    "<span class='exp-h'>Meals (comidas del día)</span><p>breakfast (desayuno), lunch (almuerzo), dinner (cena), snack (merienda).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'I have cereal and milk for _____' → breakfast. 'A red vegetable used in salads and sauces' → tomato.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Distingue fruit (fruta) de vegetable (verdura). Las comidas van con el verbo 'have': have breakfast/lunch/dinner.</div>",
+
+  "Clothing — ropa y calzado de hombre y mujer":
+    "<span class='exp-h'>Prendas comunes</span><p>shirt (camisa), t-shirt (camiseta), pants/trousers (pantalón), dress (vestido), skirt (falda), jacket (chaqueta), coat (abrigo), shoes (zapatos), socks (medias), hat (sombrero/gorro).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'When it's cold, you wear a _____' → coat/jacket. 'You wear them on your feet' → shoes/socks.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> El verbo para vestir es 'wear' (llevar puesto) o 'put on' (ponerse). Asocia la prenda con el clima o la parte del cuerpo.</div>",
+
+  "Animals — animales; means of transport — medios de transporte":
+    "<span class='exp-h'>Animals</span><p>dog (perro), cat (gato), bird (pájaro), fish, horse (caballo), cow (vaca), lion, elephant, snake (serpiente). Domésticos (pets) vs. salvajes (wild).</p>" +
+    "<span class='exp-h'>Means of transport</span><p>car (carro), bus, train (tren), plane/airplane (avión), bike/bicycle, motorcycle, boat/ship (barco), taxi.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'You use it to fly from one country to another' → plane. 'An animal that says meow' → cat.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Para transporte se usa 'by': by car, by bus, by plane (pero 'on foot' = a pie). Clasifica animales por dónde viven o qué sonido hacen.</div>",
+
+  "Sports — deportes; hobbies — pasatiempos":
+    "<span class='exp-h'>Sports</span><p>soccer/football (fútbol), basketball, tennis, swimming (natación), running, volleyball, baseball, cycling.</p>" +
+    "<span class='exp-h'>Hobbies</span><p>reading (leer), painting (pintar), dancing (bailar), cooking, listening to music, playing video games, traveling.</p>" +
+    "<div class='exp-ex'><b>Ejemplo (verbos):</b> 'play' para deportes con pelota (play soccer), 'go' para los terminados en -ing (go swimming, go running), 'do' para otros (do yoga).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Recuerda la combinación verbo+deporte: play basketball, go swimming, do karate. Los hobbies suelen ir en gerundio (-ing): 'I like reading'.</div>",
+
+  "Common objects and places (mall, bookstore, elevator, playground…)":
+    "<span class='exp-h'>Lugares (places)</span><p>mall (centro comercial), bookstore (librería), library (biblioteca), hospital, school, park, restaurant, airport, bank, pharmacy (farmacia).</p>" +
+    "<span class='exp-h'>Objetos y elementos</span><p>elevator (ascensor), stairs (escaleras), playground (parque infantil), desk (escritorio), key (llave), ticket (boleto).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'You go there to buy many things in different stores' → mall. 'It takes you up and down a building' → elevator.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Estos aparecen en la Parte 2 (señales) y en lecturas. Asocia el lugar con la ACTIVIDAD que se hace allí.</div>",
+
+  "Objetos y lugares comunes: reconocer y usar su vocabulario en contexto":
+    "<span class='exp-h'>Vocabulario en contexto</span><p>No basta con saber la palabra: hay que entenderla dentro de una frase o situación real.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'I need to withdraw money, I'm going to the _____' → bank. La frase ('sacar dinero') te lleva al lugar correcto aunque no veas la palabra 'banco'.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Usa las pistas de la oración (verbos, acciones) para deducir el lugar u objeto. El contexto manda.</div>",
+
+  "Adjetivos: calificativos, indefinidos y demostrativos":
+    "<span class='exp-h'>Tipos de adjetivos</span><ul>" +
+    "<li><strong>Calificativos:</strong> describen cualidades. big, small, happy, beautiful, expensive. Van ANTES del sustantivo: 'a big house'.</li>" +
+    "<li><strong>Demostrativos:</strong> this (este), that (ese/aquel), these (estos), those (esos). Cerca vs. lejos.</li>" +
+    "<li><strong>Indefinidos:</strong> some (algo de), any, many, much, few, a lot of.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'This book' (uno cerca) vs. 'That book' (uno lejos). 'These shoes' (plural cerca) vs. 'Those shoes' (plural lejos).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> En inglés el adjetivo NO cambia con el plural: 'a red car', 'two red cars' (no 'reds'). This/these = cerca; that/those = lejos.</div>",
+
+  "Verbos de acción; frases imperativas; instrucciones y direcciones":
+    "<span class='exp-h'>Imperativo (dar instrucciones)</span><p>Se usa el verbo en forma base, sin sujeto: 'Open the door', 'Turn left', 'Don't run'.</p>" +
+    "<span class='exp-h'>Direcciones (cómo llegar)</span><p>turn left/right (gira a la izq/der), go straight (sigue derecho), next to (al lado de), in front of (enfrente), between (entre), behind (detrás).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'To get to the bank, go straight and turn right. It's next to the pharmacy.'</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> El imperativo empieza con el verbo. Para prohibir: 'Don't + verbo'. Memoriza las preposiciones de lugar para las preguntas de direcciones.</div>",
+
+  "Avisos, advertencias y señales: identificar su propósito":
+    "<span class='exp-h'>Propósito de un aviso</span><p>Pregúntate: ¿advierte (warning), prohíbe, informa o invita? El verbo y el tono lo revelan.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'Caution: wet floor' → advierte de un peligro. 'No smoking' → prohíbe. 'Free entry' → informa/invita.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Palabras como caution, danger, warning = advertencia. 'No + …' o 'Do not' = prohibición. Identifica la INTENCIÓN del letrero.</div>",
+
+  "Verbo To Be y tiempos verbales: regulares e irregulares":
+    "<span class='exp-h'>Verbo To Be</span><p>Presente: I <b>am</b>, you/we/they <b>are</b>, he/she/it <b>is</b>. Pasado: was/were. Significa 'ser' o 'estar'.</p>" +
+    "<span class='exp-h'>Pasado: regulares vs. irregulares</span><ul>" +
+    "<li><strong>Regulares:</strong> se agrega -ed. work→worked, play→played, study→studied.</li>" +
+    "<li><strong>Irregulares:</strong> cambian por completo. go→went, eat→ate, see→saw, buy→bought.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'She <b>is</b> a doctor' (presente). 'They <b>were</b> at home' (pasado). 'I <b>played</b> soccer' (regular). 'He <b>went</b> home' (irregular).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> En negativo y pregunta del pasado se usa 'did' + verbo en BASE: 'Did you go?' (no 'went'). El verbo vuelve a su forma simple.</div>",
+
+  "Preposiciones de tiempo, lugar y movimiento (in, on, at, go away, provided with…)":
+    "<span class='exp-h'>Preposiciones de tiempo</span><p><b>in</b> (meses, años: in May, in 2020), <b>on</b> (días: on Monday), <b>at</b> (horas: at 5 pm).</p>" +
+    "<span class='exp-h'>Preposiciones de lugar</span><p><b>in</b> (dentro: in the box), <b>on</b> (sobre: on the table), <b>at</b> (punto específico: at the door), under, between, behind.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'The party is <b>on</b> Friday <b>at</b> 8 pm <b>in</b> December.' Cada preposición según la unidad de tiempo.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Regla de oro del tiempo: at (hora) → on (día) → in (mes/año), de lo más específico a lo más general.</div>",
+
+  "Comparativos y superlativos; cuantificadores":
+    "<span class='exp-h'>Comparativo (comparar dos)</span><p>Adjetivos cortos: +er. tall→taller, big→bigger. Adjetivos largos: more + adjetivo. 'more expensive'. Se usa 'than': 'taller than'.</p>" +
+    "<span class='exp-h'>Superlativo (el más de todos)</span><p>Cortos: the + …est. 'the tallest'. Largos: the most + adjetivo. 'the most expensive'.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'John is <b>taller than</b> Tom' (comparativo). 'John is <b>the tallest</b> in the class' (superlativo). Irregular: good→better→the best.</div>" +
+    "<span class='exp-h'>Cuantificadores</span><p>many (contables: many books), much (incontables: much water), a lot of (ambos), few, little.</p>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Comparativo lleva 'than'; superlativo lleva 'the'. Memoriza los irregulares: good-better-best, bad-worse-worst.</div>",
+
+  "Pronombres: reflexivos, posesivos, indefinidos":
+    "<span class='exp-h'>Tipos de pronombres</span><ul>" +
+    "<li><strong>Posesivos:</strong> mine, yours, his, hers, ours, theirs. 'This book is mine'.</li>" +
+    "<li><strong>Reflexivos:</strong> myself, yourself, himself, herself, ourselves. 'I did it myself'.</li>" +
+    "<li><strong>Indefinidos:</strong> someone/somebody, anyone, everyone, nothing, something.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'She hurt <b>herself</b>' (reflexivo). 'Is this pen <b>yours</b>?' (posesivo). '<b>Everyone</b> is here' (indefinido).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> No confundas adjetivo posesivo (my, your, his + sustantivo) con pronombre posesivo (mine, yours, his, solo). 'my book' vs. 'it's mine'.</div>",
+
+  "Conectores: adición, adversativos, causales, comparativos, ejemplificación":
+    "<span class='exp-h'>Conectores por función</span><ul>" +
+    "<li><strong>Adición:</strong> and, also, moreover, in addition.</li>" +
+    "<li><strong>Adversativos (contraste):</strong> but, however, although, on the other hand.</li>" +
+    "<li><strong>Causales:</strong> because, since, so, therefore, as a result.</li>" +
+    "<li><strong>Ejemplificación:</strong> for example, for instance, such as.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'She studied hard, <b>however</b>, she didn't pass' (contraste). 'He was late <b>because</b> of the traffic' (causa).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Entiende la RELACIÓN entre las ideas (¿se suman, se oponen, una causa la otra?) y el conector sale solo, aunque no conozcas todo el vocabulario.</div>",
+
+  "Verbos modales en contexto (might, would, could, shall)":
+    "<span class='exp-h'>Modales y su uso</span><ul>" +
+    "<li><strong>can/could:</strong> habilidad o permiso. 'I can swim', 'Could you help me?'</li>" +
+    "<li><strong>must/have to:</strong> obligación. 'You must stop'.</li>" +
+    "<li><strong>should:</strong> consejo. 'You should rest'.</li>" +
+    "<li><strong>might/may:</strong> posibilidad. 'It might rain'.</li>" +
+    "<li><strong>would:</strong> cortesía/condicional. 'Would you like…?'</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'You <b>should</b> see a doctor' (consejo) ≠ 'You <b>must</b> see a doctor' (obligación) ≠ 'You <b>might</b> see a doctor' (posibilidad).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Tras un modal va el verbo en BASE (sin to, sin -s): 'She can <b>go</b>', no 'can goes'. El matiz (consejo, obligación, posibilidad) define la respuesta.</div>",
+
+  "Tiempos verbales en narración: presente perfecto, pasado simple, futuro":
+    "<span class='exp-h'>Cuándo usar cada uno</span><ul>" +
+    "<li><strong>Pasado simple:</strong> acción terminada con tiempo definido. 'I visited Paris in 2019'. Pistas: yesterday, ago, last week.</li>" +
+    "<li><strong>Presente perfecto (have/has + participio):</strong> conecta pasado con presente, sin tiempo exacto. 'I have visited Paris'. Pistas: ever, never, already, yet, just.</li>" +
+    "<li><strong>Futuro:</strong> will + verbo (decisión/predicción) o 'going to' (plan). 'I will call you', 'I'm going to study'.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'I <b>ate</b> breakfast at 7' (pasado, hora exacta) vs. 'I <b>have</b> already <b>eaten</b>' (perfecto, sin hora, relevante ahora).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Las palabras de tiempo deciden: yesterday/ago→pasado simple; already/yet/ever→presente perfecto; tomorrow→futuro.</div>",
+
+  "Expresiones comunes y coloquiales; exclamaciones":
+    "<span class='exp-h'>Expresiones que debes reconocer</span><p>How are you? / What's up? (saludos), Thank you – You're welcome, Excuse me (disculpe), Never mind (no importa), Of course (claro), It's up to you (tú decides).</p>" +
+    "<span class='exp-h'>Exclamaciones</span><p>What a nice day! (¡Qué lindo día!), How beautiful! (¡Qué hermoso!), Oh no!, Well done! (¡Bien hecho!).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> '— I passed the exam! — <b>Well done!</b>' / '— I'm sorry. — <b>Never mind</b>.'</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Estas frases hechas no se traducen literal. Apréndelas como bloques según la situación (felicitar, disculparse, sorprenderse).</div>",
+
+  "Preguntas WH (what, where, when, who, why, how) y Yes/No questions":
+    "<span class='exp-h'>Preguntas WH (información)</span><p><b>What</b> (qué), <b>Where</b> (dónde), <b>When</b> (cuándo), <b>Who</b> (quién), <b>Why</b> (por qué), <b>How</b> (cómo), <b>Which</b> (cuál), <b>Whose</b> (de quién).</p>" +
+    "<span class='exp-h'>Yes/No questions</span><p>Empiezan con auxiliar (Do, Does, Did, Is, Are, Can): 'Do you like…?' → se responden con Yes/No.</p>" +
+    "<div class='exp-ex'><b>Ejemplo (emparejar pregunta-respuesta):</b> 'Where do you live?' → 'In Bogotá'. 'Why are you sad?' → 'Because I lost my keys'. 'How old are you?' → '15'.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Cada WH pide un tipo de respuesta: Where→lugar, When→tiempo, Who→persona, Why→razón (because…), How→manera.</div>",
+
+  "Frases para opinar: mostrar acuerdo y desacuerdo":
+    "<span class='exp-h'>Dar opinión</span><p>I think… (creo que), In my opinion…, I believe…</p>" +
+    "<span class='exp-h'>Acuerdo / Desacuerdo</span><p><b>Acuerdo:</b> I agree, That's true, You're right, Me too. <b>Desacuerdo:</b> I disagree, I don't think so, I'm not sure about that.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> '— I think English is easy. — <b>I agree</b>, it's not so hard.' / '— Winter is the best season. — <b>I don't think so</b>, I prefer summer.'</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> 'Me too' se usa para acuerdo positivo; 'Me neither' para acuerdo negativo ('I don't like it' – 'Me neither').</div>",
+
+  "Completar conversaciones cortas con la respuesta contextualmente apropiada":
+    "<span class='exp-h'>Estrategia</span><p>Identifica qué tipo de intercambio es (saludo, oferta, pregunta, disculpa) y elige la respuesta natural que mantiene el hilo.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> '— Would you like some coffee? — _____' → 'Yes, please' o 'No, thank you' (no 'I'm fine, thanks' que es para '¿cómo estás?').</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Lee el tono y la intención. Si ofrecen algo → aceptas/rechazas con please/thank you. Si preguntan información → das el dato pedido.</div>",
+
+  "Identificar qué está haciendo el autor en el texto (propósito comunicativo)":
+    "<span class='exp-h'>El propósito del autor</span><p>¿Para qué escribió el texto? Las opciones típicas: <b>to inform</b> (informar), <b>to persuade</b> (convencer), <b>to entertain</b> (entretener), <b>to instruct</b> (dar instrucciones), <b>to describe</b>, <b>to warn</b> (advertir).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una receta → to instruct. Un anuncio de un producto → to persuade. Un cuento → to entertain. Una noticia → to inform.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Mira el TIPO de texto y su tono. Verbos imperativos → instruir; lenguaje emotivo y llamados → persuadir; datos objetivos → informar.</div>",
+
+  "Extraer información específica sobre un personaje, hecho o situación":
+    "<span class='exp-h'>Preguntas de detalle</span><p>Buscan un dato concreto que ESTÁ en el texto: un nombre, una fecha, una acción, un lugar. Suelen empezar con 'According to the text…'.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si el texto dice 'Anna moved to Canada in 2010', y preguntan 'When did Anna move?' → 'In 2010'. La respuesta está literal.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Localiza en la pregunta la palabra clave (un nombre, un verbo) y búscala en el texto. La respuesta suele estar en esa misma oración.</div>",
+
+  "Interpretar el significado de una expresión o frase en contexto":
+    "<span class='exp-h'>Vocabulario por contexto</span><p>Te preguntan qué significa una palabra o frase SEGÚN el texto, no según el diccionario. Las palabras de alrededor son la pista.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'The test was a piece of cake, I finished in five minutes.' → 'a piece of cake' significa 'muy fácil' (lo deduces por 'finished in five minutes').</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> No traduzcas literal las expresiones idiomáticas. Usa el resto de la oración para inferir el sentido real.</div>",
+
+  "Inferir cuál sería la reacción o respuesta apropiada de un personaje":
+    "<span class='exp-h'>Inferencia sobre personajes</span><p>A partir de lo que siente o vive un personaje, deduces cómo reaccionaría, aunque el texto no lo diga directamente.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si el texto dice que 'Tom was exhausted after the long trip', se infiere que probablemente 'he wanted to sleep / rest' (querría descansar).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Conecta la emoción o situación del personaje con una reacción lógica. Apóyate en las pistas del texto, no en suposiciones sin base.</div>",
+
+  "Lectura literal e inferencial aplicada a textos en inglés":
+    "<span class='exp-h'>Dos niveles, igual que en español</span><ul>" +
+    "<li><strong>Literal:</strong> la respuesta está escrita tal cual. 'What is the boy's name?'</li>" +
+    "<li><strong>Inferencial:</strong> hay que deducir. 'How does the boy probably feel?'</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Texto: 'Maria smiled when she saw her grade.' Literal: María sonrió. Inferencial: probablemente le fue bien (sacó buena nota).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Si la pregunta tiene 'probably', 'most likely' o 'infer', es inferencial: la respuesta NO está literal, hay que deducirla del contexto.</div>",
+
+  "Historias personales y familiares (cartas, deseos de padres a hijos, campamentos)":
+    "<span class='exp-h'>Tema frecuente en lecturas</span><p>Textos sobre vida cotidiana, familia, cartas y experiencias. Suelen usar pasado simple y vocabulario de relaciones (parents, siblings, friends).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una carta de una madre a su hijo en un campamento: pregúntate qué SIENTE (extrañarlo: 'I miss you'), qué le DESEA y qué CONSEJOS le da.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> En cartas, identifica quién escribe, a quién, y con qué intención (dar consejos, expresar cariño, contar novedades).</div>",
+
+  "Museos, lugares históricos y personajes destacados":
+    "<span class='exp-h'>Textos informativos/descriptivos</span><p>Hablan de lugares (museums, monuments) o personas famosas. Suelen pedir datos: cuándo, dónde, por qué es importante.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Un texto sobre un museo puede preguntar el horario (opening hours), el precio (entry fee) o qué se exhibe. Localiza el dato exacto.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Para biografías y lugares, fíjate en fechas, logros y datos concretos. Suelen usar pasado simple y presente para hechos generales.</div>",
+
+  "Educación, experiencias de vida y desarrollo personal":
+    "<span class='exp-h'>Textos reflexivos</span><p>Tratan sobre aprender, superarse, metas y lecciones de vida. Buscan que captes la enseñanza o la opinión del autor.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Un texto sobre alguien que aprendió un idioma de adulto: la idea suele ser que 'nunca es tarde para aprender' (the message/moral).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Estas lecturas suelen preguntar por la idea principal o la moraleja. Busca la conclusión o lo que el autor quiere que aprendas.</div>",
+
+  "Instrucciones, recetas o guías prácticas":
+    "<span class='exp-h'>Textos instructivos</span><p>Dicen cómo hacer algo paso a paso. Usan imperativos (mix, add, cut) y conectores de secuencia (first, then, next, finally).</p>" +
+    "<div class='exp-ex'><b>Ejemplo (receta):</b> 'First, boil the water. Then, add the pasta. Finally, mix with the sauce.' Las preguntas piden el ORDEN o un paso específico.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Sigue los conectores de orden (first→then→finally) para no equivocarte en la secuencia. El propósito de estos textos es 'to instruct'.</div>",
+
+  "Textos sobre ciencia, naturaleza o cultura general":
+    "<span class='exp-h'>Textos informativos amplios</span><p>Sobre animales, medio ambiente, tecnología o costumbres. Tienen más vocabulario técnico, pero las preguntas siguen siendo de idea principal, detalle e inferencia.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Un texto sobre el reciclaje puede preguntar por qué es importante (main idea) o un dato (según el texto, cuánto tarda en degradarse el plástico).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> No te asustes con el vocabulario técnico. Usa el contexto y enfócate en lo que pregunta: rara vez necesitas entender CADA palabra.</div>",
+
+  // ───────────── SOCIALES Y CIUDADANAS ─────────────
+  "Estado social de derecho; derechos fundamentales":
+    "<span class='exp-h'>¿Qué es un Estado social de derecho?</span><p>Según el Artículo 1 de la Constitución de 1991, Colombia es un <strong>Estado social de derecho</strong>: el Estado no solo respeta las leyes, sino que debe garantizar condiciones de vida dignas (salud, educación, trabajo) y proteger a los más vulnerables.</p>" +
+    "<span class='exp-h'>Derechos fundamentales</span><p>Son los esenciales de toda persona: la vida (Art. 11), la igualdad (Art. 13), la libertad de expresión (Art. 20), el libre desarrollo de la personalidad (Art. 16), el debido proceso.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Cuando a alguien le niegan una atención médica urgente, se viola su derecho fundamental a la vida y la salud, y puede protegerlo mediante una tutela.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> 'Social' implica que el Estado debe ACTUAR para garantizar derechos, no solo no estorbar. Los derechos fundamentales se protegen con la tutela.</div>",
+
+  "Jurisdicción especial; ramas del poder público":
+    "<span class='exp-h'>Las tres ramas del poder</span><ul>" +
+    "<li><strong>Ejecutiva:</strong> gobierna y ejecuta. Presidente, gobernadores, alcaldes.</li>" +
+    "<li><strong>Legislativa:</strong> hace las leyes. El Congreso (Senado + Cámara de Representantes).</li>" +
+    "<li><strong>Judicial:</strong> administra justicia. Cortes, tribunales y jueces.</li></ul>" +
+    "<span class='exp-h'>Jurisdicciones especiales</span><p>Además existen la <strong>jurisdicción indígena</strong> (las comunidades juzgan según sus usos) y la <strong>justicia penal militar</strong>, reconocidas por la Constitución.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una comunidad indígena puede juzgar a uno de sus miembros según sus propias normas, dentro de su territorio (jurisdicción especial indígena).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> La división de poderes evita que uno solo concentre todo (pesos y contrapesos). Asocia: leyes→legislativa, gobierno→ejecutiva, justicia→judicial.</div>",
+
+  "Organismos de control; función del congreso":
+    "<span class='exp-h'>Organismos de control (vigilan al Estado)</span><ul>" +
+    "<li><strong>Procuraduría:</strong> vigila a los funcionarios públicos.</li>" +
+    "<li><strong>Contraloría:</strong> vigila el manejo del dinero público.</li>" +
+    "<li><strong>Defensoría del Pueblo:</strong> protege los derechos humanos de los ciudadanos.</li></ul>" +
+    "<span class='exp-h'>Funciones del Congreso</span><p>Hacer, reformar y derogar las leyes; reformar la Constitución; ejercer control político sobre el gobierno; aprobar el presupuesto.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si un alcalde malgasta los recursos del municipio, la Contraloría investiga el manejo del dinero y la Procuraduría puede sancionarlo disciplinariamente.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Truco: Contraloría→Cuentas (dinero), Procuraduría→funcionarios (conducta), Defensoría→Derechos (ciudadanos).</div>",
+
+  "Funciones del presidente de la república":
+    "<span class='exp-h'>El presidente: jefe de la rama ejecutiva</span><p>Es a la vez Jefe de Estado, Jefe de Gobierno y suprema autoridad administrativa. Algunas funciones:</p><ul>" +
+    "<li>Sancionar las leyes y dirigir las relaciones internacionales.</li>" +
+    "<li>Ser comandante de las Fuerzas Armadas.</li>" +
+    "<li>Nombrar ministros y dirigir el gobierno.</li>" +
+    "<li>Conservar el orden público.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Cuando el presidente firma un tratado con otro país o nombra a su gabinete de ministros, ejerce funciones propias del jefe de gobierno.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> No confundas: el presidente NO hace las leyes (eso es del Congreso), pero las sanciona (firma) y las ejecuta. En Colombia se elige por máximo 4 años.</div>",
+
+  "Mecanismos de participación y de protección de derechos":
+    "<span class='exp-h'>Mecanismos de PARTICIPACIÓN ciudadana</span><p>voto, referendo, plebiscito, consulta popular, cabildo abierto, iniciativa legislativa, revocatoria del mandato.</p>" +
+    "<span class='exp-h'>Mecanismos de PROTECCIÓN de derechos</span><ul>" +
+    "<li><strong>Tutela:</strong> protege derechos fundamentales; rápida (10 días), sin abogado.</li>" +
+    "<li><strong>Derecho de petición:</strong> pedir información a entidades (responden en 15 días).</li>" +
+    "<li><strong>Acción popular:</strong> protege derechos colectivos (ambiente, espacio público).</li>" +
+    "<li><strong>Habeas corpus:</strong> protege la libertad ante detención ilegal.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si una EPS te niega un tratamiento, usas la TUTELA. Si quieres revocar a un alcalde, usas la revocatoria del mandato (participación).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> No confundas participar (votar, decidir) con proteger derechos (tutela, petición). La tutela es la estrella: derechos fundamentales, inmediata.</div>",
+
+  "Independencia de Colombia (1810); La Patria Boba (1811)":
+    "<span class='exp-h'>El Grito de Independencia (20 de julio de 1810)</span><p>En Bogotá, el incidente del 'florero de Llorente' desató la reacción criolla contra las autoridades españolas. Marca el inicio del proceso independentista (aún no la independencia total).</p>" +
+    "<span class='exp-h'>La Patria Boba (1810–1816)</span><p>Período de conflictos internos entre <strong>centralistas</strong> (gobierno fuerte y único) y <strong>federalistas</strong> (provincias autónomas). Esas divisiones debilitaron a los patriotas y facilitaron la Reconquista española.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Mientras los criollos discutían entre sí cómo organizar el país (centralismo vs. federalismo), España aprovechó para reconquistar el territorio en 1816.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Se llama 'boba' porque las peleas internas desperdiciaron la oportunidad. La independencia definitiva llegó después, con la Batalla de Boyacá (1819).</div>",
+
+  "Centralismo y federalismo (1812); Masacre de las bananeras (1928)":
+    "<span class='exp-h'>Centralismo vs. federalismo</span><ul>" +
+    "<li><strong>Centralismo:</strong> el poder se concentra en un gobierno nacional único (defendido por Nariño).</li>" +
+    "<li><strong>Federalismo:</strong> las provincias tienen amplia autonomía (defendido por las provincias unidas).</li></ul>" +
+    "<span class='exp-h'>Masacre de las Bananeras (1928)</span><p>Trabajadores de la United Fruit Company en la zona bananera del Magdalena se declararon en huelga por mejores condiciones. El ejército reprimió violentamente, dejando muchos muertos.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> La masacre de las bananeras es un símbolo del conflicto entre los derechos laborales y los intereses económicos de empresas extranjeras; inspiró a García Márquez en 'Cien años de soledad'.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Relaciona la masacre con la lucha por derechos laborales y la influencia de multinacionales. Centralismo = uno manda; federalismo = poder repartido.</div>",
+
+  "Guerra de los Mil Días (1899)":
+    "<span class='exp-h'>Qué fue</span><p>Guerra civil (1899–1902) entre <strong>liberales y conservadores</strong>, una de las más sangrientas del país. Dejó a Colombia devastada y empobrecida.</p>" +
+    "<span class='exp-h'>Consecuencia clave</span><p>La debilidad del país tras la guerra facilitó la <strong>separación de Panamá en 1903</strong> (con apoyo de EE. UU., interesado en el canal).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El agotamiento económico y político tras la Guerra de los Mil Días dejó a Colombia sin capacidad de retener a Panamá, que se independizó en 1903.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Conecta causa-consecuencia: Guerra de los Mil Días (1899) → debilidad → pérdida de Panamá (1903). Fue un conflicto bipartidista (liberales vs. conservadores).</div>",
+
+  "La Violencia bipartidista: El Bogotazo (1948), Dictadura Gustavo Rojas Pinilla (1953), Frente Nacional (1958)":
+    "<span class='exp-h'>La Violencia (1948–1958)</span><p>Período de enfrentamientos brutales entre liberales y conservadores.</p><ul>" +
+    "<li><strong>El Bogotazo (9 abril 1948):</strong> el asesinato de Jorge Eliécer Gaitán desató disturbios masivos y marcó el inicio de La Violencia.</li>" +
+    "<li><strong>Dictadura de Rojas Pinilla (1953–1957):</strong> golpe militar que buscó pacificar el país.</li>" +
+    "<li><strong>Frente Nacional (1958–1974):</strong> acuerdo entre liberales y conservadores para ALTERNARSE el poder cada 4 años y frenar la violencia.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El Frente Nacional acabó con la guerra entre partidos repartiéndose el poder, pero excluyó a otras fuerzas políticas, lo que alimentó el surgimiento de guerrillas.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Ordena los hechos: Bogotazo (1948) → La Violencia → Dictadura (1953) → Frente Nacional (1958). El Frente Nacional excluyó a terceros partidos.</div>",
+
+  "Conflicto armado: guerrilla, paramilitarismo, narcotráfico, acuerdos de paz":
+    "<span class='exp-h'>Actores del conflicto</span><ul>" +
+    "<li><strong>Guerrillas:</strong> grupos armados de izquierda (FARC, ELN), surgidos en los años 60.</li>" +
+    "<li><strong>Paramilitares:</strong> grupos armados de derecha (AUC), surgidos para combatir guerrillas.</li>" +
+    "<li><strong>Narcotráfico:</strong> financió y agravó el conflicto durante décadas.</li></ul>" +
+    "<span class='exp-h'>Hacia la paz</span><p>En 2016 se firmó el <strong>Acuerdo de Paz</strong> entre el gobierno y las FARC, que buscó la desmovilización y la reincorporación a la vida civil.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El conflicto colombiano es multicausal: tierra, exclusión política, narcotráfico. El acuerdo de 2016 incluyó justicia transicional y reparación a víctimas.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Distingue izquierda (guerrillas) de derecha (paramilitares). Las preguntas suelen pedir causas estructurales (tierra, desigualdad), no solo hechos aislados.</div>",
+
+  "Magnicidios en Colombia (Siglo XX); orden de sucesos históricos":
+    "<span class='exp-h'>Magnicidios (asesinatos de figuras importantes)</span><p>Jorge Eliécer Gaitán (1948), Luis Carlos Galán (1989), Carlos Pizarro, Bernardo Jaramillo (1990), entre otros. Marcaron momentos clave de la violencia política.</p>" +
+    "<span class='exp-h'>Ordenar sucesos</span><p>El ICFES suele pedir colocar eventos en orden cronológico. Asocia cada hecho con su década.</p>" +
+    "<div class='exp-ex'><b>Ejemplo de orden:</b> Gaitán (1948) → Guerra fría se vive en paralelo → Galán (1989) → Constitución (1991). El asesinato de Galán impulsó cambios que llevaron a la Constitución de 1991.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Memoriza algunas fechas ancla (1948, 1989, 1991) para ordenar el resto alrededor de ellas. Relaciona causa-consecuencia entre los hechos.</div>",
+
+  "Impactos de actividades económicas históricas sobre comunidades y territorio":
+    "<span class='exp-h'>Economía y su huella social</span><p>Las grandes actividades económicas transforman el territorio y a las comunidades, muchas veces con costos sociales y ambientales.</p><ul>" +
+    "<li>La explotación cauchera y minera afectó a pueblos indígenas.</li>" +
+    "<li>El monocultivo (banano, café) modeló regiones enteras y su economía.</li>" +
+    "<li>La extracción petrolera generó riqueza pero también conflictos y daños ambientales.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> La bonanza cauchera en la Amazonía implicó esclavitud y muerte de comunidades indígenas: un caso de cómo la economía impactó negativamente a un pueblo y su territorio.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Estas preguntas piden evaluar QUIÉN se beneficia y QUIÉN se perjudica con una actividad económica. Busca el impacto sobre las comunidades locales.</div>",
+
+  "Puntos cardinales de la historia mundial":
+    "<span class='exp-h'>Grandes hitos para ubicarte</span><p>Tener un mapa mental de la historia mundial ayuda a relacionar eventos:</p><ul>" +
+    "<li>Edad Antigua → Edad Media → Edad Moderna → Edad Contemporánea.</li>" +
+    "<li>Revoluciones (industrial, francesa) → Guerras Mundiales → Guerra Fría → Globalización.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> La Revolución Francesa (1789) marca el paso a la Edad Contemporánea; las ideas de libertad e igualdad influyeron en las independencias americanas.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> No memorices fechas sueltas: entiende cómo un período LLEVA al siguiente (causas y consecuencias). Eso es lo que evalúan.</div>",
+
+  "Primera y Segunda Guerra Mundial (1914, 1939); origen de la URSS (1922)":
+    "<span class='exp-h'>Primera Guerra Mundial (1914–1918)</span><p>Conflicto entre potencias europeas, detonado por el asesinato del archiduque Francisco Fernando. Reorganizó el mapa de Europa.</p>" +
+    "<span class='exp-h'>Revolución Rusa y URSS (1917–1922)</span><p>La Revolución de 1917 derrocó al zar e instauró un régimen comunista; en 1922 nació la <strong>URSS</strong>.</p>" +
+    "<span class='exp-h'>Segunda Guerra Mundial (1939–1945)</span><p>Provocada por el expansionismo nazi. Incluyó el Holocausto y terminó con las bombas atómicas sobre Japón. Dio paso a la Guerra Fría.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El duro Tratado de Versalles tras la 1ª Guerra humilló a Alemania, creando el resentimiento que Hitler aprovechó para llegar al poder y desatar la 2ª Guerra.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Conecta las dos guerras: la paz mal hecha de 1918 sembró la guerra de 1939. La 2ª Guerra dejó dos superpotencias: EE. UU. y la URSS.</div>",
+
+  "Guerra Fría (1947–1991); Caída del Muro de Berlín (1989); Disolución URSS (1991)":
+    "<span class='exp-h'>La Guerra Fría</span><p>Tensión entre <strong>EE. UU. (capitalismo)</strong> y la <strong>URSS (comunismo)</strong>, sin enfrentamiento militar directo, pero con carrera armamentista, espacial y conflictos en otros países (Vietnam, Corea, Cuba).</p>" +
+    "<span class='exp-h'>El final</span><p>La <strong>caída del Muro de Berlín (1989)</strong> simbolizó el fin de la división, y en <strong>1991 se disolvió la URSS</strong>, terminando la Guerra Fría con el triunfo del bloque capitalista.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> El Muro de Berlín dividía la Alemania capitalista (oeste) de la comunista (este). Su caída en 1989 marcó el colapso del bloque soviético.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> 'Fría' porque nunca hubo guerra directa entre las superpotencias, sino conflictos indirectos. Capitalismo (EE.UU.) vs. comunismo (URSS).</div>",
+
+  "El apartheid (1948); lucha por los derechos civiles (1954)":
+    "<span class='exp-h'>Apartheid (Sudáfrica)</span><p>Sistema legal de <strong>segregación racial</strong> que separaba a blancos y negros, negando derechos a la población negra. Nelson Mandela lideró la lucha; terminó en los años 90.</p>" +
+    "<span class='exp-h'>Derechos civiles (EE. UU.)</span><p>Movimiento contra la segregación racial liderado por <strong>Martin Luther King</strong>, que buscó la igualdad de los afroamericanos mediante la no violencia.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Tanto el apartheid como la segregación en EE. UU. muestran cómo el racismo se institucionalizó en leyes, y cómo la lucha social logró derogarlas.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Relaciona ambos casos con la lucha por la igualdad y los derechos humanos. Mandela→Sudáfrica; Luther King→EE. UU., ambos por medios pacíficos.</div>",
+
+  "Revoluciones: industrial (1760), francesa (1789), mexicana (1910), rusa (1917), cubana (1953)":
+    "<span class='exp-h'>Cada revolución y su esencia</span><ul>" +
+    "<li><strong>Industrial (1760):</strong> máquinas, fábricas, paso del campo a la ciudad. Cambió la economía mundial.</li>" +
+    "<li><strong>Francesa (1789):</strong> derrocó la monarquía absoluta; libertad, igualdad, fraternidad.</li>" +
+    "<li><strong>Mexicana (1910):</strong> contra la dictadura de Porfirio Díaz; reforma agraria.</li>" +
+    "<li><strong>Rusa (1917):</strong> instauró el comunismo.</li>" +
+    "<li><strong>Cubana (1959):</strong> Fidel Castro instauró un régimen socialista.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> La Revolución Industrial fue ECONÓMICA/tecnológica; la Francesa fue POLÍTICA/social. Distinguir el tipo de cambio ayuda a clasificarlas.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Asocia cada revolución con su causa principal y su resultado. La Industrial creó la clase obrera, base de luchas sociales posteriores.</div>",
+
+  "Independencias hispanoamericanas: Simón Bolívar, Junín, Colombia y Perú":
+    "<span class='exp-h'>El proceso independentista</span><p>A inicios del siglo XIX, las colonias españolas en América se independizaron, inspiradas por la Ilustración y la Revolución Francesa. <strong>Simón Bolívar</strong> fue el líder clave en el norte de Sudamérica.</p>" +
+    "<span class='exp-h'>Hitos</span><p>Batalla de Boyacá (1819, Colombia), Batalla de Junín y de Ayacucho (1824, Perú) sellaron la independencia. Bolívar soñó con la Gran Colombia (unión de varias naciones).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Bolívar no solo liberó a Colombia, sino que su campaña continuó hacia Ecuador y Perú, mostrando un proyecto de independencia continental.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Relaciona las independencias con causas comunes: ideas ilustradas, crisis de España (invasión napoleónica) y descontento criollo.</div>",
+
+  "Conquista y colonización: relaciones entre españoles e indígenas americanos":
+    "<span class='exp-h'>Conquista y dominación</span><p>Los españoles sometieron a los pueblos indígenas mediante la fuerza, las enfermedades y sistemas de explotación:</p><ul>" +
+    "<li><strong>Encomienda:</strong> indígenas 'encargados' a un español a cambio de trabajo.</li>" +
+    "<li><strong>Mita:</strong> trabajo forzado, sobre todo en minas.</li>" +
+    "<li><strong>Mestizaje:</strong> mezcla cultural y biológica entre españoles, indígenas y africanos.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> La población indígena se redujo drásticamente por las enfermedades traídas de Europa (viruela) y la explotación, lo que llevó a traer esclavos africanos.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Evalúa la relación como ASIMÉTRICA (dominación). Encomienda y mita = trabajo forzado. El mestizaje define la identidad latinoamericana actual.</div>",
+
+  "Oferta, demanda y formación de precios":
+    "<span class='exp-h'>La ley de oferta y demanda</span><ul>" +
+    "<li><strong>Demanda:</strong> cuánto quieren comprar los consumidores. Si el precio sube, la demanda baja.</li>" +
+    "<li><strong>Oferta:</strong> cuánto quieren vender los productores. Si el precio sube, la oferta sube.</li></ul>" +
+    "<p>El <strong>precio de equilibrio</strong> es donde oferta y demanda se cruzan: lo que se quiere vender = lo que se quiere comprar.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si hay escasez de un producto (poca oferta) pero todos lo quieren (mucha demanda), el precio SUBE. Si sobra producto y nadie lo compra, el precio BAJA.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Más demanda o menos oferta → precio sube. Más oferta o menos demanda → precio baja. Es el mecanismo central del mercado.</div>",
+
+  "Sectores económicos":
+    "<span class='exp-h'>Los tres sectores</span><ul>" +
+    "<li><strong>Primario:</strong> extrae recursos naturales. Agricultura, minería, pesca, ganadería.</li>" +
+    "<li><strong>Secundario:</strong> transforma materias primas en productos. Industria, manufactura, construcción.</li>" +
+    "<li><strong>Terciario:</strong> ofrece servicios. Comercio, educación, salud, transporte, turismo.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Cultivar café = primario. Tostarlo y empacarlo en una fábrica = secundario. Venderlo en una cafetería = terciario.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Sigue la cadena: extraer (primario) → transformar (secundario) → vender/servir (terciario). Los países desarrollados tienen un terciario muy grande.</div>",
+
+  "Ideologías políticas: izquierda, derecha, liberalismo, neoliberalismo, conservadurismo":
+    "<span class='exp-h'>El espectro político</span><ul>" +
+    "<li><strong>Izquierda:</strong> más intervención del Estado, igualdad social, derechos colectivos.</li>" +
+    "<li><strong>Derecha:</strong> menos Estado, libre mercado, tradición, propiedad privada.</li></ul>" +
+    "<span class='exp-h'>Corrientes</span><ul>" +
+    "<li><strong>Liberalismo:</strong> defiende libertades individuales y económicas.</li>" +
+    "<li><strong>Neoliberalismo:</strong> mínima intervención del Estado en la economía, privatización.</li>" +
+    "<li><strong>Conservadurismo:</strong> mantiene tradiciones, orden y valores establecidos.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una política de mayor gasto social y impuestos a los ricos es típica de la izquierda; reducir impuestos y privatizar empresas es propio del neoliberalismo (derecha).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Izquierda = más Estado e igualdad; derecha = más mercado y libertad individual. Ubica la propuesta en el espectro según el papel que da al Estado.</div>",
+
+  "Sistemas económicos: capitalismo, comunismo, socialismo, feudalismo":
+    "<span class='exp-h'>Sistemas y quién controla la economía</span><ul>" +
+    "<li><strong>Capitalismo:</strong> propiedad privada, libre mercado, búsqueda de ganancia.</li>" +
+    "<li><strong>Comunismo:</strong> propiedad colectiva, el Estado controla todo, sin clases.</li>" +
+    "<li><strong>Socialismo:</strong> el Estado regula y redistribuye, busca equidad (intermedio).</li>" +
+    "<li><strong>Feudalismo:</strong> sistema medieval basado en la tierra y la relación señor-vasallo.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> En el capitalismo una persona puede tener su empresa y ganar lo que el mercado permita; en el comunismo los medios de producción son del Estado/colectividad.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> La pregunta clave es QUIÉN controla los medios de producción: privados (capitalismo) o el Estado/colectivo (comunismo). El socialismo está en medio.</div>",
+
+  "Sistemas de gobierno: democracia, monarquía, república, totalitarismo":
+    "<span class='exp-h'>Formas de gobierno</span><ul>" +
+    "<li><strong>Democracia:</strong> el poder reside en el pueblo, que elige a sus gobernantes.</li>" +
+    "<li><strong>República:</strong> los cargos son electos y temporales (no hereditarios).</li>" +
+    "<li><strong>Monarquía:</strong> un rey o reina, cargo hereditario (puede ser constitucional o absoluta).</li>" +
+    "<li><strong>Totalitarismo:</strong> un solo poder controla todo, sin libertades ni oposición.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Colombia es una república democrática (presidente electo cada 4 años). El Reino Unido es una monarquía constitucional (rey simbólico + democracia).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Democracia = el pueblo decide; totalitarismo = un poder absoluto sin libertades. República (electos) se opone a monarquía (hereditaria).</div>",
+
+  "Medidas proteccionistas: aranceles, cuotas y sus efectos en industria e importaciones":
+    "<span class='exp-h'>Proteccionismo</span><p>Políticas que protegen la industria nacional frente a productos extranjeros:</p><ul>" +
+    "<li><strong>Aranceles:</strong> impuestos a los productos importados (los encarecen).</li>" +
+    "<li><strong>Cuotas:</strong> límite a la cantidad que se puede importar.</li></ul>" +
+    "<span class='exp-h'>Efectos</span><p>Protegen al productor local, pero suelen ENCARECER los productos para el consumidor y reducir la competencia.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si el gobierno pone un arancel alto a los zapatos importados, los nacionales se vuelven más competitivos, pero el consumidor paga más por todos los zapatos.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Identifica el conflicto: el arancel beneficia al productor nacional pero perjudica al consumidor (precios más altos). Siempre hay un ganador y un perdedor.</div>",
+
+  "Política comercial: apertura económica y proteccionismo":
+    "<span class='exp-h'>Dos modelos opuestos</span><ul>" +
+    "<li><strong>Apertura económica (libre comercio):</strong> pocas barreras, se importa y exporta libremente. Más competencia y variedad, pero la industria local puede sufrir.</li>" +
+    "<li><strong>Proteccionismo:</strong> barreras (aranceles, cuotas) para proteger lo nacional.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Colombia abrió su economía en los años 90: entraron más productos importados baratos (bueno para el consumidor), pero algunas industrias nacionales no pudieron competir.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Ningún modelo es 'el bueno': la apertura beneficia al consumidor y la exportación; el proteccionismo cuida el empleo y la industria local. Evalúa según el contexto.</div>",
+
+  "Impuestos, gasto público y redistribución":
+    "<span class='exp-h'>Cómo funciona el Estado financieramente</span><ul>" +
+    "<li><strong>Impuestos:</strong> dinero que ciudadanos y empresas pagan al Estado (IVA, renta).</li>" +
+    "<li><strong>Gasto público:</strong> en qué invierte el Estado (salud, educación, vías).</li>" +
+    "<li><strong>Redistribución:</strong> usar los impuestos para reducir la desigualdad.</li></ul>" +
+    "<span class='exp-h'>Tipos de impuestos</span><p><strong>Progresivos</strong> (paga más quien más tiene, como el de renta) vs. <strong>regresivos</strong> (todos pagan igual, como el IVA, que pesa más sobre los pobres).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Con los impuestos de los que más ganan, el Estado financia colegios y hospitales públicos para todos: eso es redistribución.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Impuesto progresivo = reduce desigualdad; regresivo (IVA) = afecta más a los pobres. El gasto social es una herramienta de redistribución.</div>",
+
+  "Objetividad y subjetividad en la evaluación de situaciones":
+    "<span class='exp-h'>Dos formas de mirar</span><ul>" +
+    "<li><strong>Objetivo:</strong> basado en hechos verificables, sin opiniones. 'Hubo 100 asistentes'.</li>" +
+    "<li><strong>Subjetivo:</strong> basado en opiniones, gustos o emociones. 'El evento fue aburrido'.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'La temperatura fue de 30 °C' (objetivo) vs. 'Hacía un calor insoportable' (subjetivo, depende de quién lo diga).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Para evaluar con justicia hay que distinguir hechos (objetivos) de opiniones (subjetivas). Una buena decisión pública se basa en datos, no en prejuicios.</div>",
+
+  "Actores y dimensiones de un conflicto":
+    "<span class='exp-h'>Analizar un conflicto</span><p>Todo conflicto tiene <strong>actores</strong> (los involucrados, cada uno con sus intereses) y <strong>dimensiones</strong> (económica, social, ambiental, política, cultural).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> En un proyecto minero: actores = empresa (quiere ganancia), comunidad (quiere su territorio y salud), Estado (regula). Dimensiones: económica (empleo), ambiental (contaminación), social (desplazamiento).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Identifica TODOS los actores y sus intereses antes de opinar. Un buen análisis reconoce que cada parte tiene razones, no solo 'buenos y malos'.</div>",
+
+  "Efecto deseado y no deseado de decisiones públicas":
+    "<span class='exp-h'>Consecuencias previstas e imprevistas</span><p>Una política busca un <strong>efecto deseado</strong>, pero puede causar <strong>efectos no deseados</strong> (secundarios o contraproducentes).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Subir mucho el impuesto al cigarrillo busca reducir el consumo (deseado), pero podría aumentar el contrabando (no deseado).</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Al evaluar una medida, piensa siempre en sus dos caras: lo que pretende lograr y los efectos colaterales que podría generar.</div>",
+
+  "Choque de derechos; prejuicio, estigma y discriminación":
+    "<span class='exp-h'>Cuando dos derechos chocan</span><p>A veces dos derechos legítimos se enfrentan y hay que ponderar cuál prevalece.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> La libertad de expresión de una persona puede chocar con el derecho a la honra de otra. Ninguno es absoluto: se debe equilibrar según el caso.</div>" +
+    "<span class='exp-h'>Prejuicio, estigma y discriminación</span><ul>" +
+    "<li><strong>Prejuicio:</strong> juzgar sin conocer (idea previa).</li>" +
+    "<li><strong>Estigma:</strong> marca negativa sobre un grupo.</li>" +
+    "<li><strong>Discriminación:</strong> trato desigual e injusto basado en esos prejuicios.</li></ul>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> El prejuicio es la IDEA; la discriminación es la ACCIÓN. Ningún derecho es absoluto: cuando chocan, se busca el equilibrio más justo.</div>",
+
+  "Análisis crítico del discurso político y social":
+    "<span class='exp-h'>Leer entre líneas un discurso</span><p>Implica identificar la intención, los intereses y los posibles sesgos detrás de lo que dice un político o un medio.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Un político dice 'protegeremos el empleo nacional'. Analiza: ¿a quién beneficia realmente?, ¿qué intereses defiende?, ¿qué NO está diciendo?</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Pregúntate quién habla, para qué y a quién beneficia. Desconfía de frases emotivas sin datos y de las promesas absolutas.</div>",
+
+  "Derechos laborales: igualdad salarial, condiciones de trabajo justas":
+    "<span class='exp-h'>Derechos en el trabajo</span><p>Toda persona tiene derecho a condiciones dignas: salario justo, jornada limitada, descanso, seguridad social y <strong>igualdad salarial</strong> (igual pago por igual trabajo).</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si una mujer y un hombre hacen el mismo trabajo con la misma experiencia, deben ganar lo mismo. Pagar menos a uno por su género es discriminación laboral.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Relaciona estos casos con la dignidad humana y la igualdad (Art. 13). 'A igual trabajo, igual salario' es el principio clave.</div>",
+
+  "Dilemas éticos: cuándo una medida es justa o injusta y con qué argumentos":
+    "<span class='exp-h'>Razonar un dilema ético</span><p>No hay una respuesta obvia: hay que <strong>argumentar</strong> con principios (justicia, igualdad, bien común, dignidad), no con gustos.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> ¿Es justo expropiar un terreno privado para construir un hospital público? Argumentos a favor (bien común) y en contra (propiedad privada). Una buena respuesta sopesa AMBOS.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> La respuesta correcta no es la que 'suena bien', sino la que se sostiene con el MEJOR argumento basado en principios. Evita posturas extremas o sin justificar.</div>",
+
+  "Conflictos entre desarrollo económico y preservación ambiental":
+    "<span class='exp-h'>El dilema central de las ciudadanas</span><p>Muchas decisiones enfrentan el crecimiento económico (empleo, dinero) con el cuidado del ambiente. La meta ideal es el <strong>desarrollo sostenible</strong>: progresar sin destruir el entorno.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Una represa genera energía y empleo (desarrollo) pero inunda ecosistemas y desplaza comunidades (daño ambiental y social). Hay que ponderar costos y beneficios.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Rara vez la respuesta es 'solo economía' o 'solo ambiente': suele ser la opción que BALANCEA ambos (sostenibilidad). Identifica los intereses de cada actor.</div>",
+
+  "Servicios ecosistémicos: qué son y cómo se afectan por actividades humanas":
+    "<span class='exp-h'>Servicios ecosistémicos</span><p>Son los beneficios que la naturaleza nos da gratis:</p><ul>" +
+    "<li><strong>Provisión:</strong> agua, alimentos, madera.</li>" +
+    "<li><strong>Regulación:</strong> el clima, la purificación del aire y el agua, la polinización.</li>" +
+    "<li><strong>Culturales:</strong> recreación, paisaje, valor espiritual.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Los páramos colombianos regulan y almacenan el agua que beben las ciudades. Si se destruyen por minería o agricultura, se pierde ese servicio vital.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Estos servicios son 'gratis' pero invaluables. Al evaluar un proyecto, considera qué servicios ecosistémicos se perderían.</div>",
+
+  "Uso del suelo, recursos hídricos, bosques de niebla y páramos":
+    "<span class='exp-h'>Territorios estratégicos</span><ul>" +
+    "<li><strong>Páramos:</strong> ecosistemas de alta montaña que producen y regulan el agua. Colombia tiene la mayoría de los páramos del mundo.</li>" +
+    "<li><strong>Bosques de niebla:</strong> alta biodiversidad y captación de humedad.</li>" +
+    "<li><strong>Uso del suelo:</strong> debe planificarse (agrícola, urbano, de conservación) para evitar conflictos.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Sembrar papa o hacer minería en un páramo destruye la 'fábrica de agua' de la región, afectando a millones de personas aguas abajo.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Asocia los páramos con el AGUA. Su protección es prioritaria porque abastecen a las ciudades; por eso la ley prohíbe la minería en ellos.</div>",
+
+  "Minería, monocultivos y sus consecuencias sobre ecosistemas locales":
+    "<span class='exp-h'>Impactos ambientales</span><ul>" +
+    "<li><strong>Minería:</strong> contamina ríos (mercurio, cianuro), destruye suelos y deforesta.</li>" +
+    "<li><strong>Monocultivos:</strong> agotan los nutrientes del suelo, reducen la biodiversidad y aumentan plagas.</li></ul>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> La minería de oro en el Pacífico colombiano ha contaminado ríos con mercurio, afectando a peces y a las comunidades que dependen de ellos.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Estas preguntas suelen confrontar beneficio económico (empleo, exportaciones) con daño ambiental y social. La mejor respuesta evalúa AMBAS partes con evidencia.</div>",
+
+  "Siempre presentan posiciones en conflicto (empresa vs. comunidad, economía vs. ambiente)":
+    "<span class='exp-h'>El patrón típico del ICFES</span><p>La mayoría de las preguntas de sociales presentan DOS partes con intereses opuestos. Tu tarea NO es elegir un 'bando', sino entender los argumentos de cada uno.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Empresa (quiere explotar un recurso para generar empleo y ganancia) vs. comunidad (quiere proteger su territorio, salud y cultura). Ambas tienen razones válidas.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Antes de responder, identifica claramente las dos posiciones y sus intereses. La respuesta correcta suele reconocer la complejidad, no simplificar a 'bueno vs. malo'.</div>",
+
+  "Preguntan cuál es el aspecto más importante o qué evidencia lleva a la conclusión":
+    "<span class='exp-h'>Razonamiento sobre argumentos</span><p>Te piden identificar qué dato o argumento SOSTIENE mejor una conclusión, o cuál es el aspecto central de un problema.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si la conclusión es 'el proyecto perjudica a la comunidad', la evidencia que la apoya sería un dato como 'el 80% de los habitantes perdería su fuente de agua', no una opinión vaga.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Busca la opción que conecta directamente con la conclusión mediante un HECHO o dato concreto. Descarta las que son ciertas pero irrelevantes para esa conclusión.</div>",
+
+  "Opciones con 'siempre' o 'nunca' casi siempre incorrectas — eliminarlas primero":
+    "<span class='exp-h'>Estrategia de eliminación</span><p>Las opciones con palabras ABSOLUTAS (siempre, nunca, todos, ninguno, completamente) suelen ser falsas, porque la realidad social rara vez es tan tajante.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> 'La minería SIEMPRE destruye las comunidades' → sospechosa (absoluta). 'La minería PUEDE afectar a las comunidades' → más razonable y probablemente correcta.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Empieza descartando las opciones absolutas. Las respuestas correctas suelen usar lenguaje moderado: 'puede', 'algunos', 'en ciertos casos', 'tiende a'.</div>",
+
+  "Evaluar si una afirmación política o económica es verdadera con base en el texto dado":
+    "<span class='exp-h'>Juzgar con base en el texto</span><p>La afirmación solo es válida si se sostiene con la información del texto, NO con tu opinión o conocimiento externo.</p>" +
+    "<div class='exp-ex'><b>Ejemplo:</b> Si el texto da datos de que el desempleo bajó, la afirmación 'la política mejoró el empleo' se apoya en el texto. Si el texto no lo menciona, no puedes darla por cierta aunque 'suene' verdadera.</div>" +
+    "<div class='exp-tip'><b>Tip ICFES:</b> Ciñe tu respuesta a lo que DICE el texto. Una afirmación que va más allá de la evidencia presentada no se puede considerar verdadera.</div>"
+};
+
+function ytQuery(t)   { return encodeURIComponent(t + ' ICFES Saber 11 explicación'); }
+function wikiQuery(t)  { return encodeURIComponent(t); }
+function getExp(t) {
+  return EXP[t]
+    ? EXP[t]
+    : "<span class='pending'>Explicación redactada próximamente para este subtema. Por ahora, usa los botones de abajo para ver un video o leer en Wikipedia.</span>";
+}
+
 const accordion = document.getElementById('accordion');
 const searchInput = document.getElementById('searchInput');
 const noResults   = document.getElementById('noResults');
 const noQuery     = document.getElementById('noQuery');
 const statTemas   = document.getElementById('statTemas');
 const statSub     = document.getElementById('statSub');
+const progressFill  = document.getElementById('progressFill');
+const progressLabel = document.getElementById('progressLabel');
+
+// ── PROGRESO: asigna un id único a cada subtema y carga lo guardado ──
+let _uid = 0;
+data.forEach(c => c.themes.forEach(th => th.topics.forEach(t => { t._uid = _uid++; })));
+const TOTAL_SUB = _uid;
+let completed = new Set(JSON.parse(localStorage.getItem('icfes-progress') || '[]'));
+
+function saveProgress() {
+  localStorage.setItem('icfes-progress', JSON.stringify([...completed]));
+}
+
+function updateProgress() {
+  const done = [...completed].filter(id => id < TOTAL_SUB).length;
+  const pct = TOTAL_SUB ? Math.round(done / TOTAL_SUB * 100) : 0;
+  if (progressFill)  progressFill.style.width = pct + '%';
+  if (progressLabel) progressLabel.innerHTML =
+    `<strong>${TOTAL_SUB}</strong> temas totales · <strong>${done}</strong> completados · <strong>${pct}%</strong>`;
+}
+
+function resetProgress() {
+  if (!confirm('¿Seguro que quieres borrar todo tu progreso? Esta acción no se puede deshacer.')) return;
+  completed = new Set();
+  saveProgress();
+  buildAccordion(searchInput.value);
+  updateProgress();
+}
 
 function countAll() {
   let temas = 0, sub = 0;
@@ -875,10 +2414,19 @@ function buildAccordion(filter = '') {
             </div>
             <div class="spec-list ${q ? 'open' : ''}">
               ${theme.topics.map(item => `
-                <div class="spec-item">
-                  <span class="spec-dash">—</span>
-                  <span style="flex:1">${highlight(item.t, q)}</span>
-                  ${srcTag(item.src)}
+                <div class="spec-block">
+                  <div class="spec-item ${completed.has(item._uid) ? 'done' : ''}">
+                    <span class="spec-dash">${completed.has(item._uid) ? '✓' : '—'}</span>
+                    <span style="flex:1">${highlight(item.t, q)}</span>
+                    <span class="spec-toggle">+</span>
+                  </div>
+                  <div class="spec-detail">
+                    <div class="spec-exp">${getExp(item.t)}</div>
+                    <div class="res-btns">
+                      <a class="res-btn video" href="https://www.youtube.com/results?search_query=${ytQuery(item.t)}" target="_blank" rel="noopener noreferrer">▶ Ver video del tema</a>
+                      <button class="res-btn study ${completed.has(item._uid) ? 'done' : ''}" type="button" data-uid="${item._uid}">${completed.has(item._uid) ? '✓ Estudiado' : 'Marcar como estudiado'}</button>
+                    </div>
+                  </div>
                 </div>
               `).join('')}
             </div>
@@ -905,21 +2453,54 @@ function buildAccordion(filter = '') {
       });
     });
 
+    card.querySelectorAll('.spec-item').forEach(si => {
+      si.addEventListener('click', e => {
+        e.stopPropagation();
+        const detail = si.nextElementSibling;
+        const isOpen = si.classList.toggle('open');
+        if (detail) detail.classList.toggle('open', isOpen);
+      });
+    });
+
+    card.querySelectorAll('.res-btn.study').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const uid = Number(btn.dataset.uid);
+        if (completed.has(uid)) completed.delete(uid);
+        else completed.add(uid);
+        saveProgress();
+
+        const isDone = completed.has(uid);
+        btn.textContent = isDone ? '✓ Estudiado' : 'Marcar como estudiado';
+        btn.classList.toggle('done', isDone);
+
+        const block = btn.closest('.spec-block');
+        if (block) {
+          const item = block.querySelector('.spec-item');
+          item.classList.toggle('done', isDone);
+          item.querySelector('.spec-dash').textContent = isDone ? '✓' : '—';
+        }
+        updateProgress();
+      });
+    });
+
     accordion.appendChild(card);
   });
 
   noResults.style.display = totalShown === 0 ? 'block' : 'none';
   noQuery.textContent = filter;
+
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise([accordion]).catch(() => {});
+  }
 }
 
 searchInput.addEventListener('input', () => buildAccordion(searchInput.value));
 
 countAll();
 buildAccordion();
+updateProgress();
 </script>
  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
-
-
-
