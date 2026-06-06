@@ -3312,40 +3312,45 @@ function shuffleDeck(){ for(let i = fcCards.length - 1; i > 0; i--){ const j = M
 
 // ── PLAN DE ESTUDIO / CRONOGRAMA ──
 // Fases y cuadernillos según la planeación. 'days' = días que dura cada cuadernillo (para repartir fechas).
+const F = 'https://drive.google.com/drive/folders/';
+const V = id => 'https://drive.google.com/file/d/' + id + '/view';
 const PLAN = [
   { phase:'Fase 1 · Entrenando', badge:'Base', desc:'Una sesión diaria. La base para todo lo demás.', items:[
-    { id:'f1-s', name:'S11-S', days:1 }, { id:'f1-t', name:'S11-T', days:1 },
-    { id:'f1-u', name:'S11-U', days:1 }, { id:'f1-v', name:'S11-V', days:1 },
-    { id:'f1-w', name:'S11-W', days:1 }, { id:'f1-x', name:'S11-X', days:1 },
+    { id:'f1-s', name:'S11-S', days:1, url:F+'1njAdizhS1mLkiIneUIZKsQnD0l6fyab-' },
+    { id:'f1-t', name:'S11-T', days:1, url:F+'1ETypjJ-v_GHd-j5QO4065W8g-rc82rv2' },
+    { id:'f1-u', name:'S11-U', days:1, url:F+'1QrCoW84XTGHqTTSVl5kmy727cB36LQp-' },
+    { id:'f1-v', name:'S11-V', days:1, url:F+'1EvusZdwNKA4dbOE28OPkRwzwJuHBJmjm' },
+    { id:'f1-w', name:'S11-W', days:1, url:F+'1-DHoPYOEbqUGc4MiTbfNwgfBk80Qm5rT' },
+    { id:'f1-x', name:'S11-X', days:1, url:F+'1uPbM4fZWuXTYgNmGcXhlDUNN96At6McX' },
   ]},
-  { phase:'Fase 2 · Montería 2025', badge:'Por áreas', desc:'Un día por pareja de áreas.', items:[
-    { id:'f2-cn', name:'Ciencias Naturales + Física MONTERÍA 2025', days:1 },
-    { id:'f2-lc', name:'Lectura Crítica + English MONTERÍA 2025', days:1 },
-    { id:'f2-mat', name:'Matemáticas + Mates MONTERÍA 2025', days:1 },
+  { phase:'Fase 2 · Montería 2025', badge:'Por áreas', desc:'Un día por pareja de áreas (los dos PDFs están en la carpeta).', items:[
+    { id:'f2-cn', name:'Ciencias Naturales + Física MONTERÍA 2025', days:1, url:F+'1gzcnyeoU2ZihPxj-cFBBt5NaFMl5X55Y' },
+    { id:'f2-lc', name:'Lectura Crítica + English MONTERÍA 2025', days:1, url:F+'1gzcnyeoU2ZihPxj-cFBBt5NaFMl5X55Y' },
+    { id:'f2-mat', name:'Matemáticas + Mates MONTERÍA 2025', days:1, url:F+'1gzcnyeoU2ZihPxj-cFBBt5NaFMl5X55Y' },
   ]},
   { phase:'Fase 3 · Pilotos', badge:'2 días c/u', desc:'Simulacros tipo prueba real.', items:[
-    { id:'f3-reloj', name:'Cuadernillos RELOJ', days:2 },
-    { id:'f3-helmer', name:'Helmer Pardo', days:2 },
-    { id:'f3-wright', name:'Hermanos Wright', days:2 },
-    { id:'f3-curie', name:'Marie Curie', days:2 },
-    { id:'f3-mendoza', name:'Mendoza', days:2 },
-    { id:'f3-heli', name:'Piloto Helicóptero', days:2 },
-    { id:'f3-pilotos', name:'Pilotos 2025', days:2 },
+    { id:'f3-reloj', name:'Cuadernillos RELOJ', days:2, url:F+'1shZRH_8_tJcB5TvwuZwGFBnEZzb4QGiD' },
+    { id:'f3-helmer', name:'Helmer Prado', days:2, url:F+'1vwr5WXR4HQWc8xyaTcyVWietvZOppeqm' },
+    { id:'f3-wright', name:'Hermanos Wright', days:2, url:F+'1Yi9M521tOvI87ND-X1WssUwjdYi-DYG2' },
+    { id:'f3-curie', name:'Marie Curie', days:2, url:F+'1E4YOmBB9z2yxLuJTG--RbkbN9aXej4bY' },
+    { id:'f3-mendoza', name:'Mendoza', days:2, url:F+'1N_z5p5EAk8P0EXZJTqeb8FVYFvzPXnW_' },
+    { id:'f3-heli', name:'Piloto Helicóptero', days:2, url:F+'16G59LlHNjpSL68lwclTyJfcGmcrc54l7' },
+    { id:'f3-pilotos', name:'Pilotos 2025', days:2, url:F+'1gojeXS8RLTJQQ0tyho2WT0LDm52t6fvQ' },
   ]},
   { phase:'Fase 4 · Compilados', badge:'Repaso amplio', desc:'Grandes compilados por materia.', items:[
-    { id:'f4-interesante', name:'2025 · A Compilado Interesante', days:4 },
-    { id:'f4-math2', name:'Compilado MATH 2 · SeamosGenios', days:2 },
-    { id:'f4-soc-sg', name:'Compilado Sociales · SeamosGenios', days:2 },
-    { id:'f4-mixto', name:'Compilado Mixto 2026 · SG', days:2 },
-    { id:'f4-ingles', name:'Compilado Inglés', days:2 },
-    { id:'f4-lc', name:'Compilado Lectura Crítica', days:2 },
-    { id:'f4-mates', name:'Compilado Mates', days:2 },
-    { id:'f4-naturales', name:'Compilado Naturales', days:2 },
-    { id:'f4-sociales', name:'Compilado Sociales', days:2 },
+    { id:'f4-interesante', name:'2025 · A Compilado Interesante', days:4, url:V('16swi-273Om_3Mb3IaobYvqbGbD9li4h9') },
+    { id:'f4-math2', name:'Compilado MATH 2 · SeamosGenios', days:2, url:F+'1XGz_YWVYKfam8Umf5TfIM8Q_lfAuR7Fl' },
+    { id:'f4-soc-sg', name:'Compilado Sociales · SeamosGenios', days:2, url:F+'1dEsncLp45ys9HYPZeWOsLcvL4fjCa2Xl' },
+    { id:'f4-mixto', name:'Compilado Mixto 2026 · SG', days:2, url:F+'1_xOF1sG2yMQJdb9Hc2C7izfkvSNb2mV2' },
+    { id:'f4-ingles', name:'Compilado Inglés', days:2, url:V('1piasjpWm0PgOVbIG3O4Q5_Jg4_cJmetx') },
+    { id:'f4-lc', name:'Compilado Lectura Crítica', days:2, url:V('1K94BxsXrFG2fmKMenw8zLla52RC6vbRq') },
+    { id:'f4-mates', name:'Compilado Mates', days:2, url:V('13Luyx_qg9QYARszbkOiWdrevmDD4fMzw') },
+    { id:'f4-naturales', name:'Compilado Naturales', days:2, url:V('1TxktWZmipF-qQvBoX_5Fhbc4YTKMTJDU') },
+    { id:'f4-sociales', name:'Compilado Sociales', days:2, url:V('1GgYL2XcWz0nH7O_TPtg1bP-Ln0Rxi8ue') },
   ]},
   { phase:'Última fase · Repaso final', badge:'Sin orden fijo', desc:'Las preguntas no cambian mucho. Refuerza lo que más falles.', items:[
-    { id:'f5-calA', name:'Carpeta 2025 · CAL A', days:3 },
-    { id:'f5-repaso', name:'Si queda tiempo: repetir Entrenando W y X, 2025 CAL A y algunos Piloto', days:2 },
+    { id:'f5-calA', name:'Carpeta 2025 · CAL A', days:3, url:F+'1_8XdyLi-Se5jmtrRk_CiWG-68sV1tlW9' },
+    { id:'f5-repaso', name:'Si queda tiempo: repetir Entrenando W y X, 2025 CAL A y algunos Piloto', days:2, url:F+'1eLcrhJZ03USQ8yZWYzqX4dEwKaNgq4lK' },
   ]},
 ];
 const DRIVE_URL = 'https://drive.google.com/drive/folders/1m8wX55W0zd-zkfeDEXrtN4P9uUOeKdnS?usp=drive_link';
@@ -3395,7 +3400,7 @@ function renderPlan(){
             <span>${it.days} día${it.days>1?'s':''}</span>
           </div>
         </div>
-        <a class="plan-drive" href="${DRIVE_URL}" target="_blank" rel="noopener noreferrer">Abrir Drive ↗</a>
+        <a class="plan-drive" href="${it.url || DRIVE_URL}" target="_blank" rel="noopener noreferrer">Abrir cuadernillo ↗</a>
       </div>`;
     });
     html += `</div>`;
