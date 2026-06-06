@@ -376,6 +376,254 @@
   .spec-item.done .spec-dash { color: var(--lectura); opacity: 1; font-weight: 700; }
   .spec-item.done > span:nth-child(2) { color: rgba(240,238,232,0.85); }
 
+  /* ── TOOLBAR (racha, examen, flashcards, aleatorio) ── */
+  .toolbar { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.25rem; }
+  .tool-pill {
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: 99px; padding: 7px 14px; font-size: 12px;
+    color: var(--muted); display: flex; align-items: center; gap: 6px;
+  }
+  .tool-pill strong { color: var(--text); font-weight: 600; }
+  .tool-btn {
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: 99px; padding: 7px 14px; font-size: 12px;
+    color: var(--text); cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .tool-btn:hover { border-color: var(--ingles); color: var(--ingles); transform: translateY(-1px); }
+  .link-btn {
+    background: none; border: none; color: var(--ingles); cursor: pointer;
+    font-family: inherit; font-size: 11px; text-decoration: underline;
+    text-underline-offset: 2px; padding: 0 2px;
+  }
+
+  /* ── FILTER BUTTONS ── */
+  .filters { display: flex; gap: 0.4rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .filter-btn {
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: 99px; padding: 6px 14px; font-size: 12px;
+    color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { color: var(--text); }
+  .filter-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); font-weight: 600; }
+
+  /* ── ACHIEVEMENTS ── */
+  .achievements {
+    display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 6px;
+    margin-bottom: 1.5rem; scrollbar-width: none;
+  }
+  .achievements::-webkit-scrollbar { height: 0; }
+  .badge {
+    flex-shrink: 0; display: flex; align-items: center; gap: 7px;
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: 12px; padding: 8px 13px; font-size: 11px;
+    color: var(--faint); opacity: 0.55; filter: grayscale(1);
+    transition: all 0.3s; white-space: nowrap;
+  }
+  .badge .badge-icon { font-size: 17px; }
+  .badge.unlocked {
+    opacity: 1; filter: none; color: var(--text);
+    border-color: var(--sociales); background: var(--sociales-bg);
+  }
+
+  /* ── PER-SUBJECT MINI BAR ── */
+  .comp-mini-track {
+    height: 4px; background: var(--surface2); border-radius: 99px;
+    overflow: hidden; margin-top: 8px; max-width: 220px;
+  }
+  .comp-mini-fill { height: 100%; border-radius: 99px; transition: width 0.5s ease; }
+
+  /* ── NOTES ── */
+  .note-box {
+    width: 100%; margin-top: 10px; min-height: 54px; resize: vertical;
+    background: var(--bg); border: 0.5px solid var(--border); border-radius: 8px;
+    padding: 9px 12px; color: var(--text); font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px; outline: none; transition: border-color 0.2s;
+  }
+  .note-box:focus { border-color: var(--sociales); }
+  .note-box::placeholder { color: var(--faint); }
+
+  .res-btn.speak { cursor: pointer; font-family: inherit; }
+  .res-btn.speak:hover { color: var(--ingles); border-color: var(--ingles); }
+
+  /* ── FLASHCARDS MODAL ── */
+  .fc-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(8,8,12,0.82); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center; padding: 1.5rem;
+  }
+  .fc-overlay.open { display: flex; }
+  .fc-modal {
+    background: var(--surface); border: 0.5px solid var(--border-hover);
+    border-radius: 20px; padding: 1.5rem; width: 100%; max-width: 480px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .fc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem; }
+  .fc-decks { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .fc-deck-btn {
+    background: var(--surface2); border: 0.5px solid var(--border); border-radius: 99px;
+    padding: 5px 12px; font-size: 11px; color: var(--muted); cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+  }
+  .fc-deck-btn.active { background: var(--ingles); color: #fff; border-color: var(--ingles); }
+  .fc-close {
+    background: none; border: none; color: var(--muted); font-size: 20px;
+    cursor: pointer; line-height: 1; flex-shrink: 0;
+  }
+  .fc-card {
+    background: linear-gradient(145deg, var(--surface2), var(--bg));
+    border: 0.5px solid var(--border-hover); border-radius: 16px;
+    min-height: 180px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    padding: 1.75rem; cursor: pointer; position: relative; user-select: none;
+    transition: transform 0.15s;
+  }
+  .fc-card:active { transform: scale(0.99); }
+  .fc-card.flipped { border-color: var(--lectura); }
+  .fc-face {
+    font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 600;
+    color: var(--text); line-height: 1.4;
+  }
+  .fc-card.flipped .fc-face { color: var(--lectura); }
+  .fc-hint {
+    position: absolute; bottom: 12px; font-size: 10px; color: var(--faint);
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .fc-controls {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 1.25rem; gap: 1rem;
+  }
+  .fc-controls button {
+    background: var(--surface2); border: 0.5px solid var(--border); border-radius: 10px;
+    padding: 9px 16px; font-size: 12px; color: var(--text); cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+  }
+  .fc-controls button:hover { border-color: var(--ingles); color: var(--ingles); }
+  #fcCounter { font-size: 12px; color: var(--muted); }
+  .fc-shuffle {
+    width: 100%; margin-top: 0.9rem; background: none; border: 0.5px dashed var(--border);
+    border-radius: 10px; padding: 9px; font-size: 12px; color: var(--muted);
+    cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+  }
+  .fc-shuffle:hover { color: var(--text); border-color: var(--border-hover); }
+
+  /* ── PLAN DE ESTUDIO / CRONOGRAMA ── */
+  .section-block { margin: 3rem 0 1rem; }
+  .section-head {
+    font-family:'Syne',sans-serif; font-weight:800; font-size:1.5rem; color:var(--text);
+    display:flex; align-items:center; gap:0.6rem; margin-bottom:0.4rem;
+  }
+  .section-sub { font-size:13px; color:var(--muted); margin-bottom:1.4rem; line-height:1.6; }
+  .plan-progress-wrap { margin-bottom:1.6rem; }
+  .plan-bar-track { height:9px; background:var(--surface2); border-radius:99px; overflow:hidden; }
+  .plan-bar-fill { height:100%; background:linear-gradient(90deg,#3ecf8e,#4f8ef7); border-radius:99px; transition:width .4s; width:0; }
+  .plan-bar-label { display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-top:6px; }
+  .plan-no-date {
+    background:var(--sociales-bg); border:0.5px solid rgba(251,191,36,0.3); border-radius:12px;
+    padding:10px 14px; font-size:12.5px; color:var(--sociales); margin-bottom:1.4rem; cursor:pointer;
+  }
+  .phase { margin-bottom:1.6rem; }
+  .phase-title {
+    font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--text);
+    display:flex; align-items:center; gap:0.5rem; margin-bottom:0.2rem;
+  }
+  .phase-badge {
+    font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    background:var(--surface2); color:var(--muted); padding:2px 8px; border-radius:99px;
+  }
+  .phase-desc { font-size:12px; color:var(--muted); margin-bottom:0.7rem; }
+  .plan-item {
+    display:flex; align-items:center; gap:12px; padding:11px 14px; margin-bottom:7px;
+    background:var(--surface); border:0.5px solid var(--border); border-radius:12px;
+    transition:all .2s;
+  }
+  .plan-item:hover { border-color:var(--border-hover); }
+  .plan-item.done { opacity:0.55; }
+  .plan-item.next { border-color:var(--mates); box-shadow:0 0 0 1px var(--mates), 0 6px 22px rgba(79,142,247,0.18); }
+  .plan-check {
+    width:22px; height:22px; border-radius:7px; border:1.5px solid var(--border-hover);
+    flex-shrink:0; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    font-size:13px; color:#fff; transition:all .2s; background:transparent;
+  }
+  .plan-item.done .plan-check { background:#3ecf8e; border-color:#3ecf8e; }
+  .plan-main { flex:1; min-width:0; }
+  .plan-name { font-size:13.5px; color:var(--text); font-weight:500; }
+  .plan-item.done .plan-name { text-decoration:line-through; }
+  .plan-meta { font-size:11px; color:var(--muted); margin-top:2px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  .plan-next-tag { font-size:10px; font-weight:700; color:var(--mates); background:var(--mates-bg); padding:2px 8px; border-radius:99px; }
+  .plan-date { color:var(--lectura); font-weight:600; }
+  .plan-drive {
+    font-size:11px; color:var(--muted); text-decoration:none; border:0.5px solid var(--border);
+    padding:5px 10px; border-radius:8px; flex-shrink:0; transition:all .2s; white-space:nowrap;
+  }
+  .plan-drive:hover { color:var(--ingles); border-color:var(--ingles); }
+
+  /* ── RECOMENDACIONES ── */
+  .rec-grid { display:grid; grid-template-columns:1fr; gap:10px; }
+  .rec-card {
+    background:var(--surface); border:0.5px solid var(--border); border-radius:14px; padding:16px 18px;
+  }
+  .rec-card.day { border-color:rgba(251,191,36,0.25); background:var(--sociales-bg); }
+  .rec-card h4 {
+    font-family:'Syne',sans-serif; font-weight:700; font-size:14px; color:var(--text);
+    margin-bottom:8px; display:flex; align-items:center; gap:8px;
+  }
+  .rec-card ul { margin:0; padding-left:18px; }
+  .rec-card li { font-size:13px; color:var(--muted); margin-bottom:7px; line-height:1.55; }
+  .rec-card li strong { color:var(--text); font-weight:600; }
+
+  /* ── TEMPORIZADOR ── */
+  .tm-modal { max-width:440px; text-align:center; }
+  .tm-presets { display:flex; flex-direction:column; gap:8px; margin:0.4rem 0 1rem; }
+  .tm-preset {
+    background:var(--surface2); border:0.5px solid var(--border); border-radius:12px; padding:12px 14px;
+    cursor:pointer; font-family:'DM Sans',sans-serif; text-align:left; transition:all .2s; color:var(--text);
+  }
+  .tm-preset:hover { border-color:var(--ingles); }
+  .tm-preset .tm-pname { font-size:13.5px; font-weight:600; }
+  .tm-preset .tm-pdesc { font-size:11.5px; color:var(--muted); margin-top:2px; }
+  .tm-custom { display:flex; gap:8px; align-items:center; justify-content:center; margin-bottom:0.5rem; }
+  .tm-custom input {
+    width:80px; background:var(--surface2); border:0.5px solid var(--border); border-radius:8px;
+    padding:8px; color:var(--text); font-family:'DM Sans',sans-serif; text-align:center; font-size:13px;
+  }
+  .tm-custom button {
+    background:var(--ingles); border:none; color:#fff; border-radius:8px; padding:8px 14px;
+    cursor:pointer; font-family:'DM Sans',sans-serif; font-size:12.5px; font-weight:600;
+  }
+  .tm-run { display:none; }
+  .tm-run.show { display:block; }
+  .tm-phase { font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:0.4rem; }
+  .tm-display {
+    font-family:'Syne',sans-serif; font-weight:800; font-size:58px; color:var(--text);
+    font-variant-numeric:tabular-nums; line-height:1;
+  }
+  .tm-display.warn { color:var(--naturales); animation:pulse 1s infinite; }
+  .tm-sub { font-size:12px; color:var(--muted); margin:0.5rem 0 1.2rem; }
+  .tm-ctrls { display:flex; gap:8px; justify-content:center; }
+  .tm-ctrls button {
+    background:var(--surface2); border:0.5px solid var(--border-hover); border-radius:10px; padding:10px 20px;
+    color:var(--text); cursor:pointer; font-family:'DM Sans',sans-serif; font-size:13px; transition:all .2s;
+  }
+  .tm-ctrls button:hover { border-color:var(--ingles); color:var(--ingles); }
+  @keyframes pulse { 50% { opacity:.45; } }
+
+  /* ── GLOSSARY ── */
+  .gl-list { max-height: 52vh; overflow-y: auto; scrollbar-width: thin; }
+  .gl-item {
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    padding: 10px 4px; border-bottom: 0.5px solid var(--border);
+  }
+  .gl-item:last-child { border-bottom: none; }
+  .gl-name { font-size: 12.5px; color: var(--muted); flex: 1; }
+  .gl-formula { color: var(--text); flex-shrink: 0; }
+  .gl-cat {
+    font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);
+    padding: 12px 4px 4px; display: block;
+  }
+
   /* ── LEGEND ── */
   .legend {
     display: flex; gap: 1rem; flex-wrap: wrap;
@@ -453,6 +701,24 @@
     </div>
   </div>
 
+  <div class="toolbar">
+    <div class="tool-pill" id="streakPill">🔥 <strong>0</strong> días de racha</div>
+    <div class="tool-pill" id="countdownPill"></div>
+    <button class="tool-btn" type="button" onclick="surpriseMe()">🎲 Sorpréndeme</button>
+    <button class="tool-btn" type="button" onclick="openFlashcards()">🃏 Flashcards</button>
+    <button class="tool-btn" type="button" onclick="openGlossary()">📐 Fórmulas</button>
+    <button class="tool-btn" type="button" onclick="openTimer()">⏱️ Temporizador</button>
+    <button class="tool-btn" type="button" onclick="document.getElementById('planSection').scrollIntoView({behavior:'smooth'})">🗓️ Plan de estudio</button>
+  </div>
+
+  <div class="achievements" id="achievements"></div>
+
+  <div class="filters" id="filters">
+    <button class="filter-btn active" type="button" data-filter="all" onclick="setStatusFilter('all')">Todos</button>
+    <button class="filter-btn" type="button" data-filter="pending" onclick="setStatusFilter('pending')">Pendientes</button>
+    <button class="filter-btn" type="button" data-filter="done" onclick="setStatusFilter('done')">Completados</button>
+  </div>
+
   <div class="search-wrap">
     <span class="search-icon">⌕</span>
     <input class="search-input" type="text" id="searchInput" placeholder="Buscar un tema específico...">
@@ -493,6 +759,85 @@
      Acceder a los cuadernillos en Drive
   </a>
 </div>
+
+  <!-- ───────── PLAN DE ESTUDIO / CRONOGRAMA ───────── -->
+  <div class="section-block" id="planSection">
+    <div class="section-head">🗓️ Plan de estudio por fases</div>
+    <div class="section-sub">
+      Sigue esta secuencia de cuadernillos, fase por fase. Marca cada uno cuando lo completes:
+      tu progreso se guarda solo y el sistema te resalta cuál sigue. Todos los cuadernillos están en el Drive.
+    </div>
+    <div class="plan-no-date" id="planNoDate" onclick="setExamDate()" style="display:none;">
+      📅 Aún no has fijado la fecha de tu examen. <strong>Toca aquí para fijarla</strong> y el cronograma repartirá los cuadernillos según los días que falten.
+    </div>
+    <div class="plan-progress-wrap">
+      <div class="plan-bar-track"><div class="plan-bar-fill" id="planBarFill"></div></div>
+      <div class="plan-bar-label"><span id="planBarText">0 de 0 cuadernillos</span><span id="planBarPct">0%</span></div>
+    </div>
+    <div id="planList"></div>
+  </div>
+
+  <!-- ───────── RECOMENDACIONES ───────── -->
+  <div class="section-block">
+    <div class="section-head">💡 Recomendaciones</div>
+    <div class="section-sub">Estrategias para aprovechar la preparación al máximo y llegar listo el día de la prueba.</div>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <h4>⏱️ Cómo practicar (por bloques)</h4>
+        <ul>
+          <li>Haz las sesiones <strong>por bloques cronometrados</strong>: cada área seguida en su intervalo (≈1 hora), y descansa unos <strong>30 minutos</strong> entre bloques.</li>
+          <li>De vez en cuando rétate a una <strong>sesión completa</strong> (≈4 horas seguidas con pocos descansos) para entrenar la resistencia mental real del examen.</li>
+          <li>Usa el botón <strong>⏱️ Temporizador</strong> de arriba: tiene modos para un componente, sesión completa y simulacro entero.</li>
+        </ul>
+      </div>
+      <div class="rec-card">
+        <h4>🔁 Aprende de los errores</h4>
+        <ul>
+          <li>Después de cada bloque, <strong>verifica y analiza</strong> tanto aciertos como fallas.</li>
+          <li>Si el error fue <strong>teórico</strong>, refuerza rápido: pídele a la IA que te <strong>explique el tema de forma fácil de recordar</strong> (no solo la respuesta). Hazle preguntas hasta que quede claro.</li>
+          <li>Lleva un <strong>registro de los temas que más fallas</strong> y vuelve a ellos con el repaso espaciado.</li>
+        </ul>
+      </div>
+      <div class="rec-card">
+        <h4>🔍 Cómo leer y desglosar una pregunta</h4>
+        <ul>
+          <li>Primero lee <strong>títulos y enunciados</strong>: cualquier cosa que te dé una idea anticipada.</li>
+          <li>Lee la pregunta y <strong>relaciónala con esa idea anticipada</strong>.</li>
+          <li>Luego lee el resto (opciones, texto) a partir de ese análisis.</li>
+          <li><strong>Subraya</strong> conectores e ideas clave: ayuda muchísimo.</li>
+        </ul>
+      </div>
+      <div class="rec-card">
+        <h4>✂️ Estrategia para eliminar opciones</h4>
+        <ul>
+          <li>Desconfía de las opciones que <strong>exageran</strong> ("siempre", "nunca", "todos") — sobre todo en Sociales.</li>
+          <li>En preguntas tipo <strong>"Sí, (argumento) / No, (argumento)"</strong>: primero decide si la respuesta es Sí o No para descartar dos opciones, y luego compara los argumentos restantes.</li>
+          <li>Si dudas entre dos, elige la que <strong>responde exactamente lo que preguntan</strong>, no la que solo "suena bien".</li>
+        </ul>
+      </div>
+      <div class="rec-card">
+        <h4>🧠 Hábitos que suman</h4>
+        <ul>
+          <li><strong>Repaso espaciado</strong>: repasar poco y seguido rinde más que un atracón de última hora.</li>
+          <li>Cuida el <strong>sueño</strong> y la <strong>alimentación</strong> durante toda la preparación, no solo el día final.</li>
+          <li>Usa las <strong>flashcards</strong> y el <strong>glosario de fórmulas</strong> de esta página en tus ratos libres.</li>
+          <li>Estudia en un lugar <strong>sin distracciones</strong> (celular lejos) para simular el ambiente del examen.</li>
+        </ul>
+      </div>
+      <div class="rec-card day">
+        <h4>📋 El día de la prueba</h4>
+        <ul>
+          <li>Lleva tu <strong>documento de identidad</strong> y la citación; prepáralos desde la noche anterior.</li>
+          <li><strong>Duerme bien</strong> la noche previa y <strong>desayuna</strong> — el cerebro necesita energía durante varias horas.</li>
+          <li>Llega <strong>temprano</strong> al sitio para evitar el estrés de última hora.</li>
+          <li><strong>Responde TODAS las preguntas</strong>: en el ICFES no penalizan por marcar mal, así que nunca dejes una en blanco.</li>
+          <li><strong>Gestiona el tiempo</strong>: si una pregunta te traba, márcala, sigue y vuelve después. No pierdas 10 minutos en una sola.</li>
+          <li>Lee con <strong>calma</strong> pero sin relajarte; aplica la estrategia de eliminar opciones.</li>
+          <li>Mantén la <strong>calma</strong>: confía en lo que practicaste. Una pregunta difícil no define tu resultado.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 <div class="footer">
   Un verdadero perdedor es alguien que tiene tanto miedo de no ganar, que ni siquiera lo intenta.
   <br>
@@ -500,7 +845,66 @@
   Creado por: Edgar Manuel Robayo Hernandez con ayuda de Inteligencia Artificial.
 </div>
 </div> 
+</div>
 
+<!-- TEMPORIZADOR MODAL -->
+<div class="fc-overlay" id="tmOverlay">
+  <div class="fc-modal tm-modal">
+    <div class="fc-top">
+      <div class="qz-head" style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;">⏱️ Temporizador</div>
+      <button class="fc-close" type="button" onclick="closeTimer()">✕</button>
+    </div>
+    <div id="tmPick">
+      <div class="tm-presets" id="tmPresets"></div>
+      <div class="tm-custom">
+        <input type="number" id="tmQcount" min="1" max="200" placeholder="N°" />
+        <span style="font-size:12px;color:var(--muted);">preguntas × 2 min</span>
+        <button type="button" onclick="tmStartCustom()">Iniciar</button>
+      </div>
+    </div>
+    <div class="tm-run" id="tmRun">
+      <div class="tm-phase" id="tmPhase"></div>
+      <div class="tm-display" id="tmDisplay">00:00</div>
+      <div class="tm-sub" id="tmSub"></div>
+      <div class="tm-ctrls">
+        <button type="button" id="tmPauseBtn" onclick="tmTogglePause()">⏸ Pausar</button>
+        <button type="button" onclick="tmReset()">↺ Reiniciar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLASHCARDS MODAL -->
+<div class="fc-overlay" id="fcOverlay">
+  <div class="fc-modal">
+    <div class="fc-top">
+      <div class="fc-decks" id="fcDecks"></div>
+      <button class="fc-close" type="button" onclick="closeFlashcards()">✕</button>
+    </div>
+    <div class="fc-card" id="fcCard" onclick="flipCard()">
+      <div class="fc-face" id="fcFace"></div>
+      <div class="fc-hint" id="fcHint">toca para girar</div>
+    </div>
+    <div class="fc-controls">
+      <button type="button" onclick="prevCard()">‹ Anterior</button>
+      <span id="fcCounter"></span>
+      <button type="button" onclick="nextCard()">Siguiente ›</button>
+    </div>
+    <button class="fc-shuffle" type="button" onclick="shuffleDeck()">🔀 Mezclar</button>
+  </div>
+</div>
+
+<!-- GLOSSARY MODAL -->
+<div class="fc-overlay" id="glOverlay">
+  <div class="fc-modal">
+    <div class="fc-top">
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;">📐 Glosario de fórmulas</div>
+      <button class="fc-close" type="button" onclick="closeGlossary()">✕</button>
+    </div>
+    <input class="search-input" id="glSearch" placeholder="Buscar fórmula..." oninput="renderGlossary()" style="margin-bottom:1rem;padding-left:14px;">
+    <div class="gl-list" id="glList"></div>
+  </div>
+</div>
 
 <script>
 // src: "pdf" = solo de tus pruebas | "img" = solo temario imagen | "both" = en ambos
@@ -2319,6 +2723,10 @@ const statTemas   = document.getElementById('statTemas');
 const statSub     = document.getElementById('statSub');
 const progressFill  = document.getElementById('progressFill');
 const progressLabel = document.getElementById('progressLabel');
+const streakPill    = document.getElementById('streakPill');
+const countdownPill = document.getElementById('countdownPill');
+const achievementsEl = document.getElementById('achievements');
+let statusFilter = 'all';
 
 // ── PROGRESO: asigna un id único a cada subtema y carga lo guardado ──
 let _uid = 0;
@@ -2372,12 +2780,17 @@ function buildAccordion(filter = '') {
 
   data.forEach(comp => {
     const matchedThemes = comp.themes.map(theme => {
-      const topics = theme.topics.filter(t =>
-        !q ||
-        t.t.toLowerCase().includes(q) ||
-        theme.name.toLowerCase().includes(q) ||
-        comp.title.toLowerCase().includes(q)
-      );
+      const topics = theme.topics.filter(t => {
+        const matchesText = !q ||
+          t.t.toLowerCase().includes(q) ||
+          theme.name.toLowerCase().includes(q) ||
+          comp.title.toLowerCase().includes(q);
+        const isDone = completed.has(t._uid);
+        const matchesStatus = statusFilter === 'all' ||
+          (statusFilter === 'pending' && !isDone) ||
+          (statusFilter === 'done' && isDone);
+        return matchesText && matchesStatus;
+      });
       return { ...theme, topics };
     }).filter(t => t.topics.length > 0);
 
@@ -2386,10 +2799,14 @@ function buildAccordion(filter = '') {
 
     const card = document.createElement('div');
     card.className = 'comp-card';
+    card.dataset.comp = comp.id;
     card.style.setProperty('--accent-color', comp.color);
     card.style.setProperty('--accent-bg', comp.bg);
 
     const totalTopics = matchedThemes.reduce((a, t) => a + t.topics.length, 0);
+    const compTotal = comp.themes.reduce((a, th) => a + th.topics.length, 0);
+    const compDone  = comp.themes.reduce((a, th) => a + th.topics.filter(t => completed.has(t._uid)).length, 0);
+    const compPct   = compTotal ? Math.round(compDone / compTotal * 100) : 0;
 
     card.innerHTML = `
       <div class="comp-header">
@@ -2397,9 +2814,10 @@ function buildAccordion(filter = '') {
         <div class="comp-info">
           <div class="comp-name">${comp.title}</div>
           <div class="comp-desc">${comp.desc}</div>
+          <div class="comp-mini-track"><div class="comp-mini-fill" style="width:${compPct}%; background:${comp.color};"></div></div>
         </div>
         <div class="comp-meta">
-          <span class="comp-count">${matchedThemes.length} temas · ${totalTopics} subtemas</span>
+          <span class="comp-count">${compDone}/${compTotal} estudiados · ${compPct}%</span>
           <div class="comp-chevron">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M2.5 5L7 9.5L11.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2419,7 +2837,7 @@ function buildAccordion(filter = '') {
             </div>
             <div class="spec-list ${q ? 'open' : ''}">
               ${theme.topics.map(item => `
-                <div class="spec-block">
+                <div class="spec-block" data-uid="${item._uid}">
                   <div class="spec-item ${completed.has(item._uid) ? 'done' : ''}">
                     <span class="spec-dash">${completed.has(item._uid) ? '✓' : '—'}</span>
                     <span style="flex:1">${highlight(item.t, q)}</span>
@@ -2429,8 +2847,10 @@ function buildAccordion(filter = '') {
                     <div class="spec-exp">${getExp(item.t)}</div>
                     <div class="res-btns">
                       <a class="res-btn video" href="https://www.youtube.com/results?search_query=${ytQuery(item.t)}" target="_blank" rel="noopener noreferrer">▶ Ver video del tema</a>
+                      <button class="res-btn speak" type="button">🔊 Escuchar</button>
                       <button class="res-btn study ${completed.has(item._uid) ? 'done' : ''}" type="button" data-uid="${item._uid}">${completed.has(item._uid) ? '✓ Estudiado' : 'Marcar como estudiado'}</button>
                     </div>
+                    <textarea class="note-box" data-uid="${item._uid}" placeholder="📝 Escribe aquí tus notas sobre este tema...">${(localStorage.getItem('icfes-note-' + item._uid) || '').replace(/&/g, '&amp;').replace(/</g, '&lt;')}</textarea>
                   </div>
                 </div>
               `).join('')}
@@ -2485,9 +2905,36 @@ function buildAccordion(filter = '') {
           item.classList.toggle('done', isDone);
           item.querySelector('.spec-dash').textContent = isDone ? '✓' : '—';
         }
+
+        const cardEl = btn.closest('.comp-card');
+        if (cardEl) {
+          const cmp = data.find(c => c.id === cardEl.dataset.comp);
+          const tot = cmp.themes.reduce((a, th) => a + th.topics.length, 0);
+          const dn  = cmp.themes.reduce((a, th) => a + th.topics.filter(t => completed.has(t._uid)).length, 0);
+          const pct = tot ? Math.round(dn / tot * 100) : 0;
+          const fill = cardEl.querySelector('.comp-mini-fill');
+          const cnt  = cardEl.querySelector('.comp-count');
+          if (fill) fill.style.width = pct + '%';
+          if (cnt)  cnt.textContent = `${dn}/${tot} estudiados · ${pct}%`;
+        }
+
+        if (isDone) recordStudyDay();
         updateProgress();
+        renderAchievements();
       });
     });
+
+    card.querySelectorAll('.note-box').forEach(ta => {
+      ta.addEventListener('click', e => e.stopPropagation());
+      ta.addEventListener('input', () => {
+        localStorage.setItem('icfes-note-' + ta.dataset.uid, ta.value);
+      });
+    });
+
+    card.querySelectorAll('.res-btn.speak').forEach(btn => {
+      btn.addEventListener('click', e => { e.stopPropagation(); speak(btn); });
+    });
+
 
     accordion.appendChild(card);
   });
@@ -2502,9 +2949,553 @@ function buildAccordion(filter = '') {
 
 searchInput.addEventListener('input', () => buildAccordion(searchInput.value));
 
+// ── FILTRO POR ESTADO ──
+function setStatusFilter(f){
+  statusFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === f));
+  buildAccordion(searchInput.value);
+}
+
+// ── TEMA ALEATORIO ──
+function surpriseMe(){
+  searchInput.value = '';
+  setStatusFilter('all');
+  openTopic(Math.floor(Math.random() * TOTAL_SUB));
+}
+function openTopic(uid){
+  const block = accordion.querySelector('.spec-block[data-uid="' + uid + '"]');
+  if(!block) return;
+  const card = block.closest('.comp-card');
+  if(card){ card.classList.add('open'); const b = card.querySelector('.comp-body'); if(b) b.classList.add('open'); }
+  const gt = block.closest('.gen-theme');
+  if(gt){ gt.classList.add('open'); const sl = gt.querySelector('.spec-list'); if(sl) sl.classList.add('open'); }
+  block.querySelector('.spec-item').classList.add('open');
+  block.querySelector('.spec-detail').classList.add('open');
+  block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ── LECTURA EN VOZ ALTA ──
+let _speakBtn = null;
+function speak(btn){
+  if(!('speechSynthesis' in window)){ alert('Tu navegador no soporta lectura en voz alta.'); return; }
+  const wasThis = (_speakBtn === btn);
+  speechSynthesis.cancel();
+  if(_speakBtn){ _speakBtn.textContent = '🔊 Escuchar'; _speakBtn = null; }
+  if(wasThis) return;
+  const exp = btn.closest('.spec-detail').querySelector('.spec-exp');
+  const u = new SpeechSynthesisUtterance(exp.innerText);
+  u.lang = 'es-ES'; u.rate = 1;
+  u.onend = () => { btn.textContent = '🔊 Escuchar'; if(_speakBtn === btn) _speakBtn = null; };
+  btn.textContent = '⏹ Detener'; _speakBtn = btn;
+  speechSynthesis.speak(u);
+}
+
+// ── RACHA DE ESTUDIO ──
+function todayStr(){ const d = new Date(); return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate(); }
+function dayBefore(s){ const p = s.split('-').map(Number); const dt = new Date(p[0], p[1]-1, p[2]); dt.setDate(dt.getDate()-1); return dt.getFullYear() + '-' + (dt.getMonth()+1) + '-' + dt.getDate(); }
+function recordStudyDay(){
+  const today = todayStr();
+  const last = localStorage.getItem('icfes-lastStudy');
+  let streak = Number(localStorage.getItem('icfes-streak') || '0');
+  if(last !== today){
+    streak = (last === dayBefore(today)) ? streak + 1 : 1;
+    localStorage.setItem('icfes-lastStudy', today);
+    localStorage.setItem('icfes-streak', String(streak));
+  }
+  renderStreak();
+}
+function renderStreak(){
+  const today = todayStr();
+  const last = localStorage.getItem('icfes-lastStudy');
+  let streak = Number(localStorage.getItem('icfes-streak') || '0');
+  if(last !== today && last !== dayBefore(today)) streak = 0;
+  if(streakPill) streakPill.innerHTML = `🔥 <strong>${streak}</strong> día${streak === 1 ? '' : 's'} de racha`;
+}
+
+// ── LOGROS / MEDALLAS ──
+const ACHIEVEMENTS = [
+  { icon:'🌱', name:'Primeros pasos',     test:s => s.done >= 1 },
+  { icon:'📘', name:'10 temas',           test:s => s.done >= 10 },
+  { icon:'📚', name:'50 temas',           test:s => s.done >= 50 },
+  { icon:'🏅', name:'100 temas',          test:s => s.done >= 100 },
+  { icon:'🔥', name:'Racha de 7 días',    test:s => s.streak >= 7 },
+  { icon:'➗', name:'Matemáticas 100%',    test:s => s.subj.mates === 100 },
+  { icon:'📖', name:'Lectura 100%',        test:s => s.subj.lectura === 100 },
+  { icon:'⚛️', name:'Ciencias 100%',       test:s => s.subj.naturales === 100 },
+  { icon:'🔤', name:'Inglés 100%',         test:s => s.subj.ingles === 100 },
+  { icon:'🌎', name:'Sociales 100%',       test:s => s.subj.sociales === 100 },
+  { icon:'👑', name:'¡Todo completado!',  test:s => s.pct === 100 }
+];
+function renderAchievements(){
+  const done = [...completed].filter(id => id < TOTAL_SUB).length;
+  const pct = TOTAL_SUB ? Math.round(done / TOTAL_SUB * 100) : 0;
+  const subj = {};
+  data.forEach(c => {
+    const tot = c.themes.reduce((a, th) => a + th.topics.length, 0);
+    const dn  = c.themes.reduce((a, th) => a + th.topics.filter(t => completed.has(t._uid)).length, 0);
+    subj[c.id] = tot ? Math.round(dn / tot * 100) : 0;
+  });
+  const s = { done, pct, subj, streak: Number(localStorage.getItem('icfes-streak') || '0') };
+  achievementsEl.innerHTML = ACHIEVEMENTS.map(a =>
+    `<div class="badge ${a.test(s) ? 'unlocked' : ''}"><span class="badge-icon">${a.icon}</span><span>${a.name}</span></div>`
+  ).join('');
+}
+
+// ── CUENTA REGRESIVA AL EXAMEN ──
+function renderCountdown(){
+  const d = localStorage.getItem('icfes-examDate');
+  if(!d){ countdownPill.innerHTML = `📅 <button class="link-btn" type="button" onclick="setExamDate()">Fijar fecha del examen</button>`; return; }
+  const p = d.split('-').map(Number);
+  const exam = new Date(p[0], p[1]-1, p[2]);
+  const now = new Date(); now.setHours(0,0,0,0);
+  const diff = Math.round((exam - now) / 86400000);
+  if(diff > 0)        countdownPill.innerHTML = `📅 Faltan <strong>${diff}</strong> día${diff===1?'':'s'} para el ICFES <button class="link-btn" type="button" onclick="setExamDate()">editar</button>`;
+  else if(diff === 0) countdownPill.innerHTML = `📅 <strong>¡Hoy es el examen! ¡Éxitos!</strong> <button class="link-btn" type="button" onclick="setExamDate()">editar</button>`;
+  else                countdownPill.innerHTML = `📅 El examen ya pasó <button class="link-btn" type="button" onclick="setExamDate()">editar</button>`;
+}
+function setExamDate(){
+  const cur = localStorage.getItem('icfes-examDate') || '';
+  const v = prompt('¿Cuándo es tu examen? Escribe la fecha en formato AAAA-MM-DD (ej: 2026-08-09):', cur);
+  if(v === null) return;
+  if(v.trim() === '') localStorage.removeItem('icfes-examDate');
+  else localStorage.setItem('icfes-examDate', v.trim());
+  renderCountdown();
+  if(typeof renderPlan === 'function') renderPlan();
+}
+
+// ── GLOSARIO DE FÓRMULAS ──
+const FORMULAS = [
+  { cat:'Geometría', name:'Área del cuadrado', f:'A = l^2' },
+  { cat:'Geometría', name:'Área del rectángulo', f:'A = b \\cdot h' },
+  { cat:'Geometría', name:'Área del triángulo', f:'A = \\dfrac{b \\cdot h}{2}' },
+  { cat:'Geometría', name:'Área del círculo', f:'A = \\pi r^2' },
+  { cat:'Geometría', name:'Circunferencia', f:'C = 2\\pi r' },
+  { cat:'Geometría', name:'Área del trapecio', f:'A = \\dfrac{(B+b)\\,h}{2}' },
+  { cat:'Geometría', name:'Teorema de Pitágoras', f:'c^2 = a^2 + b^2' },
+  { cat:'Geometría', name:'Suma de ángulos internos', f:'(n-2)\\cdot 180^\\circ' },
+  { cat:'Geometría', name:'Volumen del cubo', f:'V = l^3' },
+  { cat:'Geometría', name:'Volumen del cilindro', f:'V = \\pi r^2 h' },
+  { cat:'Geometría', name:'Volumen del cono', f:'V = \\dfrac{\\pi r^2 h}{3}' },
+  { cat:'Geometría', name:'Volumen de la esfera', f:'V = \\dfrac{4}{3}\\pi r^3' },
+  { cat:'Álgebra', name:'Cuadrado de un binomio', f:'(a \\pm b)^2 = a^2 \\pm 2ab + b^2' },
+  { cat:'Álgebra', name:'Diferencia de cuadrados', f:'a^2 - b^2 = (a+b)(a-b)' },
+  { cat:'Álgebra', name:'Porcentaje', f:'\\% = \\dfrac{\\text{parte}}{\\text{total}}\\times 100' },
+  { cat:'Estadística', name:'Media (promedio)', f:'\\bar{x} = \\dfrac{\\sum x}{n}' },
+  { cat:'Estadística', name:'Probabilidad simple', f:'P = \\dfrac{\\text{favorables}}{\\text{posibles}}' },
+  { cat:'Física', name:'Velocidad (MRU)', f:'d = v \\cdot t' },
+  { cat:'Física', name:'Velocidad final (MRUA)', f:'v_f = v_0 + a\\,t' },
+  { cat:'Física', name:'Posición (MRUA)', f:'d = v_0 t + \\tfrac{1}{2}a t^2' },
+  { cat:'Física', name:'Segunda ley de Newton', f:'F = m \\cdot a' },
+  { cat:'Física', name:'Peso', f:'P = m \\cdot g' },
+  { cat:'Física', name:'Energía cinética', f:'E_c = \\tfrac{1}{2} m v^2' },
+  { cat:'Física', name:'Energía potencial', f:'E_p = m g h' },
+  { cat:'Física', name:'Trabajo', f:'W = F \\cdot d' },
+  { cat:'Física', name:'Potencia', f:'P = \\dfrac{W}{t}' },
+  { cat:'Física', name:'Densidad', f:'\\rho = \\dfrac{m}{V}' },
+  { cat:'Física', name:'Presión', f:'P = \\dfrac{F}{A}' },
+  { cat:'Física', name:'Ley de Ohm', f:'V = I \\cdot R' },
+  { cat:'Física', name:'Fuerza de un resorte (Hooke)', f:'F = k \\cdot x' },
+  { cat:'Química', name:'Gases ideales', f:'P V = n R T' },
+  { cat:'Química', name:'Ley de Coulomb', f:'F = k\\,\\dfrac{q_1 q_2}{r^2}' },
+  { cat:'Química', name:'Escala de pH', f:'pH = -\\log[H^+]' }
+];
+function openGlossary(){ document.getElementById('glOverlay').classList.add('open'); document.getElementById('glSearch').value = ''; renderGlossary(); }
+function closeGlossary(){ document.getElementById('glOverlay').classList.remove('open'); }
+function renderGlossary(){
+  const q = (document.getElementById('glSearch').value || '').toLowerCase().trim();
+  const list = FORMULAS.filter(x => !q || x.name.toLowerCase().includes(q) || x.cat.toLowerCase().includes(q));
+  let html = '', lastCat = '';
+  list.forEach(x => {
+    if(x.cat !== lastCat){ html += `<span class="gl-cat">${x.cat}</span>`; lastCat = x.cat; }
+    html += `<div class="gl-item"><span class="gl-name">${x.name}</span><span class="gl-formula">\\(${x.f}\\)</span></div>`;
+  });
+  const el = document.getElementById('glList');
+  el.innerHTML = html || '<div class="gl-name" style="padding:1rem 0">Sin resultados.</div>';
+  if(window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([el]).catch(()=>{});
+}
+
+// ── FLASHCARDS ──
+const FLASHCARDS = {
+  'Fórmulas': [
+    { f:'Área del círculo', b:'\\(A = \\pi r^2\\)' },
+    { f:'Perímetro (circunferencia)', b:'\\(P = 2\\pi r\\)' },
+    { f:'Área del triángulo', b:'\\(A = \\dfrac{b \\cdot h}{2}\\)' },
+    { f:'Área del rectángulo', b:'\\(A = b \\cdot h\\)' },
+    { f:'Área del trapecio', b:'\\(A = \\dfrac{(B+b)}{2}\\cdot h\\)' },
+    { f:'Teorema de Pitágoras', b:'\\(c^2 = a^2 + b^2\\)' },
+    { f:'Volumen del cilindro', b:'\\(V = \\pi r^2 h\\)' },
+    { f:'Volumen del cono', b:'\\(V = \\tfrac{1}{3}\\pi r^2 h\\)' },
+    { f:'Volumen de la esfera', b:'\\(V = \\tfrac{4}{3}\\pi r^3\\)' },
+    { f:'Volumen del prisma', b:'\\(V = A_{base}\\cdot h\\)' },
+    { f:'Pendiente de una recta', b:'\\(m = \\dfrac{y_2 - y_1}{x_2 - x_1}\\)' },
+    { f:'Ecuación de la recta', b:'\\(y = mx + b\\)' },
+    { f:'Fórmula cuadrática', b:'\\(x = \\dfrac{-b \\pm \\sqrt{b^2-4ac}}{2a}\\)' },
+    { f:'Distancia entre 2 puntos', b:'\\(d = \\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\\)' },
+    { f:'Segunda ley de Newton', b:'\\(F = m \\cdot a\\)' },
+    { f:'Velocidad', b:'\\(v = \\dfrac{d}{t}\\)' },
+    { f:'Aceleración', b:'\\(a = \\dfrac{v_f - v_i}{t}\\)' },
+    { f:'Energía cinética', b:'\\(E_c = \\tfrac{1}{2} m v^2\\)' },
+    { f:'Energía potencial', b:'\\(E_p = m\\,g\\,h\\)' },
+    { f:'Trabajo', b:'\\(W = F \\cdot d\\)' },
+    { f:'Potencia', b:'\\(P = \\dfrac{W}{t}\\)' },
+    { f:'Peso', b:'\\(P = m \\cdot g\\)' },
+    { f:'Densidad', b:'\\(\\rho = \\dfrac{m}{V}\\)' },
+    { f:'Ley de Ohm', b:'\\(V = I \\cdot R\\)' },
+    { f:'Probabilidad simple', b:'\\(P = \\dfrac{\\text{favorables}}{\\text{posibles}}\\)' },
+    { f:'Porcentaje', b:'\\(\\% = \\dfrac{\\text{parte}}{\\text{total}}\\times 100\\)' },
+    { f:'Promedio (media)', b:'\\(\\bar{x} = \\dfrac{\\sum x_i}{n}\\)' },
+    { f:'Regla de tres', b:'\\(x = \\dfrac{b \\cdot c}{a}\\)' },
+    { f:'Interés simple', b:'\\(I = C \\cdot i \\cdot t\\)' }
+  ],
+  'Inglés': [
+    { f:'However', b:'Sin embargo (contraste)' },
+    { f:'Therefore', b:'Por lo tanto (consecuencia)' },
+    { f:'Because', b:'Porque (causa)' },
+    { f:'Although / Even though', b:'Aunque (contraste)' },
+    { f:'Despite / In spite of', b:'A pesar de (+ sustantivo)' },
+    { f:'Moreover / Furthermore', b:'Además (añadir)' },
+    { f:'Nevertheless', b:'No obstante' },
+    { f:'Whereas / While', b:'Mientras que (contraste)' },
+    { f:'Library', b:'Biblioteca (¡NO librería!)' },
+    { f:'Actually', b:'En realidad / de hecho (NO actualmente)' },
+    { f:'Eventually', b:'Finalmente (NO eventualmente)' },
+    { f:'Embarrassed', b:'Avergonzado (NO embarazada)' },
+    { f:'went', b:'Pasado de "go" (ir)' },
+    { f:'bought', b:'Pasado de "buy" (comprar)' },
+    { f:'taught', b:'Pasado de "teach" (enseñar)' },
+    { f:'caught', b:'Pasado de "catch" (atrapar)' },
+    { f:'Present perfect', b:'have / has + participio (ever, never, already, yet)' },
+    { f:'Past continuous', b:'was / were + verbo-ing (acción en progreso)' },
+    { f:'Future (will)', b:'will + verbo base (predicción/decisión)' },
+    { f:'Going to', b:'Plan o intención futura' },
+    { f:'First conditional', b:'If + presente, will + base (real)' },
+    { f:'Second conditional', b:'If + pasado, would + base (hipotético)' },
+    { f:'many vs much', b:'many = contables · much = incontables' },
+    { f:'few vs little', b:'few = contables · little = incontables' },
+    { f:'Comparativo', b:'adj + -er ... than / more ... than' },
+    { f:'Superlativo', b:'the + adj + -est / the most ...' },
+    { f:'make vs do', b:'make = crear/fabricar · do = realizar' },
+    { f:'say vs tell', b:'tell + persona (tell me) · say (say to me)' },
+    { f:'used to', b:'Solía (hábito en el pasado)' },
+    { f:'should', b:'Debería (consejo)' },
+    { f:'must', b:'Deber (obligación fuerte)' }
+  ],
+  'Historia / Fechas': [
+    { f:'Descubrimiento de América', b:'12 de octubre de 1492' },
+    { f:'Grito de Independencia', b:'20 de julio de 1810' },
+    { f:'Batalla de Boyacá (independencia)', b:'7 de agosto de 1819' },
+    { f:'Gran Colombia (disolución)', b:'1830' },
+    { f:'Abolición de la esclavitud en Colombia', b:'1851' },
+    { f:'Guerra de los Mil Días', b:'1899 – 1902' },
+    { f:'Separación de Panamá', b:'1903' },
+    { f:'El Bogotazo (asesinato de Gaitán)', b:'9 de abril de 1948' },
+    { f:'Frente Nacional', b:'1958 – 1974' },
+    { f:'Constitución actual de Colombia', b:'1991' },
+    { f:'Acuerdo de paz con las FARC', b:'2016' },
+    { f:'Revolución Francesa', b:'1789' },
+    { f:'Independencia de EE.UU.', b:'4 de julio de 1776' },
+    { f:'Revolución Industrial (inicio)', b:'Mediados del siglo XVIII (≈1760)' },
+    { f:'Primera Guerra Mundial', b:'1914 – 1918' },
+    { f:'Revolución Rusa', b:'1917' },
+    { f:'Crack / Gran Depresión', b:'1929' },
+    { f:'Segunda Guerra Mundial', b:'1939 – 1945' },
+    { f:'Caída del Muro de Berlín', b:'1989' },
+    { f:'Disolución de la URSS', b:'1991' },
+    { f:'¿Qué protege la tutela?', b:'Los derechos fundamentales' },
+    { f:'¿Qué es el hábeas corpus?', b:'Protege la libertad ante detención ilegal' },
+    { f:'Ramas del poder público', b:'Ejecutiva, Legislativa y Judicial' },
+    { f:'¿Quién hace las leyes?', b:'El Congreso (rama legislativa)' },
+    { f:'Derecho a un ambiente sano', b:'Derecho colectivo (acción popular)' }
+  ],
+  'Biología': [
+    { f:'¿Qué hace la mitocondria?', b:'Produce energía (ATP) — "central energética"' },
+    { f:'Función del cloroplasto', b:'Realiza la fotosíntesis (solo en plantas)' },
+    { f:'Función del ribosoma', b:'Sintetiza proteínas' },
+    { f:'Función del núcleo', b:'Guarda el ADN y controla la célula' },
+    { f:'Mitosis', b:'Produce 2 células idénticas (crecimiento/reparación)' },
+    { f:'Meiosis', b:'Produce 4 gametos con la mitad de cromosomas' },
+    { f:'Bases del ADN', b:'A–T y C–G' },
+    { f:'Fotosíntesis', b:'CO₂ + agua + luz → glucosa + O₂' },
+    { f:'Respiración celular', b:'Glucosa + O₂ → energía + CO₂ + agua' },
+    { f:'Célula procariota', b:'Sin núcleo definido (ej: bacterias)' },
+    { f:'Célula eucariota', b:'Con núcleo definido (animales, plantas, hongos)' },
+    { f:'Niveles de organización', b:'Célula → tejido → órgano → sistema → organismo' },
+    { f:'Productores', b:'Plantas (hacen su propio alimento)' },
+    { f:'Genotipo vs fenotipo', b:'Genotipo = genes · Fenotipo = lo que se ve' },
+    { f:'Alelo dominante', b:'Se expresa con una sola copia (letra mayúscula)' },
+    { f:'Homeostasis', b:'Mantener el equilibrio interno del cuerpo' },
+    { f:'Sistema circulatorio', b:'Transporta sangre, O₂ y nutrientes' },
+    { f:'Función de los pulmones', b:'Intercambio de gases (O₂ entra, CO₂ sale)' }
+  ],
+  'Química': [
+    { f:'Escala de pH', b:'< 7 ácido · 7 neutro · > 7 básico' },
+    { f:'Número atómico (Z)', b:'Número de protones' },
+    { f:'Número másico (A)', b:'Protones + neutrones' },
+    { f:'Enlace iónico', b:'Metal + no metal (transferencia de electrones)' },
+    { f:'Enlace covalente', b:'No metal + no metal (comparten electrones)' },
+    { f:'Catión', b:'Ion positivo (perdió electrones)' },
+    { f:'Anión', b:'Ion negativo (ganó electrones)' },
+    { f:'Isótopos', b:'Mismo Z, distinto número de neutrones' },
+    { f:'Tabla periódica: grupos', b:'Columnas (mismo nº de electrones de valencia)' },
+    { f:'Tabla periódica: períodos', b:'Filas (mismo nº de niveles de energía)' },
+    { f:'Gases nobles', b:'Grupo 18, muy estables (poco reactivos)' },
+    { f:'Mol (número de Avogadro)', b:'\\(6.022\\times10^{23}\\) partículas' },
+    { f:'Ácido', b:'Libera H⁺ (sabor agrio, pH < 7)' },
+    { f:'Base', b:'Libera OH⁻ (sabor amargo, pH > 7)' },
+    { f:'Estados de la materia', b:'Sólido, líquido, gaseoso (y plasma)' },
+    { f:'Cambio físico', b:'No cambia la sustancia (ej: derretir hielo)' },
+    { f:'Cambio químico', b:'Forma una sustancia nueva (ej: combustión)' },
+    { f:'Fórmula del agua', b:'H₂O' },
+    { f:'Símbolo del oro / hierro', b:'Au (oro) · Fe (hierro)' }
+  ],
+  'Física': [
+    { f:'Velocidad', b:'\\(v = \\dfrac{d}{t}\\) — rapidez con dirección' },
+    { f:'Aceleración', b:'\\(a = \\dfrac{v_f - v_i}{t}\\)' },
+    { f:'Segunda ley de Newton', b:'\\(F = m \\cdot a\\)' },
+    { f:'Primera ley de Newton', b:'Inercia: sin fuerza, el estado no cambia' },
+    { f:'Tercera ley de Newton', b:'Acción y reacción (fuerzas opuestas iguales)' },
+    { f:'Gravedad (g)', b:'\\(\\approx 9.8\\ m/s^2\\) hacia abajo' },
+    { f:'Energía cinética', b:'\\(E_c = \\tfrac{1}{2} m v^2\\)' },
+    { f:'Energía potencial', b:'\\(E_p = m\\,g\\,h\\)' },
+    { f:'Trabajo', b:'\\(W = F \\cdot d\\)' },
+    { f:'Potencia', b:'\\(P = \\dfrac{W}{t}\\) (en watts)' },
+    { f:'Ley de Ohm', b:'\\(V = I \\cdot R\\)' },
+    { f:'Frecuencia y período', b:'\\(f = \\dfrac{1}{T}\\)' },
+    { f:'Velocidad de la luz', b:'\\(\\approx 3\\times10^{8}\\ m/s\\)' },
+    { f:'Reflexión vs refracción', b:'Reflexión = rebota · Refracción = se desvía' },
+    { f:'Escalar vs vectorial', b:'Escalar = solo magnitud · Vector = magnitud y dirección' },
+    { f:'Caída libre', b:'Movimiento solo bajo la gravedad (a = g)' },
+    { f:'Conservación de la energía', b:'La energía no se crea ni destruye, se transforma' }
+  ],
+  'Lectura crítica': [
+    { f:'Idea principal', b:'El mensaje central que sostiene todo el texto' },
+    { f:'Tesis', b:'La postura que el autor defiende' },
+    { f:'Argumento', b:'Razón que respalda la tesis' },
+    { f:'Inferir', b:'Deducir lo que el texto NO dice explícitamente' },
+    { f:'Connotativo', b:'Sentido figurado/emocional de una palabra' },
+    { f:'Denotativo', b:'Sentido literal (de diccionario)' },
+    { f:'Texto argumentativo', b:'Busca convencer (tesis + argumentos)' },
+    { f:'Texto expositivo', b:'Informa o explica un tema (objetivo)' },
+    { f:'Función del conector "por lo tanto"', b:'Introduce una conclusión/consecuencia' },
+    { f:'Función del conector "sin embargo"', b:'Marca un contraste u oposición' },
+    { f:'Hipérbole', b:'Exageración ("te lo dije mil veces")' },
+    { f:'Metáfora', b:'Comparación sin "como" ("sus ojos son luceros")' },
+    { f:'Símil', b:'Comparación con "como" ("fuerte como un roble")' },
+    { f:'Ironía', b:'Decir lo contrario de lo que se piensa' },
+    { f:'Propósito del autor', b:'Para qué escribe: informar, convencer, entretener' },
+    { f:'Punto de vista', b:'La perspectiva desde la que se narra/argumenta' },
+    { f:'Falacia', b:'Argumento que parece válido pero es engañoso' }
+  ]
+};
+let fcDeck = '', fcCards = [], fcIndex = 0, fcFlipped = false;
+function openFlashcards(){ document.getElementById('fcOverlay').classList.add('open'); loadDeck(Object.keys(FLASHCARDS)[0]); }
+function closeFlashcards(){ document.getElementById('fcOverlay').classList.remove('open'); }
+function renderDecks(){
+  document.getElementById('fcDecks').innerHTML = Object.keys(FLASHCARDS).map(k =>
+    `<button class="fc-deck-btn ${k === fcDeck ? 'active' : ''}" type="button" onclick="loadDeck('${k}')">${k}</button>`
+  ).join('');
+}
+function loadDeck(k){ fcDeck = k; fcCards = FLASHCARDS[k].slice(); fcIndex = 0; fcFlipped = false; renderDecks(); showCard(); }
+function showCard(){
+  const c = fcCards[fcIndex];
+  const face = document.getElementById('fcFace');
+  face.innerHTML = fcFlipped ? c.b : c.f;
+  document.getElementById('fcCard').classList.toggle('flipped', fcFlipped);
+  document.getElementById('fcHint').textContent = fcFlipped ? 'respuesta' : 'toca para girar';
+  document.getElementById('fcCounter').textContent = `${fcIndex + 1} / ${fcCards.length}`;
+  if(window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([face]).catch(()=>{});
+}
+function flipCard(){ fcFlipped = !fcFlipped; showCard(); }
+function nextCard(){ fcIndex = (fcIndex + 1) % fcCards.length; fcFlipped = false; showCard(); }
+function prevCard(){ fcIndex = (fcIndex - 1 + fcCards.length) % fcCards.length; fcFlipped = false; showCard(); }
+function shuffleDeck(){ for(let i = fcCards.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); const tmp = fcCards[i]; fcCards[i] = fcCards[j]; fcCards[j] = tmp; } fcIndex = 0; fcFlipped = false; showCard(); }
+
+// ── PLAN DE ESTUDIO / CRONOGRAMA ──
+// Fases y cuadernillos según la planeación. 'days' = días que dura cada cuadernillo (para repartir fechas).
+const PLAN = [
+  { phase:'Fase 1 · Entrenando', badge:'Base', desc:'Una sesión diaria. La base para todo lo demás.', items:[
+    { id:'f1-s', name:'S11-S', days:1 }, { id:'f1-t', name:'S11-T', days:1 },
+    { id:'f1-u', name:'S11-U', days:1 }, { id:'f1-v', name:'S11-V', days:1 },
+    { id:'f1-w', name:'S11-W', days:1 }, { id:'f1-x', name:'S11-X', days:1 },
+  ]},
+  { phase:'Fase 2 · Montería 2025', badge:'Por áreas', desc:'Un día por pareja de áreas.', items:[
+    { id:'f2-cn', name:'Ciencias Naturales + Física MONTERÍA 2025', days:1 },
+    { id:'f2-lc', name:'Lectura Crítica + English MONTERÍA 2025', days:1 },
+    { id:'f2-mat', name:'Matemáticas + Mates MONTERÍA 2025', days:1 },
+  ]},
+  { phase:'Fase 3 · Pilotos', badge:'2 días c/u', desc:'Simulacros tipo prueba real.', items:[
+    { id:'f3-reloj', name:'Cuadernillos RELOJ', days:2 },
+    { id:'f3-helmer', name:'Helmer Pardo', days:2 },
+    { id:'f3-wright', name:'Hermanos Wright', days:2 },
+    { id:'f3-curie', name:'Marie Curie', days:2 },
+    { id:'f3-mendoza', name:'Mendoza', days:2 },
+    { id:'f3-heli', name:'Piloto Helicóptero', days:2 },
+    { id:'f3-pilotos', name:'Pilotos 2025', days:2 },
+  ]},
+  { phase:'Fase 4 · Compilados', badge:'Repaso amplio', desc:'Grandes compilados por materia.', items:[
+    { id:'f4-interesante', name:'2025 · A Compilado Interesante', days:4 },
+    { id:'f4-math2', name:'Compilado MATH 2 · SeamosGenios', days:2 },
+    { id:'f4-soc-sg', name:'Compilado Sociales · SeamosGenios', days:2 },
+    { id:'f4-mixto', name:'Compilado Mixto 2026 · SG', days:2 },
+    { id:'f4-ingles', name:'Compilado Inglés', days:2 },
+    { id:'f4-lc', name:'Compilado Lectura Crítica', days:2 },
+    { id:'f4-mates', name:'Compilado Mates', days:2 },
+    { id:'f4-naturales', name:'Compilado Naturales', days:2 },
+    { id:'f4-sociales', name:'Compilado Sociales', days:2 },
+  ]},
+  { phase:'Última fase · Repaso final', badge:'Sin orden fijo', desc:'Las preguntas no cambian mucho. Refuerza lo que más falles.', items:[
+    { id:'f5-calA', name:'Carpeta 2025 · CAL A', days:3 },
+    { id:'f5-repaso', name:'Si queda tiempo: repetir Entrenando W y X, 2025 CAL A y algunos Piloto', days:2 },
+  ]},
+];
+const DRIVE_URL = 'https://drive.google.com/drive/folders/1m8wX55W0zd-zkfeDEXrtN4P9uUOeKdnS?usp=drive_link';
+const PLAN_FLAT = PLAN.flatMap(p => p.items);
+let planDone = new Set(JSON.parse(localStorage.getItem('icfes-plan') || '[]'));
+function savePlan(){ localStorage.setItem('icfes-plan', JSON.stringify([...planDone])); }
+
+function planDates(){
+  // Reparte los cuadernillos según los días que falten para el examen. Si no hay fecha, devuelve null.
+  const raw = localStorage.getItem('icfes-examDate');
+  if(!raw) return null;
+  const exam = new Date(raw + 'T00:00:00');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const avail = Math.round((exam - today) / 86400000);
+  if(isNaN(avail) || avail < 1) return null;
+  const totalDays = PLAN_FLAT.reduce((a,i)=>a+i.days, 0);
+  const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const map = {}; let cum = 0;
+  PLAN_FLAT.forEach(it => {
+    const offset = Math.round((cum / totalDays) * avail);
+    const d = new Date(today); d.setDate(d.getDate() + offset);
+    map[it.id] = `${d.getDate()} ${meses[d.getMonth()]}`;
+    cum += it.days;
+  });
+  return map;
+}
+
+function renderPlan(){
+  const dates = planDates();
+  document.getElementById('planNoDate').style.display = dates ? 'none' : 'block';
+  const nextId = PLAN_FLAT.find(i => !planDone.has(i.id))?.id;
+  let html = '';
+  PLAN.forEach(ph => {
+    html += `<div class="phase">
+      <div class="phase-title">${ph.phase} <span class="phase-badge">${ph.badge}</span></div>
+      <div class="phase-desc">${ph.desc}</div>`;
+    ph.items.forEach(it => {
+      const done = planDone.has(it.id);
+      const isNext = it.id === nextId;
+      html += `<div class="plan-item ${done?'done':''} ${isNext?'next':''}">
+        <button class="plan-check" type="button" onclick="togglePlan('${it.id}')">${done?'✓':''}</button>
+        <div class="plan-main">
+          <div class="plan-name">${it.name}</div>
+          <div class="plan-meta">
+            ${isNext?'<span class="plan-next-tag">▶ Siguiente</span>':''}
+            ${dates && dates[it.id] ? `<span class="plan-date">📅 ${dates[it.id]}</span>` : ''}
+            <span>${it.days} día${it.days>1?'s':''}</span>
+          </div>
+        </div>
+        <a class="plan-drive" href="${DRIVE_URL}" target="_blank" rel="noopener noreferrer">Abrir Drive ↗</a>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  document.getElementById('planList').innerHTML = html;
+  const total = PLAN_FLAT.length, done = PLAN_FLAT.filter(i=>planDone.has(i.id)).length;
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('planBarFill').style.width = pct + '%';
+  document.getElementById('planBarText').textContent = `${done} de ${total} cuadernillos`;
+  document.getElementById('planBarPct').textContent = pct + '%';
+}
+function togglePlan(id){
+  if(planDone.has(id)) planDone.delete(id); else { planDone.add(id); recordStudyDay(); }
+  savePlan(); renderPlan();
+}
+
+// ── TEMPORIZADOR MULTIMODO ──
+// Cada modo es una lista de fases [{label, secs}]. El simulacro tiene descanso intermedio.
+const TM_PRESETS = [
+  { name:'Un componente · ~1 hora', desc:'Para resolver de corrido un solo componente cronometrado.', phases:[{label:'Componente', secs:60*60}] },
+  { name:'Sesión completa · 4 horas', desc:'Una sesión entera seguida, como en la prueba real.', phases:[{label:'Sesión', secs:4*60*60}] },
+  { name:'Simulacro completo · 10 horas', desc:'Dos sesiones de 4 h con 2 h de descanso en medio.', phases:[{label:'Sesión 1', secs:4*60*60},{label:'Descanso', secs:2*60*60},{label:'Sesión 2', secs:4*60*60}] },
+];
+let tmPhases = [], tmPhaseIdx = 0, tmLeft = 0, tmId = null, tmPaused = false;
+function openTimer(){ document.getElementById('tmOverlay').classList.add('open'); tmShowPicker(); }
+function closeTimer(){ tmStop(); document.getElementById('tmOverlay').classList.remove('open'); }
+function tmShowPicker(){
+  tmStop();
+  document.getElementById('tmRun').classList.remove('show');
+  document.getElementById('tmPick').style.display = 'block';
+  document.getElementById('tmPresets').innerHTML = TM_PRESETS.map((p,i) =>
+    `<button class="tm-preset" type="button" onclick="tmStart(${i})">
+      <div class="tm-pname">${p.name}</div><div class="tm-pdesc">${p.desc}</div></button>`
+  ).join('');
+}
+function tmStartCustom(){
+  const n = parseInt(document.getElementById('tmQcount').value, 10);
+  if(!n || n < 1){ return; }
+  tmRun([{label:`${n} preguntas`, secs:n*120}], `${n} preguntas × 2 min`);
+}
+function tmStart(i){
+  const p = TM_PRESETS[i];
+  tmRun(p.phases, p.name);
+}
+function tmRun(phases, subtitle){
+  tmPhases = phases; tmPhaseIdx = 0; tmLeft = phases[0].secs; tmPaused = false;
+  document.getElementById('tmPick').style.display = 'none';
+  document.getElementById('tmRun').classList.add('show');
+  document.getElementById('tmSub').textContent = subtitle;
+  document.getElementById('tmPauseBtn').textContent = '⏸ Pausar';
+  tmPaint();
+  tmStop();
+  tmId = setInterval(tmTick, 1000);
+}
+function tmTick(){
+  if(tmPaused) return;
+  tmLeft--;
+  if(tmLeft < 0){
+    if(tmPhaseIdx < tmPhases.length - 1){
+      tmPhaseIdx++; tmLeft = tmPhases[tmPhaseIdx].secs;
+      try { new SpeechSynthesisUtterance && speechSynthesis.speak(Object.assign(new SpeechSynthesisUtterance('Cambio: ' + tmPhases[tmPhaseIdx].label), {lang:'es-ES'})); } catch(e){}
+    } else {
+      tmStop(); tmLeft = 0; tmPaint();
+      document.getElementById('tmPhase').textContent = '✓ ¡Tiempo terminado!';
+      try { speechSynthesis.speak(Object.assign(new SpeechSynthesisUtterance('Tiempo terminado'), {lang:'es-ES'})); } catch(e){}
+      return;
+    }
+  }
+  tmPaint();
+}
+function tmPaint(){
+  const ph = tmPhases[tmPhaseIdx] || {label:''};
+  const h = Math.floor(tmLeft/3600), m = Math.floor((tmLeft%3600)/60), s = tmLeft%60;
+  const disp = document.getElementById('tmDisplay');
+  disp.textContent = (h>0 ? h+':' : '') + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  disp.classList.toggle('warn', tmLeft <= 60 && tmLeft > 0);
+  let label = ph.label;
+  if(tmPhases.length > 1) label += ` (${tmPhaseIdx+1}/${tmPhases.length})`;
+  document.getElementById('tmPhase').textContent = label;
+}
+function tmTogglePause(){
+  tmPaused = !tmPaused;
+  document.getElementById('tmPauseBtn').textContent = tmPaused ? '▶ Reanudar' : '⏸ Pausar';
+}
+function tmReset(){ tmShowPicker(); }
+function tmStop(){ if(tmId){ clearInterval(tmId); tmId = null; } }
+
+// cerrar modales al tocar el fondo
+['fcOverlay','glOverlay','tmOverlay'].forEach(id => {
+  const ov = document.getElementById(id);
+  if(ov) ov.addEventListener('click', e => { if(e.target === ov) { if(id==='tmOverlay') closeTimer(); else ov.classList.remove('open'); } });
+});
+
 countAll();
 buildAccordion();
 updateProgress();
+renderStreak();
+renderAchievements();
+renderCountdown();
+renderPlan();
 </script>
  <script defer src="/_vercel/insights/script.js"></script>
 </body>
